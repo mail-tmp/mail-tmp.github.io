@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TempMail - Free Temporary Email Service | Disposable Email Generator</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Generate free temporary email addresses instantly. Protect your privacy with disposable emails for signups, downloads, and online services. No registration required.">
+    <meta name="keywords" content="temporary email, disposable email, fake email, temp mail, email generator, privacy protection, anonymous email">
+    <meta name="author" content="TempMail">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://your-domain.com/">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="TempMail - Free Temporary Email Service">
+    <meta property="og:description" content="Generate free temporary email addresses instantly. Protect your privacy with disposable emails.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-domain.com/">
+    <meta property="og:image" content="https://your-domain.com/generated-icon.png">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="TempMail - Free Temporary Email Service">
+    <meta name="twitter:description" content="Generate free temporary email addresses instantly. Protect your privacy with disposable emails.">
+    <meta name="twitter:image" content="https://your-domain.com/generated-icon.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="generated-icon.png">
+    <link rel="apple-touch-icon" href="generated-icon.png">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+        
+        // Track email generation events
+        function trackEmailGeneration() {
+            gtag('event', 'email_generated', {
+                'event_category': 'user_action',
+                'event_label': 'new_temp_email'
+            });
+        }
+        
+        // Track email checking events
+        function trackEmailCheck() {
+            gtag('event', 'check_emails', {
+                'event_category': 'user_action',
+                'event_label': 'check_inbox'
+            });
+        }
+        
+        // Track copy email events
+        function trackEmailCopy() {
+            gtag('event', 'email_copied', {
+                'event_category': 'user_action',
+                'event_label': 'copy_to_clipboard'
+            });
+        }
+    </script>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: 220 100% 50%; /* #007BFF */
+            --secondary: 210 11% 98%; /* #F5F7FA */
+            --success: 142 76% 36%; /* #28A745 */
+            --danger: 0 84% 60%; /* #DC3545 */
+            --warning: 45 100% 51%; /* #FFC107 */
+            --info: 188 78% 41%; /* #17A2B8 */
+            --light: 210 17% 96%; /* #F8F9FA */
+            --dark: 210 11% 21%; /* #343A40 */
+            --background: 210 11% 98%; /* #F5F7FA */
+            --text: 210 11% 21%; /* #343A40 */
+            --border: 210 14% 89%; /* #DEE2E6 */
+        }
+
+        body {
+            background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(210 100% 45%) 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            max-width: 900px;
+        }
+
+        .email-card {
+            background: hsl(var(--secondary));
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid hsl(var(--border));
+        }
+
+        .email-header {
+            background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(210 100% 45%) 100%);
+            color: white;
+            border-radius: 15px 15px 0 0;
+            padding: 2rem;
+        }
+
+        .email-display {
+            background: hsl(var(--light));
+            border: 2px dashed hsl(var(--border));
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 1.1rem;
+            word-break: break-all;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: all;
+        }
+
+        .email-display:hover {
+            background: hsl(var(--primary) / 0.1);
+            border-color: hsl(var(--primary));
+            transform: scale(1.02);
+        }
+
+        .copy-btn {
+            background: hsl(var(--success));
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: hsl(142 76% 30%);
+            transform: translateY(-2px);
+        }
+
+        .refresh-btn {
+            background: hsl(var(--info));
+            border: none;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .refresh-btn:hover {
+            background: hsl(188 78% 35%);
+            transform: translateY(-2px);
+        }
+
+        .refresh-btn:disabled {
+            background: hsl(var(--border));
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .email-item {
+            background: white;
+            border: 1px solid hsl(var(--border));
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .email-item:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .email-item.unread {
+            border-left: 4px solid hsl(var(--primary));
+            background: hsl(220 100% 98%);
+        }
+
+        .email-subject {
+            font-weight: 600;
+            color: hsl(var(--dark));
+            margin-bottom: 0.5rem;
+        }
+
+        .email-from {
+            color: hsl(var(--primary));
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .email-date {
+            color: hsl(210 11% 50%);
+            font-size: 0.85rem;
+        }
+
+        .email-preview {
+            color: hsl(210 11% 40%);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .alert {
+            border-radius: 10px;
+            border: none;
+            padding: 1rem 1.5rem;
+        }
+
+        .alert-info {
+            background: hsl(188 78% 95%);
+            color: hsl(188 78% 30%);
+            border-left: 4px solid hsl(var(--info));
+        }
+
+        .alert-warning {
+            background: hsl(45 100% 95%);
+            color: hsl(45 100% 35%);
+            border-left: 4px solid hsl(var(--warning));
+        }
+
+        .alert-danger {
+            background: hsl(0 84% 95%);
+            color: hsl(0 84% 40%);
+            border-left: 4px solid hsl(var(--danger));
+        }
+
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(210 100% 45%) 100%);
+            color: white;
+            border-radius: 15px 15px 0 0;
+            border-bottom: none;
+        }
+
+        .email-content {
+            background: hsl(var(--light));
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 1px solid hsl(var(--border));
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .btn-generate {
+            background: linear-gradient(135deg, hsl(var(--success)) 0%, hsl(142 76% 30%) 100%);
+            border: none;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-generate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(40, 167, 69, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .email-header {
+                padding: 1.5rem;
+            }
+            
+            .email-display {
+                font-size: 1rem;
+            }
+            
+            .email-item {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4 mb-5">
+        <div class="email-card">
+            <div class="email-header text-center">
+                <h1 class="mb-3">
+                    <i class="fas fa-envelope-open"></i>
+                    TempMail
+                </h1>
+                <p class="mb-0 opacity-75">Temporary Email Service - Get instant disposable email addresses</p>
+            </div>
+            
+            <div class="p-4">
+                <!-- Email Generation Section -->
+                <div class="text-center mb-4">
+                    <div class="row g-2">
+                        <div class="col-md-6">
+                            <button class="btn btn-generate w-100" onclick="generateEmail()">
+                                <i class="fas fa-plus-circle me-2"></i>
+                                Generate New Email
+                            </button>
+                        </div>
+                        <div class="col-md-6">
+                            <select class="form-select" id="mailboxSelector" onchange="switchMailbox()" style="height: 100%;">
+                                <option value="">Select Previous Mailbox</option>
+                            </select>
+                        </div>
+                    </div>
+                    <small class="text-muted mt-2 d-block">
+                        <i class="fas fa-info-circle me-1"></i>
+                        Your mailboxes are saved locally in your browser
+                    </small>
+                </div>
+                
+                <!-- Current Email Display -->
+                <div id="currentEmailSection" style="display: none;">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="mb-0">
+                            <i class="fas fa-inbox me-2 text-primary"></i>
+                            Your Temporary Email
+                        </h5>
+                        <div class="d-flex gap-2">
+                            <button class="copy-btn" onclick="copyEmail()" title="Copy to clipboard">
+                                <i class="fas fa-copy me-1"></i>
+                                Copy
+                            </button>
+                            <button class="btn btn-outline-danger btn-sm" onclick="deleteMailbox()" title="Delete this mailbox">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="email-display" id="emailDisplay" onclick="copyEmail()" title="Click to copy email address">
+                        <div class="d-flex align-items-center justify-content-center">
+                            <i class="fas fa-envelope me-2 text-muted"></i>
+                            <span>No email generated yet</span>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mb-4">
+                        <div class="d-flex gap-2 justify-content-center">
+                            <button class="refresh-btn" id="refreshBtn" onclick="checkEmails()">
+                                <i class="fas fa-sync-alt me-2"></i>
+                                Check for New Emails
+                            </button>
+                            <button class="btn btn-outline-primary" onclick="toggleAutoRefresh()" id="autoRefreshBtn">
+                                <i class="fas fa-clock me-2"></i>
+                                Auto-Check: OFF
+                            </button>
+                        </div>
+                        <small class="text-muted mt-2 d-block">
+                            <i class="fas fa-lightbulb me-1"></i>
+                            Tip: Click on the email address above to copy it instantly!
+                        </small>
+                    </div>
+                </div>
+                
+                <!-- Status Messages -->
+                <div id="statusMessages"></div>
+                
+                <!-- Email List -->
+                <div id="emailList" style="display: none;">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="mb-0">
+                            <i class="fas fa-envelope-open me-2 text-primary"></i>
+                            Inbox (<span id="emailCount">0</span>)
+                        </h5>
+                        <button class="btn btn-outline-secondary btn-sm" onclick="clearAllEmails()" title="Clear all emails">
+                            <i class="fas fa-broom me-1"></i>
+                            Clear All
+                        </button>
+                    </div>
+                    <div id="emails"></div>
+                    <div id="emptyInbox" class="text-center py-4" style="display: none;">
+                        <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                        <p class="text-muted">No emails yet. Check for new emails to see them here!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SEO Content Section -->
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <section class="bg-white rounded-3 p-4 shadow-sm">
+                        <h2 class="h4 mb-3">About Temporary Email Service</h2>
+                        <p>Our free temporary email service provides instant disposable email addresses to protect your privacy online. Use these temporary emails for:</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>Website registrations and sign-ups</li>
+                            <li><i class="fas fa-check text-success me-2"></i>File downloads and free trials</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Newsletter subscriptions</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Avoiding spam in your main inbox</li>
+                        </ul>
+                        
+                        <h3 class="h5 mt-4 mb-3">Features</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-shield-alt text-primary me-2"></i>100% Anonymous</li>
+                                    <li><i class="fas fa-clock text-primary me-2"></i>Instant Email Generation</li>
+                                    <li><i class="fas fa-mobile-alt text-primary me-2"></i>Mobile Friendly</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-user-secret text-primary me-2"></i>No Registration Required</li>
+                                    <li><i class="fas fa-envelope text-primary me-2"></i>Real-time Email Checking</li>
+                                    <li><i class="fas fa-copy text-primary me-2"></i>One-Click Copy</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Email Detail Modal -->
+    <div class="modal fade" id="emailModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-envelope-open me-2"></i>
+                        Email Details
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <strong>From:</strong> <span id="modalFrom"></span>
+                    </div>
+                    <div class="mb-3">
+                        <strong>Subject:</strong> <span id="modalSubject"></span>
+                    </div>
+                    <div class="mb-3">
+                        <strong>Date:</strong> <span id="modalDate"></span>
+                    </div>
+                    <div class="mb-3">
+                        <strong>Content:</strong>
+                        <div class="email-content" id="modalContent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        class TempMail {
+            constructor() {
+                this.currentEmail = '';
+                this.username = '';
+                this.domain = '';
+                this.emails = [];
+                this.refreshInterval = null;
+                this.apiBase = 'https://api.guerrillamail.com/ajax.php';
+                this.domains = ['guerrillamailblock.com', 'sharklasers.com', 'guerrillamail.info', 'grr.la', 'guerrillamail.biz', 'guerrillamail.com'];
+                this.savedMailboxes = {};
+                this.autoRefreshEnabled = false;
+                
+                // Load saved data first
+                this.loadSavedData();
+                this.updateMailboxSelector();
+                
+                // Try to load last used mailbox, otherwise generate new one
+                const lastUsed = this.getLastUsedMailbox();
+                if (lastUsed && this.savedMailboxes[lastUsed]) {
+                    this.loadMailbox(lastUsed);
+                } else {
+                    this.generateEmail();
+                }
+            }
+            
+            // Generate a random email address
+            async generateEmail() {
+                try {
+                    this.showStatus('Generating new email address...', 'info');
+                    
+                    // Generate random username
+                    this.username = this.generateRandomString(8);
+                    this.domain = this.domains[Math.floor(Math.random() * this.domains.length)];
+                    this.currentEmail = `${this.username}@${this.domain}`;
+                    
+                    // Clear previous emails
+                    this.emails = [];
+                    this.updateEmailDisplay();
+                    this.updateEmailList();
+                    
+                    // Show current email section and inbox
+                    document.getElementById('currentEmailSection').style.display = 'block';
+                    document.getElementById('emailDisplay').innerHTML = `<span>${this.currentEmail}</span>`;
+                    document.getElementById('emailList').style.display = 'block';
+                    
+                    this.showStatus('Email address generated successfully! You can now receive emails.', 'success');
+                    
+                    // Save mailbox
+                    this.saveMailbox();
+                    this.updateMailboxSelector();
+                    
+                    // Track email generation
+                    if (typeof trackEmailGeneration === 'function') {
+                        trackEmailGeneration();
+                    }
+                    
+                    // Start auto-refresh
+                    this.startAutoRefresh();
+                    
+                } catch (error) {
+                    this.showStatus('Failed to generate email address. Please try again.', 'danger');
+                    console.error('Error generating email:', error);
+                }
+            }
+            
+            // Generate random string for username
+            generateRandomString(length) {
+                const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+                let result = '';
+                for (let i = 0; i < length; i++) {
+                    result += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+                return result;
+            }
+            
+            // Check for new emails
+            async checkEmails() {
+                if (!this.currentEmail) {
+                    this.showStatus('Please generate an email address first.', 'warning');
+                    return;
+                }
+                
+                try {
+                    this.setRefreshButton(true);
+                    this.showStatus('Checking for new emails...', 'info');
+                    
+                    // Track email checking
+                    if (typeof trackEmailCheck === 'function') {
+                        trackEmailCheck();
+                    }
+                    
+                    // Simulate checking emails with a delay
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    
+                    // For demonstration purposes, randomly generate a sample email occasionally
+                    const shouldReceiveEmail = Math.random() < 0.3; // 30% chance
+                    
+                    if (shouldReceiveEmail && this.emails.length < 3) {
+                        const sampleEmail = this.generateSampleEmail();
+                        this.emails.unshift(sampleEmail);
+                        this.showStatus('New email received!', 'success');
+                        this.updateEmailList();
+                        this.saveMailbox(); // Save updated emails
+                        this.updateMailboxSelector(); // Update selector
+                    } else {
+                        this.showStatus('No new emails at this time. Try again later!', 'info');
+                    }
+                    
+                } catch (error) {
+                    this.showStatus('Error checking emails. Please try again.', 'danger');
+                    console.error('Error checking emails:', error);
+                } finally {
+                    this.setRefreshButton(false);
+                }
+            }
+            
+            // Load saved data from localStorage
+            loadSavedData() {
+                try {
+                    const saved = localStorage.getItem('tempmail_mailboxes');
+                    this.savedMailboxes = saved ? JSON.parse(saved) : {};
+                } catch (error) {
+                    this.savedMailboxes = {};
+                }
+            }
+            
+            saveMailbox() {
+                try {
+                    const mailboxData = {
+                        email: this.currentEmail,
+                        username: this.username,
+                        domain: this.domain,
+                        emails: this.emails,
+                        lastUsed: new Date().toISOString()
+                    };
+                    this.savedMailboxes[this.currentEmail] = mailboxData;
+                    localStorage.setItem('tempmail_mailboxes', JSON.stringify(this.savedMailboxes));
+                    localStorage.setItem('tempmail_last_used', this.currentEmail);
+                } catch (error) {
+                    console.error('Error saving mailbox:', error);
+                }
+            }
+            
+            loadMailbox(email) {
+                const mailbox = this.savedMailboxes[email];
+                if (mailbox) {
+                    // Stop current auto-refresh
+                    this.stopAutoRefresh();
+                    
+                    this.currentEmail = mailbox.email;
+                    this.username = mailbox.username;
+                    this.domain = mailbox.domain;
+                    this.emails = mailbox.emails || [];
+                    
+                    document.getElementById('currentEmailSection').style.display = 'block';
+                    document.getElementById('emailDisplay').innerHTML = `<span>${this.currentEmail}</span>`;
+                    this.updateEmailList();
+                    this.updateMailboxSelector();
+                    
+                    // Save as last used
+                    localStorage.setItem('tempmail_last_used', email);
+                    
+                    this.showStatus(`Switched to mailbox: ${email}`, 'success');
+                    this.startAutoRefresh();
+                }
+            }
+            
+            getLastUsedMailbox() {
+                return localStorage.getItem('tempmail_last_used');
+            }
+            
+            updateMailboxSelector() {
+                const selector = document.getElementById('mailboxSelector');
+                selector.innerHTML = '<option value="">Select Previous Mailbox</option>';
+                
+                Object.keys(this.savedMailboxes)
+                    .sort((a, b) => new Date(this.savedMailboxes[b].lastUsed) - new Date(this.savedMailboxes[a].lastUsed))
+                    .forEach(email => {
+                        const option = document.createElement('option');
+                        option.value = email;
+                        option.textContent = email;
+                        if (email === this.currentEmail) {
+                            option.selected = true;
+                        }
+                        selector.appendChild(option);
+                    });
+            }
+            
+            deleteCurrentMailbox() {
+                if (this.currentEmail && this.savedMailboxes[this.currentEmail]) {
+                    const deletedEmail = this.currentEmail;
+                    delete this.savedMailboxes[this.currentEmail];
+                    localStorage.setItem('tempmail_mailboxes', JSON.stringify(this.savedMailboxes));
+                    
+                    // If this was the last used, clear it
+                    if (localStorage.getItem('tempmail_last_used') === deletedEmail) {
+                        localStorage.removeItem('tempmail_last_used');
+                    }
+                    
+                    this.showStatus('Mailbox deleted successfully', 'success');
+                    
+                    // Check if there are other saved mailboxes
+                    const remainingMailboxes = Object.keys(this.savedMailboxes);
+                    if (remainingMailboxes.length > 0) {
+                        // Load the most recently used mailbox
+                        const lastUsed = remainingMailboxes.sort((a, b) => 
+                            new Date(this.savedMailboxes[b].lastUsed) - new Date(this.savedMailboxes[a].lastUsed)
+                        )[0];
+                        this.loadMailbox(lastUsed);
+                    } else {
+                        // Generate new email if no saved mailboxes
+                        this.generateEmail();
+                    }
+                    
+                    this.updateMailboxSelector();
+                }
+            }
+            
+            clearAllEmails() {
+                this.emails = [];
+                this.updateEmailList();
+                this.saveMailbox();
+                this.showStatus('All emails cleared', 'success');
+            }
+            
+            toggleAutoRefresh() {
+                const btn = document.getElementById('autoRefreshBtn');
+                if (this.refreshInterval) {
+                    this.stopAutoRefresh();
+                    btn.innerHTML = '<i class="fas fa-clock me-2"></i>Auto-Check: OFF';
+                    btn.classList.remove('btn-success');
+                    btn.classList.add('btn-outline-primary');
+                } else {
+                    this.startAutoRefresh();
+                    btn.innerHTML = '<i class="fas fa-clock me-2"></i>Auto-Check: ON';
+                    btn.classList.remove('btn-outline-primary');
+                    btn.classList.add('btn-success');
+                }
+            }
+            
+            // Generate sample email for demonstration
+            generateSampleEmail() {
+                const sampleEmails = [
+                    {
+                        id: Date.now(),
+                        from: 'welcome@example.com',
+                        subject: 'Welcome to Our Service!',
+                        date: new Date().toISOString(),
+                        textBody: 'Thank you for signing up! We are excited to have you on board. This is a sample email to demonstrate the temporary email functionality.',
+                        htmlBody: '<p>Thank you for signing up! We are excited to have you on board.</p><p>This is a sample email to demonstrate the temporary email functionality.</p>'
+                    },
+                    {
+                        id: Date.now() + 1,
+                        from: 'notifications@testsite.com',
+                        subject: 'Your account verification',
+                        date: new Date().toISOString(),
+                        textBody: 'Please click the link below to verify your account. This is a demonstration email for the temporary email app.',
+                        htmlBody: '<p>Please click the link below to verify your account.</p><p><a href="#">Verify Account</a></p><p>This is a demonstration email for the temporary email app.</p>'
+                    },
+                    {
+                        id: Date.now() + 2,
+                        from: 'support@demo.org',
+                        subject: 'Test Email Received',
+                        date: new Date().toISOString(),
+                        textBody: 'Congratulations! Your temporary email is working correctly. You can receive emails at this address.',
+                        htmlBody: '<h3>Congratulations!</h3><p>Your temporary email is working correctly. You can receive emails at this address.</p>'
+                    }
+                ];
+                
+                return sampleEmails[Math.floor(Math.random() * sampleEmails.length)];
+            }
+            
+            // Get full email content
+            async getEmailContent(id) {
+                try {
+                    const response = await fetch(
+                        `${this.apiBase}?action=readMessage&login=${this.username}&domain=${this.domain}&id=${id}`
+                    );
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    
+                    return await response.json();
+                } catch (error) {
+                    console.error('Error fetching email content:', error);
+                    return null;
+                }
+            }
+            
+            // Update email display
+            updateEmailDisplay() {
+                const display = document.getElementById('emailDisplay');
+                if (this.currentEmail) {
+                    display.textContent = this.currentEmail;
+                } else {
+                    display.textContent = 'No email generated yet';
+                }
+            }
+            
+            // Update email list
+            updateEmailList() {
+                const emailList = document.getElementById('emailList');
+                const emailsContainer = document.getElementById('emails');
+                const emailCount = document.getElementById('emailCount');
+                const emptyInbox = document.getElementById('emptyInbox');
+                
+                emailCount.textContent = this.emails.length;
+                
+                // Always show the email list section
+                emailList.style.display = 'block';
+                
+                if (this.emails.length > 0) {
+                    emailsContainer.style.display = 'block';
+                    emptyInbox.style.display = 'none';
+                    emailsContainer.innerHTML = this.emails.map((email, index) => `
+                        <div class="email-item ${index < 3 ? 'unread' : ''}" onclick="showEmailDetail(${index})">
+                            <div class="email-subject">${this.escapeHtml(email.subject || 'No Subject')}</div>
+                            <div class="email-from">
+                                <i class="fas fa-user me-1"></i>
+                                ${this.escapeHtml(email.from || 'Unknown Sender')}
+                            </div>
+                            <div class="email-date">
+                                <i class="fas fa-clock me-1"></i>
+                                ${this.formatDate(email.date)}
+                            </div>
+                            <div class="email-preview">
+                                ${this.getEmailPreview(email)}
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    emailsContainer.style.display = 'none';
+                    emptyInbox.style.display = 'block';
+                }
+            }
+            
+            // Get email preview text
+            getEmailPreview(email) {
+                if (email.htmlBody) {
+                    // Strip HTML tags and get first 150 characters
+                    const text = email.htmlBody.replace(/<[^>]*>/g, '').trim();
+                    return this.escapeHtml(text.substring(0, 150) + (text.length > 150 ? '...' : ''));
+                } else if (email.textBody) {
+                    return this.escapeHtml(email.textBody.substring(0, 150) + (email.textBody.length > 150 ? '...' : ''));
+                } else {
+                    return 'No preview available';
+                }
+            }
+            
+            // Show email detail modal
+            showEmailDetail(index) {
+                const email = this.emails[index];
+                if (!email) return;
+                
+                document.getElementById('modalFrom').textContent = email.from || 'Unknown Sender';
+                document.getElementById('modalSubject').textContent = email.subject || 'No Subject';
+                document.getElementById('modalDate').textContent = this.formatDate(email.date);
+                
+                const contentDiv = document.getElementById('modalContent');
+                if (email.htmlBody) {
+                    // Sanitize HTML content
+                    contentDiv.innerHTML = this.sanitizeHtml(email.htmlBody);
+                } else if (email.textBody) {
+                    contentDiv.innerHTML = `<pre style="white-space: pre-wrap; font-family: inherit;">${this.escapeHtml(email.textBody)}</pre>`;
+                } else {
+                    contentDiv.innerHTML = '<p class="text-muted">No content available</p>';
+                }
+                
+                // Show modal
+                const modal = new bootstrap.Modal(document.getElementById('emailModal'));
+                modal.show();
+            }
+            
+            // Copy email to clipboard
+            async copyEmail() {
+                if (!this.currentEmail) {
+                    this.showStatus('No email address to copy.', 'warning');
+                    return;
+                }
+                
+                try {
+                    await navigator.clipboard.writeText(this.currentEmail);
+                    this.showStatus('Email address copied to clipboard!', 'success');
+                    
+                    // Track copy action
+                    if (typeof trackEmailCopy === 'function') {
+                        trackEmailCopy();
+                    }
+                } catch (error) {
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = this.currentEmail;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    this.showStatus('Email address copied to clipboard!', 'success');
+                    
+                    // Track copy action
+                    if (typeof trackEmailCopy === 'function') {
+                        trackEmailCopy();
+                    }
+                }
+            }
+            
+            // Show status message
+            showStatus(message, type) {
+                const container = document.getElementById('statusMessages');
+                const alertClass = `alert-${type}`;
+                const icon = type === 'success' ? 'check-circle' : 
+                            type === 'danger' ? 'exclamation-triangle' : 
+                            type === 'warning' ? 'exclamation-triangle' : 'info-circle';
+                
+                const alert = document.createElement('div');
+                alert.className = `alert ${alertClass} d-flex align-items-center`;
+                alert.innerHTML = `
+                    <i class="fas fa-${icon} me-2"></i>
+                    ${this.escapeHtml(message)}
+                `;
+                
+                container.appendChild(alert);
+                
+                // Auto-remove after 5 seconds
+                setTimeout(() => {
+                    if (alert.parentNode) {
+                        alert.remove();
+                    }
+                }, 5000);
+            }
+            
+            // Set refresh button state
+            setRefreshButton(loading) {
+                const btn = document.getElementById('refreshBtn');
+                if (loading) {
+                    btn.disabled = true;
+                    btn.innerHTML = '<span class="loading-spinner me-2"></span>Checking...';
+                } else {
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fas fa-sync-alt me-2"></i>Check for New Emails';
+                }
+            }
+            
+            // Start auto-refresh
+            startAutoRefresh() {
+                if (this.refreshInterval) {
+                    clearInterval(this.refreshInterval);
+                }
+                
+                // Check for emails every 30 seconds
+                this.refreshInterval = setInterval(() => {
+                    if (this.currentEmail) {
+                        this.checkEmails();
+                    }
+                }, 30000);
+            }
+            
+            // Stop auto-refresh
+            stopAutoRefresh() {
+                if (this.refreshInterval) {
+                    clearInterval(this.refreshInterval);
+                    this.refreshInterval = null;
+                }
+            }
+            
+            // Format date
+            formatDate(dateString) {
+                if (!dateString) return 'Unknown date';
+                
+                try {
+                    const date = new Date(dateString);
+                    const now = new Date();
+                    const diffMs = now - date;
+                    const diffMins = Math.floor(diffMs / 60000);
+                    const diffHours = Math.floor(diffMins / 60);
+                    const diffDays = Math.floor(diffHours / 24);
+                    
+                    if (diffMins < 1) return 'Just now';
+                    if (diffMins < 60) return `${diffMins} minute${diffMins > 1 ? 's' : ''} ago`;
+                    if (diffHours < 24) return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`;
+                    if (diffDays < 7) return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`;
+                    
+                    return date.toLocaleDateString();
+                } catch (error) {
+                    return dateString;
+                }
+            }
+            
+            // Escape HTML to prevent XSS
+            escapeHtml(text) {
+                const map = {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#039;'
+                };
+                return text.replace(/[&<>"']/g, m => map[m]);
+            }
+            
+            // Basic HTML sanitization
+            sanitizeHtml(html) {
+                // Remove script tags and dangerous attributes
+                return html
+                    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+                    .replace(/<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi, '')
+                    .replace(/on\w+\s*=\s*"[^"]*"/gi, '')
+                    .replace(/on\w+\s*=\s*'[^']*'/gi, '')
+                    .replace(/javascript:/gi, '');
+            }
+        }
+        
+        // Global instance
+        const tempMail = new TempMail();
+        
+        // Global functions for HTML onclick handlers
+        function generateEmail() {
+            tempMail.generateEmail();
+        }
+        
+        function checkEmails() {
+            tempMail.checkEmails();
+        }
+        
+        function copyEmail() {
+            tempMail.copyEmail();
+        }
+        
+        function showEmailDetail(index) {
+            tempMail.showEmailDetail(index);
+        }
+        
+        function switchMailbox() {
+            const selector = document.getElementById('mailboxSelector');
+            const selectedEmail = selector.value;
+            if (selectedEmail && selectedEmail !== tempMail.currentEmail) {
+                tempMail.loadMailbox(selectedEmail);
+            } else if (!selectedEmail) {
+                // If "Select Previous Mailbox" is chosen, do nothing
+                return;
+            }
+        }
+        
+        function deleteMailbox() {
+            if (confirm('Are you sure you want to delete this mailbox? This action cannot be undone.')) {
+                tempMail.deleteCurrentMailbox();
+            }
+        }
+        
+        function clearAllEmails() {
+            if (confirm('Are you sure you want to clear all emails from this mailbox?')) {
+                tempMail.clearAllEmails();
+            }
+        }
+        
+        function toggleAutoRefresh() {
+            tempMail.toggleAutoRefresh();
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show welcome message
+            tempMail.showStatus('Welcome to TempMail! Generate a temporary email address to get started.', 'info');
+        });
+        
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', function() {
+            tempMail.stopAutoRefresh();
+        });
+    </script>
+    
+    <!-- JSON-LD Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "TempMail - Temporary Email Service",
+        "description": "Free temporary email service for generating disposable email addresses to protect your privacy online",
+        "url": "https://your-domain.com/",
+        "applicationCategory": "WebApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "TempMail"
+        },
+        "featureList": [
+            "Anonymous temporary email generation",
+            "Real-time email checking",
+            "No registration required",
+            "Mobile-friendly interface",
+            "One-click email copying"
+        ],
+        "browserRequirements": "Requires JavaScript. Compatible with all modern browsers.",
+        "screenshot": "https://your-domain.com/generated-icon.png"
+    }
+    </script>
+</body>
+</html>
