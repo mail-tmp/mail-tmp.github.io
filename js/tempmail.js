@@ -1,9 +1,7 @@
-// Google Analytics Setup
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'GA_MEASUREMENT_ID');
-
+/**
+ * TempMail - A disposable email service for developers
+ * This class handles all the functionality for managing temporary email addresses
+ */
 class TempMail {
     constructor() {
         this.currentEmail = '';
@@ -12,7 +10,8 @@ class TempMail {
         this.refreshInterval = null;
         this.apiBase = 'https://api.mail.tm';
         this.savedMailboxes = {};
-        this.autoRefreshEnabled = false;
+        this.autoRefreshEnabled = true; // Enable auto-refresh by default
+        this.refreshFrequency = 5000;   // 5 seconds refresh frequency
 
         this.loadSavedData();
         this.updateMailboxSelector();
@@ -282,26 +281,44 @@ class TempMail {
         const emailsContainer = document.getElementById('emails');
         const emailCount = document.getElementById('emailCount');
         const emptyInbox = document.getElementById('emptyInbox');
+        const clearAllBtn = document.querySelector('button[onclick="clearAllEmails()"]');
 
         emailCount.textContent = this.emails.length;
 
         if (this.emails.length === 0) {
             emailsContainer.innerHTML = '';
             emptyInbox.classList.remove('hidden');
-            return;
+            if (clearAllBtn) clearAllBtn.classList.add('hidden');
+            return
         }
 
         emptyInbox.classList.add('hidden');
-        emailsContainer.innerHTML = this.emails.map((email, index) => `
-            <div class="bg-gray-900 border border-gray-600 rounded-lg p-4 mb-2 hover:bg-gray-800 transition cursor-pointer" 
-                 onclick="tempMail.showEmailDetails('${email.id}')">
-                <div class="flex justify-between items-start mb-2">
-                    <div class="font-semibold text-gray-100">${this.escapeHtml(email.from?.address || 'Unknown Sender')}</div>
-                    <div class="text-sm text-gray-400">${this.formatDate(email.createdAt)}</div>
+        if (clearAllBtn) clearAllBtn.classList.remove('hidden');
+        
+        emailsContainer.innerHTML = this.emails.map((email, index) => {
+            return `
+                <div class="bg-gray-900 border border-gray-600 rounded-lg p-4 mb-2 hover:bg-gray-800 transition cursor-pointer" 
+                     onclick="tempMail.showEmailDetails('${email.id}')">
+                    <div class="flex justify-between items-start mb-2">
+                        <div class="font-semibold text-gray-100">${this.escapeHtml(email.from?.address || 'Unknown Sender')}</div>
+                        <div class="flex items-center gap-2">
+                            <div class="text-sm text-gray-400">${this.formatDate(email.createdAt)}</div>
+                            <button class="text-red-400 hover:text-red-300 transition p-1" 
+                                    onclick="event.stopPropagation(); tempMail.deleteEmail('${email.id}')" 
+                                    data-bs-toggle="tooltip" 
+                                    data-bs-placement="top" 
+                                    title="Delete email">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="text-gray-300">${this.escapeHtml(email.subject || 'No Subject')}</div>
                 </div>
-                <div class="text-gray-300">${this.escapeHtml(email.subject || 'No Subject')}</div>
-            </div>
-        `).join('');
+            `;
+        }).join('');
+
+        // Reinitialize tooltips for new elements
+        this.initializeTooltips();
     }
 
     updateEmailDisplay() {
@@ -328,6 +345,60 @@ class TempMail {
                 this.showStatus(btn, 'Copy failed', 'danger');
             });
         }
+   }
+
+    copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            const activeButton = document.activeElement;
+            if (activeButton && activeButton.tagName === 'BUTTON') {
+                this.showStatus(activeButton, 'Text copied!', 'success');
+            }
+        }).catch(err => {
+            console.error('Copy failed:', err);
+            const activeButton = document.activeElement;
+            if (activeButton && activeButton.tagName === 'BUTTON') {
+                this.showStatus(activeButton, 'Copy failed', 'danger');
+            }
+        });
+    }
+
+    async showEmailDetails(messageId) {
+        try {
+            const emailData = await this.getEmailContent(messageId);
+            if (!emailData) {
+                throw new Error('Failed to get email content');
+            }
+
+            // Update modal content
+            document.getElementById('modalFrom').textContent = emailData.from?.address || 'Unknown Sender';
+            document.getElementById('modalSubject').textContent = emailData.subject || 'No Subject';
+            document.getElementById('modalDate').textContent = this.formatDate(emailData.createdAt);
+
+            // Handle email content
+            let content = emailData.html || emailData.text || 'No content';
+            if (emailData.html) {
+                // Sanitize HTML content if available
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = content;
+                content = tempDiv.innerHTML;
+            } else {
+                // Format plain text with line breaks
+                content = this.escapeHtml(content).replace(/\n/g, '<br>');
+            }
+            document.getElementById('modalContent').innerHTML = content;
+
+            // Show the modal
+            const emailModal = new bootstrap.Modal(document.getElementById('emailModal'));
+            emailModal.show();
+
+        } catch (error) {
+            console.error('Show email details error:', error.message);
+            // Show error message to user
+            const activeElement = document.activeElement;
+            if (activeElement) {
+                this.showStatus(activeElement, 'Error loading email', 'danger');
+            }
+        }
     }
 
     toggleAutoRefresh() {
@@ -347,7 +418,12 @@ class TempMail {
 
     startAutoRefresh() {
         if (this.autoRefreshEnabled && !this.refreshInterval) {
-            this.refreshInterval = setInterval(() => this.checkEmails(), 30000);
+            this.refreshInterval = setInterval(() => this.checkEmails(), this.refreshFrequency);
+            // Also update the button state
+            const btn = document.getElementById('autoRefreshBtn');
+            if (btn) {
+                btn.innerHTML = '<i class="fas fa-clock mr-2"></i>Auto-Refresh: ON';
+            }
         }
     }
 
@@ -462,6 +538,9 @@ class TempMail {
         this.updateEmailDisplay();
         this.updateEmailList();
         this.updateMailboxSelector();
+        
+        // Start auto-refresh when loading a mailbox
+        this.startAutoRefresh();
 
         localStorage.setItem('lastUsedMailbox', email);
     }
@@ -489,110 +568,78 @@ class TempMail {
         }
     }
 
-    clearAllEmails() {
-        if (this.currentEmail && this.emails.length > 0) {
-            this.emails = [];
-            this.updateEmailList();
-            this.saveMailbox();
-            const btn = document.querySelector('button[onclick="clearAllEmails()"]');
-            this.showStatus(btn, 'Inbox cleared', 'success');
-        }
-    }
+    async deleteEmail(messageId) {
+        if (!messageId || !this.currentToken) return;
 
-    async showEmailDetails(messageId) {
         try {
-            const emailData = await this.getEmailContent(messageId);
-            if (!emailData) {
-                throw new Error('Failed to fetch email content');
+            const response = await fetch(`${this.apiBase}/messages/${messageId}`, {
+                method: 'DELETE',
+                headers: { 'Authorization': `Bearer ${this.currentToken}` }
+            });
+
+            if (!response.ok) {
+                throw new Error(`Failed to delete message: ${response.status}`);
             }
 
-            document.getElementById('modalFrom').textContent = emailData.from?.address || 'Unknown Sender';
-            document.getElementById('modalSubject').textContent = emailData.subject || 'No Subject';
-            document.getElementById('modalDate').textContent = this.formatDate(emailData.createdAt);
-
-            const contentDiv = document.getElementById('modalContent');
-            contentDiv.innerHTML = ''; // Clear existing content
-
-            if (emailData.html) {
-                const iframe = document.createElement('iframe');
-                iframe.style.width = '100%';
-                iframe.style.height = '400px';
-                iframe.style.border = 'none';
-                contentDiv.appendChild(iframe);
-
-                iframe.contentDocument.open();
-                iframe.contentDocument.write(emailData.html);
-                iframe.contentDocument.close();
-            } else {
-                contentDiv.textContent = emailData.text || 'No content';
+            // Remove the email from local array
+            this.emails = this.emails.filter(email => email.id !== messageId);
+            
+            // Update UI
+            this.updateEmailList();
+            
+            // Save updated state
+            this.saveMailbox();
+            
+            // Show success message
+            const activeButton = document.activeElement;
+            if (activeButton) {
+                this.showStatus(activeButton, 'Email deleted', 'success');
             }
-
-            new bootstrap.Modal(document.getElementById('emailModal')).show();
 
         } catch (error) {
-            console.error('Show email details error:', error.message);
-            alert('Failed to load email content');
-        }
-    }
-}
-
-// Event listener for sidebar toggle
-document.addEventListener('DOMContentLoaded', function() {
-    const sidebarToggle = document.getElementById('sidebarToggle');
-    const sidebar = document.getElementById('sidebar');
-    
-    if (sidebarToggle && sidebar) {
-        sidebarToggle.addEventListener('click', function() {
-            sidebar.classList.toggle('hidden');
-        });
-    }
-
-    // Hide sidebar by default on small screens
-    function checkScreenSize() {
-        if (window.innerWidth < 1024 && sidebar) { // 1024px is the 'lg' breakpoint in Tailwind
-            sidebar.classList.add('hidden');
-        } else if (sidebar) {
-            sidebar.classList.remove('hidden');
+            console.error('Delete email error:', error.message);
+            const activeButton = document.activeElement;
+            if (activeButton) {
+                this.showStatus(activeButton, 'Error deleting email', 'danger');
+            }
         }
     }
 
-    // Run on load
-    checkScreenSize();
+    async clearAllEmails() {
+        if (!this.currentToken || this.emails.length === 0) return;
 
-    // Run on resize
-    window.addEventListener('resize', checkScreenSize);
-});
+        try {
+            // Delete all emails one by one
+            const deletePromises = this.emails.map(email => 
+                fetch(`${this.apiBase}/messages/${email.id}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${this.currentToken}` }
+                })
+            );
 
-// Analytics Functions
-function trackEmailGeneration() {
-    gtag('event', 'email_generated', {
-        'event_category': 'user_action',
-        'event_label': 'new_temp_email'
-    });
+            await Promise.all(deletePromises);
+
+            // Clear local array
+            this.emails = [];
+            
+            // Update UI
+            this.updateEmailList();
+            
+            // Save updated state
+            this.saveMailbox();
+            
+            // Show success message
+            const btn = document.querySelector('button[onclick="clearAllEmails()"]');
+            if (btn) {
+                this.showStatus(btn, 'All emails cleared', 'success');
+            }
+
+        } catch (error) {
+            console.error('Clear all emails error:', error.message);
+            const btn = document.querySelector('button[onclick="clearAllEmails()"]');
+            if (btn) {
+                this.showStatus(btn, 'Error clearing emails', 'danger');
+            }
+        }
+    }
 }
-
-function trackEmailCheck() {
-    gtag('event', 'check_emails', {
-        'event_category': 'user_action',
-        'event_label': 'check_inbox'
-    });
-}
-
-function trackEmailCopy() {
-    gtag('event', 'email_copied', {
-        'event_category': 'user_action',
-        'event_label': 'copy_to_clipboard'
-    });
-}
-
-// Initialize TempMail instance
-const tempMail = new TempMail();
-
-// Global function declarations for HTML event handlers
-window.generateEmail = () => tempMail.generateEmail();
-window.checkEmails = () => tempMail.checkEmails();
-window.copyEmail = () => tempMail.copyEmail();
-window.toggleAutoRefresh = () => tempMail.toggleAutoRefresh();
-window.switchMailbox = () => tempMail.switchMailbox();
-window.deleteMailbox = () => tempMail.deleteMailbox();
-window.clearAllEmails = () => tempMail.clearAllEmails();
