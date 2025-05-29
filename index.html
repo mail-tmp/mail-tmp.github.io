@@ -6,8 +6,8 @@
     <title>TempMail - Disposable Email for Devs</title>
 
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Generate disposable email addresses instantly. Protect your privacy with temporary emails for testing, signups, and more. Built for developers.">
-    <meta name="keywords" content="temporary email, disposable email, fake email, temp mail, email generator, privacy, developer tools">
+    <meta name="description" content="Generate disposable email addresses instantly. Built for developers.">
+    <meta name="keywords" content="temporary email, disposable email, temp mail, email generator, developer tools">
     <meta name="author" content="TempMail">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="/">
@@ -59,461 +59,141 @@
         }
     </script>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Fira Code Font -->
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&display=swap" rel="stylesheet">
 
+    <!-- Bootstrap CSS (for tooltips and modal) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
-        :root {
-            --primary: 200 100% 50%; /* Neon Blue */
-            --secondary: 0 0% 13%; /* Dark Gray */
-            --success: 160 100% 40%; /* Neon Green */
-            --danger: 0 100% 50%; /* Neon Red */
-            --warning: 40 100% 50%; /* Neon Yellow */
-            --info: 280 100% 50%; /* Neon Purple */
-            --light: 0 0% 20%; /* Lighter Gray */
-            --dark: 0 0% 7%; /* Almost Black */
-            --background: 0 0% 10%; /* Dark Background */
-            --text: 0 0% 90%; /* Light Text */
-            --border: 0 0% 20%; /* Gray Border */
-        }
-
         body {
-            background: hsl(var(--background));
-            min-height: 100vh;
             font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
-            color: hsl(var(--text));
-        }
-
-        .container {
-            max-width: 1200px;
-        }
-
-        .email-card, .sidebar {
-            background: hsl(var(--secondary));
-            border-radius: 8px;
-            border: 1px solid hsl(var(--border));
-            transition: all 0.3s ease;
-        }
-
-        .email-header {
-            background: hsl(var(--dark));
-            color: hsl(var(--primary));
-            border-radius: 8px 8px 0 0;
-            padding: 1.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .email-header h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            animation: typing 2s steps(20) forwards;
-            white-space: nowrap;
-            overflow: hidden;
-            border-right: 2px solid hsl(var(--primary));
-        }
-
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-
-        .email-display {
-            background: hsl(var(--dark));
-            border: 1px solid hsl(var(--border));
-            border-radius: 4px;
-            padding: 1rem;
-            margin: 1rem 0;
-            font-size: 1rem;
-            color: hsl(var(--success));
-            word-break: break-all;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .email-display:hover {
-            background: hsl(var(--primary) / 0.2);
-            transform: translateX(5px);
-        }
-
-        .copy-btn {
-            background: hsl(var(--success));
-            border: none;
-            color: hsl(var(--text));
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .copy-btn:hover {
-            background: hsl(160 100% 35%);
-            box-shadow: 0 0 10px hsl(var(--success));
-        }
-
-        .refresh-btn {
-            background: hsl(var(--info));
-            border: none;
-            color: hsl(var(--text));
-            padding: 0.75rem 1.5rem;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .refresh-btn:hover {
-            background: hsl(280 100% 45%);
-            box-shadow: 0 0 10px hsl(var(--info));
-        }
-
-        .refresh-btn:disabled {
-            background: hsl(var(--border));
-            cursor: not-allowed;
-        }
-
-        .email-item {
-            background: hsl(var(--light));
-            border: 1px solid hsl(var(--border));
-            border-radius: 4px;
-            margin-bottom: 1rem;
-            padding: 1rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .email-item:hover {
-            background: hsl(var(--primary) / 0.1);
-            transform: translateX(5px);
-        }
-
-        .email-item.unread {
-            border-left: 4px solid hsl(var(--primary));
-            background: hsl(var(--light) / 0.8);
-        }
-
-        .email-subject {
-            font-weight: 600;
-            color: hsl(var(--text));
-        }
-
-        .email-from {
-            color: hsl(var(--primary));
-            font-size: 0.9rem;
-        }
-
-        .email-date {
-            color: hsl(var(--text) / 0.7);
-            font-size: 0.85rem;
-        }
-
-        .email-preview {
-            color: hsl(var(--text) / 0.6);
-            font-size: 0.9rem;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+            @apply bg-gray-900 text-gray-100 overflow-hidden;
         }
 
         .loading-spinner {
-            width: 16px;
-            height: 16px;
-            border: 2px solid hsl(var(--text) / 0.3);
-            border-top-color: hsl(var(--text));
-            animation: spin 1s ease-in-out infinite;
+            @apply inline-block w-4 h-4 border-2 border-t-transparent border-gray-100 rounded-full animate-spin;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        .tooltip .tooltip-inner {
+            @apply font-mono text-sm px-2 py-1 rounded;
         }
 
-        .refresh-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: hsl(var(--dark) / 0.95);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
+        .tooltip.bs-tooltip-top .tooltip-inner.alert-info {
+            @apply bg-blue-800 text-gray-100 border-l-4 border-blue-400;
         }
 
-        .refresh-overlay.active {
-            opacity: 1;
-            visibility: visible;
+        .tooltip.bs-tooltip-top .tooltip-inner.alert-success {
+            @apply bg-green-800 text-gray-100 border-l-4 border-green-400;
         }
 
-        .refresh-text {
-            color: hsl(var(--text));
-            font-size: 1.2rem;
-            animation: glitch 1s linear infinite;
+        .tooltip.bs-tooltip-top .tooltip-inner.alert-warning {
+            @apply bg-yellow-800 text-gray-100 border-l-4 border-yellow-400;
         }
 
-        @keyframes glitch {
-            2%, 64% { transform: translate(2px, 0) skew(0deg); }
-            4%, 60% { transform: translate(-2px, 0) skew(0deg); }
-            62% { transform: translate(0, 0) skew(5deg); }
-        }
-
-        .sidebar {
-            background: hsl(var(--secondary));
-            border-radius: 8px;
-            border: 1px solid hsl(var(--border));
-            padding: 1.5rem;
-            max-height: 80vh;
-            overflow-y: auto;
-            color: hsl(var(--text));
-        }
-
-        .sidebar h2 {
-            font-size: 1.4rem;
-            animation: typing 2s steps(20) forwards;
-            border-right: 2px solid hsl(var(--primary));
-            white-space: nowrap;
-            overflow: hidden;
-        }
-
-        .sidebar ul {
-            padding-left: 0;
-        }
-
-        .sidebar li {
-            margin-bottom: 0.5rem;
-        }
-
-        .alert {
-            border-radius: 4px;
-            border: none;
-            padding: 0.5rem 1rem;
-            font-size: 0.9rem;
-            position: absolute;
-            z-index: 1000;
-            font-family: 'Fira Code', monospace;
-        }
-
-        .alert-info {
-            background: hsl(var(--info) / 0.2);
-            color: hsl(var(--info));
-            border-left: 4px solid hsl(var(--info));
-        }
-
-        .alert-warning {
-            background: hsl(var(--warning) / 0.2);
-            color: hsl(var(--warning));
-            border-left: 4px solid hsl(var(--warning));
-        }
-
-        .alert-danger {
-            background: hsl(var(--danger) / 0.2);
-            color: hsl(var(--danger));
-            border-left: 4px solid hsl(var(--danger));
-        }
-
-        .alert-success {
-            background: hsl(var(--success) / 0.2);
-            color: hsl(var(--success));
-            border-left: 4px solid hsl(var(--success));
-        }
-
-        .modal-content {
-            background: hsl(var(--secondary));
-            border-radius: 8px;
-            border: 1px solid hsl(var(--border));
-        }
-
-        .modal-header {
-            background: hsl(var(--dark));
-            color: hsl(var(--primary));
-            border-radius: 8px 8px 0 0;
-            border-bottom: none;
-        }
-
-        .email-content {
-            background: hsl(var(--dark));
-            border-radius: 4px;
-            padding: 1rem;
-            border: 1px solid hsl(var(--border));
-            max-height: 400px;
-            overflow-y: auto;
-            color: hsl(var(--text));
-        }
-
-        .btn-generate {
-            background: hsl(var(--success));
-            border: none;
-            color: hsl(var(--text));
-            padding: 0.75rem 2rem;
-            border-radius: 4px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .btn-generate:hover {
-            background: hsl(160 100% 35%);
-            box-shadow: 0 0 10px hsl(var(--success));
-        }
-
-        @media (max-width: 768px) {
-            .email-header {
-                padding: 1rem;
-            }
-
-            .email-display {
-                font-size: 0.9rem;
-            }
-
-            .email-item {
-                padding: 0.75rem;
-            }
-
-            .sidebar {
-                margin-bottom: 1rem;
-                max-height: none;
-            }
-
-            .refresh-text {
-                font-size: 1rem;
-            }
+        .tooltip.bs-tooltip-top .tooltip-inner.alert-danger {
+            @apply bg-red-800 text-gray-100 border-l-4 border-red-400;
         }
     </style>
 </head>
 <body>
-    <div class="container mt-4 mb-5">
-        <div class="row">
-            <!-- Sidebar with About Section -->
-            <div class="col-lg-4 col-md-12">
-                <div class="sidebar">
-                    <h2 class="mb-3">About TempMail</h2>
-                    <p>Instant disposable email addresses for developers. Use for testing, signups, or keeping your main inbox clean.</p>
-                    <ul class="list-unstyled">
-                        <li><i class="fas fa-check text-success me-2"></i>API testing and automation</li>
-                        <li><i class="fas fa-check text-success me-2"></i>Quick signups without spam</li>
-                        <li><i class="fas fa-check text-success me-2"></i>Privacy-first design</li>
-                        <li><i class="fas fa-check text-success me-2"></i>Local mailbox storage</li>
+    <div class="flex flex-col min-h-screen">
+        <div class="container mx-auto px-4 py-4 flex-grow">
+            <div class="flex h-[calc(100vh-2rem)]">
+                <!-- Sidebar with About Section -->
+                <div class="w-full lg:w-1/3 bg-gray-800 rounded-lg p-6 mr-4 overflow-y-auto border border-white">
+                    <h2 class="text-xl font-bold text-white mb-4">About TempMail</h2>
+                    <p class="text-gray-100 mb-4">Instant disposable email addresses for developers. Use for testing, signups, or keeping your main inbox clean.</p>
+                    <ul class="list-none">
+                        <li class="mb-2"><i class="fas fa-check text-blue-200 mr-2"></i><span class="text-gray-100">API testing and automation</span></li>
+                        <li class="mb-2"><i class="fas fa-check text-blue-200 mr-2"></i><span class="text-gray-100">Quick signups without spam</span></li>
+                        <li class="mb-2"><i class="fas fa-check text-blue-200 mr-2"></i><span class="text-gray-100">Privacy-first design</span></li>
+                        <li class="mb-2"><i class="fas fa-check text-blue-200 mr-2"></i><span class="text-gray-100">Local mailbox storage</span></li>
                     </ul>
-
-                    <h3 class="h5 mt-4 mb-3">Features</h3>
-                    <div class="row">
-                        <div class="col-6">
-                            <ul class="list-unstyled">
-                                <li><i class="fas fa-shield-alt text-primary me-2"></i>Anonymous</li>
-                                <li><i class="fas fa-bolt text-primary me-2"></i>Instant Generation</li>
-                                <li><i class="fas fa-mobile-alt text-primary me-2"></i>Mobile-Friendly</li>
-                            </ul>
-                        </div>
-                        <div class="col-6">
-                            <ul class="list-unstyled">
-                                <li><i class="fas fa-user-secret text-primary me-2"></i>No Registration</li>
-                                <li><i class="fas fa-sync-alt text-primary me-2"></i>Real-time Checking</li>
-                                <li><i class="fas fa-copy text-primary me-2"></i>One-Click Copy</li>
-                            </ul>
-                        </div>
+                    <h3 class="text-lg font-semibold text-white mt-4 mb-3">Features</h3>
+                    <div class="grid grid-cols-2 gap-2">
+                        <ul class="list-none">
+                            <li class="mb-2"><i class="fas fa-shield-alt text-blue-200 mr-2"></i><span class="text-gray-100">Anonymous</span></li>
+                            <li class="mb-2"><i class="fas fa-bolt text-blue-200 mr-2"></i><span class="text-gray-100">Instant Generation</span></li>
+                            <li class="mb-2"><i class="fas fa-mobile-alt text-blue-200 mr-2"></i><span class="text-gray-100">Mobile-Friendly</span></li>
+                        </ul>
+                        <ul class="list-none">
+                            <li class="mb-2"><i class="fas fa-user-secret text-blue-200 mr-2"></i><span class="text-gray-100">No Registration</span></li>
+                            <li class="mb-2"><i class="fas fa-sync-alt text-blue-200 mr-2"></i><span class="text-gray-100">Real-time Checking</span></li>
+                            <li class="mb-2"><i class="fas fa-copy text-blue-200 mr-2"></i><span class="text-gray-100">One-Click Copy</span></li>
+                        </ul>
                     </div>
                 </div>
-            </div>
 
-            <!-- Email Card -->
-            <div class="col-lg-8 col-md-12">
-                <div class="email-card">
-                    <div class="email-header text-center">
-                        <h1 class="mb-3">
-                            TempMail
-                        </h1>
-                        <p class="mb-0 opacity-75">Disposable Email for Devs</p>
+                <!-- Email Card -->
+                <div class="w-full lg:w-2/3 bg-gray-800 rounded-lg flex flex-col border border-white">
+                    <div class="bg-gray-900 rounded-t-lg p-6 text-center">
+                        <h1 class="text-2xl font-bold text-white">TempMail</h1>
+                        <p class="text-gray-100">Disposable Email for Devs</p>
                     </div>
-
-                    <div class="p-4">
+                    <div class="p-6 flex-grow flex flex-col">
                         <!-- Email Generation Section -->
-                        <div class="text-center mb-4">
-                            <div class="row g-2">
-                                <div class="col-md-6">
-                                    <button class="btn btn-generate w-100" onclick="generateEmail()" data-bs-toggle="tooltip" data-bs-placement="top" title="">
-                                        <i class="fas fa-plus-circle me-2"></i>
-                                        Generate Email
-                                    </button>
-                                </div>
-                                <div class="col-md-6">
-                                    <select class="form-select" id="mailboxSelector" onchange="switchMailbox()" style="height: 100%; background: hsl(var(--dark)); color: hsl(var(--text)); border-color: hsl(var(--border));">
-                                        <option value="">Select Mailbox</option>
-                                    </select>
-                                </div>
+                        <div class="mb-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                                <button class="bg-green-600 hover:bg-green-700 text-gray-100 py-2 rounded-lg transition" onclick="generateEmail()" data-bs-toggle="tooltip" data-bs-placement="top" title="">
+                                    <i class="fas fa-plus-circle mr-2"></i>Generate Email
+                                </button>
+                                <select class="form-select bg-gray-900 text-gray-100 border-gray-600 rounded-lg py-2" id="mailboxSelector" onchange="switchMailbox()">
+                                    <option value="">Select Mailbox</option>
+                                </select>
                             </div>
-                            <small class="text-muted mt-2 d-block">
-                                <i class="fas fa-info-circle me-1"></i>
-                                Mailboxes saved locally in browser
-                            </small>
+                            <p class="text-gray-100 text-sm mt-2"><i class="fas fa-info-circle mr-1"></i>Mailboxes saved locally in browser</p>
                         </div>
 
                         <!-- Current Email Display -->
-                        <div id="currentEmailSection" style="display: none;">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h5 class="mb-0">
-                                    <i class="fas fa-inbox me-2 text-primary"></i>
-                                    Current Email
-                                </h5>
-                                <div class="d-flex gap-2">
-                                    <button class="copy-btn" onclick="copyEmail()" title="Copy to clipboard" data-bs-toggle="tooltip" data-bs-placement="top">
-                                        <i class="fas fa-copy me-1"></i>
-                                        Copy
+                        <div id="currentEmailSection" class="hidden flex-grow">
+                            <div class="flex justify-between items-center mb-3">
+                                <h5 class="text-lg font-semibold text-white"><i class="fas fa-inbox mr-2"></i>Current Email</h5>
+                                <div class="flex gap-2">
+                                    <button class="bg-green-600 hover:bg-green-700 text-gray-100 py-1 px-3 rounded-md" onclick="copyEmail()" data-bs-toggle="tooltip" data-bs-placement="top" title="Copy to clipboard">
+                                        <i class="fas fa-copy mr-1"></i>Copy
                                     </button>
-                                    <button class="btn btn-outline-danger btn-sm" onclick="deleteMailbox()" title="Delete mailbox" data-bs-toggle="tooltip" data-bs-placement="top">
+                                    <button class="bg-red-600 hover:bg-red-700 text-gray-100 py-1 px-3 rounded-md" onclick="deleteMailbox()" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete mailbox">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </div>
                             </div>
-
-                            <div class="email-display" id="emailDisplay" onclick="copyEmail()" title="Click to copy email" data-bs-toggle="tooltip" data-bs-placement="top">
-                                <div class="d-flex align-items-center justify-content-center">
-                                    <i class="fas fa-envelope me-2 text-muted"></i>
-                                    <span>No email generated yet</span>
+                            <div class="bg-gray-900 border border-white rounded-lg p-4 text-green-400 cursor-pointer hover:bg-blue-600/20 transition" id="emailDisplay" onclick="copyEmail()" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to copy email">
+                                <div class="flex items-center justify-center">
+                                    <i class="fas fa-envelope mr-2 text-gray-100"></i>
+                                    <span>No email generated</span>
                                 </div>
                             </div>
 
                             <div class="text-center mb-4">
-                                <div class="d-flex gap-2 justify-content-center">
-                                    <button class="refresh-btn" id="refreshBtn" onclick="checkEmails()" data-bs-toggle="tooltip" data-bs-placement="top">
-                                        <i class="fas fa-sync-alt me-2"></i>
-                                        Check Emails
+                                <div class="flex gap-2 justify-center">
+                                    <button class="bg-blue-600 hover:bg-blue-700 text-gray-100 py-2 px-4 rounded-lg transition" id="refreshBtn" onclick="checkEmails()" data-bs-toggle="tooltip" data-bs-placement="top" title="Check emails">
+                                        <i class="fas fa-sync-alt mr-2"></i>Refresh
                                     </button>
-                                    <button class="btn btn-outline-primary" onclick="toggleAutoRefresh()" id="autoRefreshBtn" data-bs-toggle="tooltip" data-bs-placement="top">
-                                        <i class="fas fa-clock me-2"></i>
-                                        Auto-Check: OFF
+                                    <button class="bg-gray-600 hover:bg-gray-500 text-gray-100 py-2 px-4 rounded-lg transition" onclick="toggleAutoRefresh()" id="autoRefreshBtn" data-bs-toggle="tooltip" data-bs-placement="top" title="Toggle auto-refresh">
+                                        <i class="fas fa-clock mr-2"></i>Auto-Refresh: OFF
                                     </button>
                                 </div>
-                                <small class="text-muted mt-2 d-block">
-                                    <i class="fas fa-lightbulb me-1"></i>
-                                    Click email to copy instantly
-                                </small>
+                                <p class="text-gray-100 text-sm mt-2"><i class="fas fa-lightbulb mr-1"></i>Click email to copy instantly</p>
                             </div>
                         </div>
 
                         <!-- Email List -->
-                        <div id="emailList" style="display: none;">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h5 class="mb-0">
-                                    <i class="fas fa-envelope-open me-2 text-primary"></i>
-                                    Inbox (<span id="emailCount">0</span>)
-                                </h5>
-                                <button class="btn btn-outline-secondary btn-sm" onclick="clearAllEmails()" title="Clear all emails" data-bs-toggle="tooltip" data-bs-placement="top">
-                                    <i class="fas fa-broom me-1"></i>
-                                    Clear All
+                        <div id="emailList" class="hidden flex flex-col">
+                            <div class="flex justify-between items-center mb-3">
+                                <h5 class="text-lg font-semibold text-white"><i class="fas fa-envelope-open mr-2"></i>Inbox (<span id="emailCount">0</span>)</h5>
+                                <button class="bg-gray-600 hover:bg-gray-500 text-gray-100 py-1 px-3 rounded-md" onclick="clearAllEmails()" data-bs-toggle="tooltip" data-bs-placement="top" title="Clear all emails">
+                                    <i class="fas fa-broom mr-1"></i>Clear
                                 </button>
                             </div>
-                            <div id="emails"></div>
-                            <div id="emptyInbox" class="text-center py-4" style="display: none;">
-                                <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
-                                <p class="text-muted">No emails yet. Check for new emails!</p>
+                            <div id="emails" class="overflow-y-auto max-h-[200px]"></div>
+                            <div id="emptyInbox" class="text-center py-4 hidden">
+                                <i class="fas fa-inbox text-3xl text-gray-100 mb-3"></i>
+                                <p class="text-gray-100">No emails found</p>
                             </div>
                         </div>
                     </div>
@@ -523,34 +203,33 @@
     </div>
 
     <!-- Refresh Animation Overlay -->
-    <div class="refresh-overlay" id="refreshOverlay">
-        <div class="refresh-text">Checking emails...</div>
+    <div class="hidden fixed inset-0 bg-gray-900/90 flex items-center justify-center" id="refreshOverlay">
+        <div class="text-gray-100 text-center">
+            <p class="text-xl animate-pulse">Checking emails...</p>
+        </div>
     </div>
 
-    <!-- Email Detail Modal -->
-    <div class="modal fade" id="emailModal" tabindex="-1">
+    <!-- Email Content Modal -->
+    <div class="modal fade" id="emailModal" tabindex="-1" aria-labelledby="emailModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">
-                        <i class="fas fa-envelope-open me-2"></i>
-                        Email Details
-                    </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            <div class="modal-content bg-gray-800 border border-white rounded-lg">
+                <div class="modal-header bg-gray-900 text-white rounded-t-lg border-b border-white">
+                    <h5 class="modal-title" id="emailModalLabel"><i class="fas fa-envelope-open mr-2"></i>Email Details</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body p-6">
                     <div class="mb-3">
-                        <strong>From:</strong> <span id="modalFrom"></span>
+                        <strong class="text-blue-200">From:</strong> <span id="modalFrom" class="text-gray-100"></span>
                     </div>
                     <div class="mb-3">
-                        <strong>Subject:</strong> <span id="modalSubject"></span>
+                        <strong class="text-blue-200">Subject:</strong> <span id="modalSubject" class="text-gray-100"></span>
                     </div>
                     <div class="mb-3">
-                        <strong>Date:</strong> <span id="modalDate"></span>
+                        <strong class="text-blue-200">Date:</strong> <span id="modalDate" class="text-gray-100"></span>
                     </div>
                     <div class="mb-3">
-                        <strong>Content:</strong>
-                        <div class="email-content" id="modalContent"></div>
+                        <strong class="text-blue-200">Content:</strong>
+                        <div id="modalContent" class="bg-gray-900 p-4 rounded-lg border border-white max-h-[400px] overflow-y-auto text-gray-100"></div>
                     </div>
                 </div>
             </div>
@@ -573,6 +252,7 @@
 
                 this.loadSavedData();
                 this.updateMailboxSelector();
+                this.initializeTooltips();
 
                 const lastUsed = this.getLastUsedMailbox();
                 if (lastUsed && this.savedMailboxes[lastUsed]) {
@@ -580,23 +260,33 @@
                 } else {
                     this.generateEmail();
                 }
+            }
 
-                const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-                [...tooltipTriggerList].forEach(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+            initializeTooltips() {
+                try {
+                    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+                    tooltipTriggerList.forEach(triggerEl => {
+                        if (!bootstrap.Tooltip.getInstance(triggerEl)) {
+                            new bootstrap.Tooltip(triggerEl);
+                        }
+                    });
+                } catch (error) {
+                    console.error('Error initializing tooltips:', error);
+                }
             }
 
             async generateEmail() {
                 try {
-                    const btn = document.querySelector('.btn-generate');
+                    const btn = document.querySelector('button[onclick="generateEmail()"]');
                     this.showStatus(btn, 'Generating email...', 'info');
 
-                    const domainsResponse = await fetch(`${this.apiBase}/domains`);
+                    const domainsResponse = await fetch(`${this.apiBase}/domains`, { method: 'GET' });
                     if (!domainsResponse.ok) {
-                        throw new Error('Failed to get domains');
+                        throw new Error(`Failed to get domains: ${domainsResponse.status}`);
                     }
                     const domains = await domainsResponse.json();
 
-                    if (!domains['hydra:member'] || domains['hydra:member'].length === 0) {
+                    if (!domains['hydra:member'] || !Array.isArray(domains['hydra:member']) || domains['hydra:member'].length === 0) {
                         throw new Error('No domains available');
                     }
 
@@ -606,9 +296,7 @@
 
                     const createResponse = await fetch(`${this.apiBase}/accounts`, {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
+                        headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
                             address: this.currentEmail,
                             password: 'temppassword123'
@@ -616,15 +304,13 @@
                     });
 
                     if (!createResponse.ok) {
-                        const errorData = await createResponse.json();
-                        throw new Error(errorData.message || 'Failed to create account');
+                        const errorData = await createResponse.json().catch(() => ({}));
+                        throw new Error(errorData.message || `Failed to create account: ${createResponse.status}`);
                     }
 
                     const authResponse = await fetch(`${this.apiBase}/token`, {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
+                        headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
                             address: this.currentEmail,
                             password: 'temppassword123'
@@ -632,24 +318,28 @@
                     });
 
                     if (!authResponse.ok) {
-                        throw new Error('Failed to get authentication token');
+                        throw new Error(`Failed to get authentication token: ${authResponse.status}`);
                     }
 
                     const authData = await authResponse.json();
+                    if (!authData.token) {
+                        throw new Error('No token received');
+                    }
                     this.currentToken = authData.token;
 
                     this.emails = [];
                     this.updateEmailDisplay();
                     this.updateEmailList();
 
-                    document.getElementById('currentEmailSection').style.display = 'block';
+                    document.getElementById('currentEmailSection').classList.remove('hidden');
                     document.getElementById('emailDisplay').innerHTML = `<span>${this.currentEmail}</span>`;
-                    document.getElementById('emailList').style.display = 'block';
+                    document.getElementById('emailList').classList.remove('hidden');
 
                     this.showStatus(btn, 'Email generated!', 'success');
 
                     this.saveMailbox();
                     this.updateMailboxSelector();
+                    this.initializeTooltips();
 
                     if (typeof trackEmailGeneration === 'function') {
                         trackEmailGeneration();
@@ -658,9 +348,9 @@
                     this.startAutoRefresh();
 
                 } catch (error) {
-                    const btn = document.querySelector('.btn-generate');
-                    this.showStatus(btn, 'Failed to generate email.', 'danger');
-                    console.error('Error generating email:', error);
+                    const btn = document.querySelector('button[onclick="generateEmail()"]');
+                    this.showStatus(btn, 'Error generating email', 'danger');
+                    console.error('Generate email error:', error.message);
                 }
             }
 
@@ -676,26 +366,25 @@
             async checkEmails() {
                 if (!this.currentEmail || !this.currentToken) {
                     const btn = document.getElementById('refreshBtn');
-                    this.showStatus(btn, 'Generate an email first.', 'warning');
+                    this.showStatus(btn, 'Generate an email first', 'warning');
                     return;
                 }
 
                 try {
                     const btn = document.getElementById('refreshBtn');
                     this.setRefreshButton(true);
+                    document.getElementById('refreshOverlay').classList.remove('hidden');
 
                     if (typeof trackEmailCheck === 'function') {
                         trackEmailCheck();
                     }
 
                     const response = await fetch(`${this.apiBase}/messages`, {
-                        headers: {
-                            'Authorization': `Bearer ${this.currentToken}`
-                        }
+                        headers: { 'Authorization': `Bearer ${this.currentToken}` }
                     });
 
                     if (!response.ok) {
-                        throw new Error('Failed to fetch messages');
+                        throw new Error(`Failed to fetch messages: ${response.status}`);
                     }
 
                     const data = await response.json();
@@ -703,7 +392,7 @@
 
                     if (messages.length > 0) {
                         const existingIds = new Set(this.emails.map(email => email.id));
-                        const newEmails = messages.filter(msg => !existingIds.has(msg.id));
+                        const newEmails = messages.filter(msg => msg.id && !existingIds.has(msg.id));
 
                         if (newEmails.length > 0) {
                             this.emails = [...newEmails, ...this.emails];
@@ -712,36 +401,40 @@
                             this.saveMailbox();
                             this.updateMailboxSelector();
                         } else {
-                            this.showStatus(btn, 'No new emails.', 'info');
+                            this.showStatus(btn, 'No new emails', 'info');
                         }
                     } else {
-                        this.showStatus(btn, 'Inbox empty.', 'info');
+                        this.showStatus(btn, 'Inbox empty', 'info');
                     }
 
                 } catch (error) {
                     const btn = document.getElementById('refreshBtn');
-                    this.showStatus(btn, 'Error checking emails.', 'danger');
-                    console.error('Error checking emails:', error);
+                    this.showStatus(btn, 'Error checking emails', 'danger');
+                    console.error('Check emails error:', error.message);
                 } finally {
                     this.setRefreshButton(false);
+                    document.getElementById('refreshOverlay').classList.add('hidden');
+                    this.initializeTooltips();
                 }
             }
 
             async getEmailContent(messageId) {
                 try {
+                    if (!messageId) {
+                        throw new Error('Invalid message ID');
+                    }
                     const response = await fetch(`${this.apiBase}/messages/${messageId}`, {
-                        headers: {
-                            'Authorization': `Bearer ${this.currentToken}`
-                        }
+                        headers: { 'Authorization': `Bearer ${this.currentToken}` }
                     });
 
                     if (!response.ok) {
-                        throw new Error('Failed to fetch message content');
+                        throw new Error(`Failed to fetch message content: ${response.status}`);
                     }
 
-                    return await response.json();
+                    const data = await response.json();
+                    return data;
                 } catch (error) {
-                    console.error('Error fetching email content:', error);
+                    console.error('Fetch email content error:', error.message);
                     return null;
                 }
             }
@@ -749,9 +442,18 @@
             loadSavedData() {
                 try {
                     const saved = localStorage.getItem('tempmail_mailboxes');
-                    this.savedMailboxes = saved ? JSON.parse(saved) : {};
+                    if (saved) {
+                        const parsed = JSON.parse(saved);
+                        if (typeof parsed === 'object' && parsed !== null) {
+                            this.savedMailboxes = parsed;
+                        } else {
+                            throw new Error('Invalid mailbox data format');
+                        }
+                    }
                 } catch (error) {
                     this.savedMailboxes = {};
+                    console.error('Error loading saved data:', error.message);
+                    localStorage.removeItem('tempmail_mailboxes');
                 }
             }
 
@@ -767,20 +469,24 @@
                     localStorage.setItem('tempmail_mailboxes', JSON.stringify(this.savedMailboxes));
                     localStorage.setItem('tempmail_last_used', this.currentEmail);
                 } catch (error) {
-                    console.error('Error saving mailbox:', error);
+                    console.error('Error saving mailbox:', error.message);
                 }
             }
 
             loadMailbox(email) {
-                const mailbox = this.savedMailboxes[email];
-                if (mailbox) {
+                try {
+                    const mailbox = this.savedMailboxes[email];
+                    if (!mailbox) {
+                        throw new Error('Mailbox not found');
+                    }
+
                     this.stopAutoRefresh();
 
                     this.currentEmail = mailbox.email;
                     this.currentToken = mailbox.token;
                     this.emails = mailbox.emails || [];
 
-                    document.getElementById('currentEmailSection').style.display = 'block';
+                    document.getElementById('currentEmailSection').classList.remove('hidden');
                     document.getElementById('emailDisplay').innerHTML = `<span>${this.currentEmail}</span>`;
                     this.updateEmailList();
                     this.updateMailboxSelector();
@@ -790,6 +496,9 @@
                     const selector = document.getElementById('mailboxSelector');
                     this.showStatus(selector, `Switched to ${email}`, 'success');
                     this.startAutoRefresh();
+                    this.initializeTooltips();
+                } catch (error) {
+                    console.error('Error loading mailbox:', error.message);
                 }
             }
 
@@ -798,26 +507,34 @@
             }
 
             updateMailboxSelector() {
-                const selector = document.getElementById('mailboxSelector');
-                selector.innerHTML = '<option value="">Select Mailbox</option>';
+                try {
+                    const selector = document.getElementById('mailboxSelector');
+                    selector.innerHTML = '<option value="">Select Mailbox</option>';
 
-                Object.keys(this.savedMailboxes)
-                    .sort((a, b) => new Date(this.savedMailboxes[b].lastUsed) - new Date(this.savedMailboxes[a].lastUsed))
-                    .forEach(email => {
-                        const option = document.createElement('option');
-                        option.value = email;
-                        option.textContent = email;
-                        if (email === this.currentEmail) {
-                            option.selected = true;
-                        }
-                        selector.appendChild(option);
-                    });
+                    Object.keys(this.savedMailboxes)
+                        .sort((a, b) => new Date(this.savedMailboxes[b].lastUsed) - new Date(this.savedMailboxes[a].lastUsed))
+                        .forEach(email => {
+                            const option = document.createElement('option');
+                            option.value = email;
+                            option.textContent = email;
+                            if (email === this.currentEmail) {
+                                option.selected = true;
+                            }
+                            selector.appendChild(option);
+                        });
+                } catch (error) {
+                    console.error('Error updating mailbox selector:', error.message);
+                }
             }
 
             deleteCurrentMailbox() {
-                if (this.currentEmail && this.savedMailboxes[this.currentEmail]) {
+                try {
+                    if (!this.currentEmail || !this.savedMailboxes[this.currentEmail]) {
+                        throw new Error('No mailbox to delete');
+                    }
+
                     const deletedEmail = this.currentEmail;
-                    const btn = document.querySelector('.btn-outline-danger');
+                    const btn = document.querySelector('button[onclick="deleteMailbox()"]');
                     delete this.savedMailboxes[this.currentEmail];
                     localStorage.setItem('tempmail_mailboxes', JSON.stringify(this.savedMailboxes));
 
@@ -829,7 +546,7 @@
 
                     const remainingMailboxes = Object.keys(this.savedMailboxes);
                     if (remainingMailboxes.length > 0) {
-                        const lastUsed = remainingMailboxes.sort((a, b) => 
+                        const lastUsed = remainingMailboxes.sort((a, b) =>
                             new Date(this.savedMailboxes[b].lastUsed) - new Date(this.savedMailboxes[a].lastUsed)
                         )[0];
                         this.loadMailbox(lastUsed);
@@ -838,196 +555,237 @@
                     }
 
                     this.updateMailboxSelector();
+                    this.initializeTooltips();
+                } catch (error) {
+                    console.error('Error deleting mailbox:', error.message);
                 }
             }
 
             clearAllEmails() {
-                const btn = document.querySelector('.btn-outline-secondary');
-                this.emails = [];
-                this.updateEmailList();
-                this.saveMailbox();
-                this.showStatus(btn, 'Emails cleared', 'success');
+                try {
+                    const btn = document.querySelector('button[onclick="clearAllEmails()"]');
+                    this.emails = [];
+                    this.updateEmailList();
+                    this.saveMailbox();
+                    this.showStatus(btn, 'Emails cleared', 'success');
+                    this.initializeTooltips();
+                } catch (error) {
+                    console.error('Error clearing emails:', error.message);
+                }
             }
 
             toggleAutoRefresh() {
-                const btn = document.getElementById('autoRefreshBtn');
-                if (this.refreshInterval) {
-                    this.stopAutoRefresh();
-                    btn.innerHTML = '<i class="fas fa-clock me-2"></i>Auto-Check: OFF';
-                    btn.classList.remove('btn-success');
-                    btn.classList.add('btn-outline-primary');
-                    this.showStatus(btn, 'Auto-Check disabled', 'info');
-                } else {
-                    this.startAutoRefresh();
-                    btn.innerHTML = '<i class="fas fa-clock me-2"></i>Auto-Check: ON';
-                    btn.classList.remove('btn-outline-primary');
-                    btn.classList.add('btn-success');
-                    this.showStatus(btn, 'Auto-Check enabled', 'success');
+                try {
+                    const btn = document.getElementById('autoRefreshBtn');
+                    if (this.refreshInterval) {
+                        this.stopAutoRefresh();
+                        btn.innerHTML = '<i class="fas fa-clock mr-2"></i>Auto-Refresh: OFF';
+                        btn.classList.remove('bg-green-600', 'hover:bg-green-700');
+                        btn.classList.add('bg-gray-600', 'hover:bg-gray-500');
+                        this.showStatus(btn, 'Auto-refresh disabled', 'info');
+                    } else {
+                        this.startAutoRefresh();
+                        btn.innerHTML = '<i class="fas fa-clock mr-2"></i>Auto-Refresh: ON';
+                        btn.classList.remove('bg-gray-600', 'hover:bg-gray-500');
+                        btn.classList.add('bg-green-600', 'hover:bg-green-700');
+                        this.showStatus(btn, 'Auto-refresh enabled', 'success');
+                    }
+                    this.initializeTooltips();
+                } catch (error) {
+                    console.error('Error toggling auto-refresh:', error.message);
                 }
             }
 
             updateEmailDisplay() {
-                const display = document.getElementById('emailDisplay');
-                if (this.currentEmail) {
-                    display.textContent = this.currentEmail;
-                } else {
-                    display.textContent = 'No email generated yet';
+                try {
+                    const display = document.getElementById('emailDisplay');
+                    if (this.currentEmail) {
+                        display.textContent = this.currentEmail;
+                    } else {
+                        display.textContent = 'No email generated';
+                    }
+                } catch (error) {
+                    console.error('Error updating email display:', error.message);
                 }
             }
 
             updateEmailList() {
-                const emailList = document.getElementById('emailList');
-                const emailsContainer = document.getElementById('emails');
-                const emailCount = document.getElementById('emailCount');
-                const emptyInbox = document.getElementById('emptyInbox');
+                try {
+                    const emailList = document.getElementById('emailList');
+                    const emailsContainer = document.getElementById('emails');
+                    const emailCount = document.getElementById('emailCount');
+                    const emptyInbox = document.getElementById('emptyInbox');
 
-                emailCount.textContent = this.emails.length;
+                    emailCount.textContent = this.emails.length;
 
-                emailList.style.display = 'block';
+                    emailList.classList.remove('hidden');
 
-                if (this.emails.length > 0) {
-                    emailsContainer.style.display = 'block';
-                    emptyInbox.style.display = 'none';
-                    emailsContainer.innerHTML = this.emails.map((email, index) => `
-                        <div class="email-item ${index < 3 ? 'unread' : ''}" onclick="showEmailDetail(${index})">
-                            <div class="email-subject">${this.escapeHtml(email.subject || 'No Subject')}</div>
-                            <div class="email-from">
-                                <i class="fas fa-user me-1"></i>
-                                ${this.escapeHtml(email.from ? email.from.address : 'Unknown Sender')}
+                    if (this.emails.length > 0) {
+                        emailsContainer.style.display = 'block';
+                        emptyInbox.classList.add('hidden');
+                        emailsContainer.innerHTML = this.emails.map((email, index) => `
+                            <div class="bg-gray-700 p-4 rounded-lg mb-2 hover:bg-blue-600/20 transition cursor-pointer border border-white ${index < 3 ? 'border-l-4 border-blue-400' : ''}" onclick="showEmailDetail(${index})">
+                                <h6 class="text-gray-100 truncate">${this.escapeHtml(email.subject || 'No Subject')}</h6>
+                                <p class="text-blue-200 text-sm"><i class="fas fa-user mr-1"></i>${this.escapeHtml(email.from ? email.from.address : 'Unknown Sender')}</p>
+                                <p class="text-gray-100 text-sm"><i class="fas fa-clock mr-1"></i>${this.formatDate(email.createdAt)}</p>
+                                <p class="text-gray-400 text-sm truncate">${this.escapeHtml(email.intro || 'Click to view')}</p>
                             </div>
-                            <div class="email-date">
-                                <i class="fas fa-clock me-1"></i>
-                                ${this.formatDate(email.createdAt)}
-                            </div>
-                            <div class="email-preview">
-                                ${this.escapeHtml(email.intro || 'Click to view email content')}
-                            </div>
-                        </div>
-                    `).join('');
-                } else {
-                    emailsContainer.style.display = 'none';
-                    emptyInbox.style.display = 'block';
+                        `).join('');
+                    } else {
+                        emailsContainer.style.display = 'none';
+                        emptyInbox.classList.remove('hidden');
+                    }
+                    this.initializeTooltips();
+                } catch (error) {
+                    console.error('Error updating email list:', error.message);
                 }
             }
 
             async showEmailDetail(index) {
-                const email = this.emails[index];
-                if (!email) return;
-
-                document.getElementById('modalFrom').textContent = email.from ? email.from.address : 'Unknown Sender';
-                document.getElementById('modalSubject').textContent = email.subject || 'No Subject';
-                document.getElementById('modalDate').textContent = this.formatDate(email.createdAt);
-
-                const contentDiv = document.getElementById('modalContent');
-                contentDiv.innerHTML = '<div class="text-center"><i class="fas fa-spinner fa-spin"></i> Loading...</div>';
-
-                const modal = new bootstrap.Modal(document.getElementById('emailModal'));
-                modal.show();
-
                 try {
+                    const email = this.emails[index];
+                    if (!email) {
+                        throw new Error('Invalid email index');
+                    }
+
+                    document.getElementById('modalFrom').textContent = email.from ? email.from.address : 'Unknown Sender';
+                    document.getElementById('modalSubject').textContent = email.subject || 'No Subject';
+                    document.getElementById('modalDate').textContent = this.formatDate(email.createdAt);
+
+                    const contentDiv = document.getElementById('modalContent');
+                    contentDiv.innerHTML = '<div class="text-center text-gray-400"><i class="fas fa-spinner fa-spin"></i> Loading...</div>';
+
+                    const modal = new bootstrap.Modal(document.getElementById('emailModal'));
+                    modal.show();
+
                     const fullEmail = await this.getEmailContent(email.id);
 
                     if (fullEmail) {
-                        if (fullEmail.html && fullEmail.html.length > 0) {
+                        if (fullEmail.html && Array.isArray(fullEmail.html) && fullEmail.html.length > 0) {
                             contentDiv.innerHTML = this.sanitizeHtml(fullEmail.html[0]);
                         } else if (fullEmail.text) {
-                            contentDiv.innerHTML = `<pre style="white-space: pre-wrap; font-family: inherit; color: hsl(var(--text));">${this.escapeHtml(fullEmail.text)}</pre>`;
+                            contentDiv.innerHTML = `<pre class="text-gray-100 whitespace-pre-wrap">${this.escapeHtml(fullEmail.text)}</pre>`;
                         } else {
-                            contentDiv.innerHTML = '<p class="text-muted">No content available</p>';
+                            contentDiv.innerHTML = '<p class="text-gray-400">No content available</p>';
                         }
                     } else {
-                        contentDiv.innerHTML = '<p class="text-muted text-danger">Failed to load content</p>';
+                        contentDiv.innerHTML = '<p class="text-red-400">Failed to load content</p>';
                     }
+                    this.initializeTooltips();
                 } catch (error) {
-                    console.error('Error loading email content:', error);
-                    contentDiv.innerHTML = '<p class="text-muted text-danger">Error loading content</p>';
+                    console.error('Error showing email detail:', error.message);
+                    document.getElementById('modalContent').innerHTML = '<p class="text-red-400">Error loading content</p>';
                 }
             }
 
             async copyEmail() {
-                const display = document.getElementById('emailDisplay');
-                if (!this.currentEmail) {
-                    this.showStatus(display, 'No email to copy.', 'warning');
-                    return;
-                }
-
                 try {
-                    await navigator.clipboard.writeText(this.currentEmail);
-                    this.showStatus(display, 'Email copied!', 'success');
+                    const display = document.getElementById('emailDisplay');
+                    if (!this.currentEmail) {
+                        this.showStatus(display, 'No email to copy', 'warning');
+                        return;
+                    }
 
-                    if (typeof trackEmailCopy === 'function') {
-                        trackEmailCopy();
+                    try {
+                        await navigator.clipboard.writeText(this.currentEmail);
+                        this.showStatus(display, 'Email copied!', 'success');
+
+                        if (typeof trackEmailCopy === 'function') {
+                            trackEmailCopy();
+                        }
+                    } catch (error) {
+                        const textArea = document.createElement('textarea');
+                        textArea.value = this.currentEmail;
+                        document.body.appendChild(textArea);
+                        textArea.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(textArea);
+                        this.showStatus(display, 'Email copied!', 'success');
+
+                        if (typeof trackEmailCopy === 'function') {
+                            trackEmailCopy();
+                        }
                     }
                 } catch (error) {
-                    const textArea = document.createElement('textarea');
-                    textArea.value = this.currentEmail;
-                    document.body.appendChild(textArea);
-                    textArea.select();
-                    document.execCommand('copy');
-                    document.body.removeChild(textArea);
-                    this.showStatus(display, 'Email copied!', 'success');
-
-                    if (typeof trackEmailCopy === 'function') {
-                        trackEmailCopy();
-                    }
+                    console.error('Error copying email:', error.message);
                 }
             }
 
             showStatus(element, message, type) {
-                const existingTooltip = bootstrap.Tooltip.getInstance(element);
-                if (existingTooltip) {
-                    existingTooltip.dispose();
+                try {
+                    const existingTooltip = bootstrap.Tooltip.getInstance(element);
+                    if (existingTooltip) {
+                        existingTooltip.dispose();
+                    }
+
+                    element.setAttribute('data-bs-title', this.escapeHtml(message));
+                    const tooltip = new bootstrap.Tooltip(element, {
+                        trigger: 'manual',
+                        placement: 'top',
+                        customClass: `alert-${type}`
+                    });
+                    tooltip.show();
+
+                    setTimeout(() => {
+                        tooltip.hide();
+                        element.setAttribute('data-bs-title', element.getAttribute('title') || '');
+                    }, 1000);
+                } catch (error) {
+                    console.error('Error showing status:', error.message);
                 }
-
-                element.setAttribute('data-bs-title', this.escapeHtml(message));
-                const tooltip = new bootstrap.Tooltip(element, {
-                    trigger: 'manual',
-                    placement: 'top',
-                    customClass: `alert alert-${type}`
-                });
-                tooltip.show();
-
-                setTimeout(() => {
-                    tooltip.hide();
-                    element.setAttribute('data-bs-title', element.getAttribute('title') || '');
-                }, 1000);
             }
 
             setRefreshButton(loading) {
-                const btn = document.getElementById('refreshBtn');
-                if (loading) {
-                    btn.disabled = true;
-                    btn.innerHTML = '<span class="loading-spinner me-2"></span>Checking...';
-                } else {
-                    btn.disabled = false;
-                    btn.innerHTML = '<i class="fas fa-sync-alt me-2"></i>Check Emails';
+                try {
+                    const btn = document.getElementById('refreshBtn');
+                    if (loading) {
+                        btn.disabled = true;
+                        btn.innerHTML = '<span class="loading-spinner mr-2"></span>Checking...';
+                    } else {
+                        btn.disabled = false;
+                        btn.innerHTML = '<i class="fas fa-sync-alt mr-2"></i>Refresh';
+                    }
+                } catch (error) {
+                    console.error('Error setting refresh button:', error.message);
                 }
             }
 
             startAutoRefresh() {
-                if (this.refreshInterval) {
-                    clearInterval(this.refreshInterval);
-                }
-
-                this.refreshInterval = setInterval(() => {
-                    if (this.currentEmail && this.currentToken) {
-                        this.checkEmails();
+                try {
+                    if (this.refreshInterval) {
+                        clearInterval(this.refreshInterval);
                     }
-                }, 30000);
+
+                    this.refreshInterval = setInterval(() => {
+                        if (this.currentEmail && this.currentToken) {
+                            this.checkEmails();
+                        }
+                    }, 30000);
+                } catch (error) {
+                    console.error('Error starting auto-refresh:', error.message);
+                }
             }
 
             stopAutoRefresh() {
-                if (this.refreshInterval) {
-                    clearInterval(this.refreshInterval);
-                    this.refreshInterval = null;
+                try {
+                    if (this.refreshInterval) {
+                        clearInterval(this.refreshInterval);
+                        this.refreshInterval = null;
+                    }
+                } catch (error) {
+                    console.error('Error stopping auto-refresh:', error.message);
                 }
             }
 
             formatDate(dateString) {
-                if (!dateString) return 'Unknown date';
-
                 try {
+                    if (!dateString) return 'Unknown date';
+
                     const date = new Date(dateString);
+                    if (isNaN(date.getTime())) {
+                        return dateString;
+                    }
+
                     const now = new Date();
                     const diffMs = now - date;
                     const diffMins = Math.floor(diffMs / 60000);
@@ -1041,28 +799,41 @@
 
                     return date.toLocaleDateString();
                 } catch (error) {
+                    console.error('Error formatting date:', error.message);
                     return dateString;
                 }
             }
 
             escapeHtml(text) {
-                const map = {
-                    '&': '&amp;',
-                    '<': '&lt;',
-                    '>': '&gt;',
-                    '"': '&quot;',
-                    "'": '&#039;'
-                };
-                return text.replace(/[&<>"']/g, m => map[m]);
+                try {
+                    if (typeof text !== 'string') return text;
+                    const map = {
+                        '&': '&amp;',
+                        '<': '&lt;',
+                        '>': '&gt;',
+                        '"': '&quot;',
+                        "'": '&#039;'
+                    };
+                    return text.replace(/[&<>"']/g, m => map[m]);
+                } catch (error) {
+                    console.error('Error escaping HTML:', error.message);
+                    return text;
+                }
             }
 
             sanitizeHtml(html) {
-                return html
-                    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
-                    .replace(/<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi, '')
-                    .replace(/on\w+\s*=\s*"[^"]*"/gi, '')
-                    .replace(/on\w+\s*=\s*'[^']*'/gi, '')
-                    .replace(/javascript:/gi, '');
+                try {
+                    if (typeof html !== 'string') return '';
+                    return html
+                        .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+                        .replace(/<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi, '')
+                        .replace(/on\w+\s*=\s*"[^"]*"/gi, '')
+                        .replace(/on\w+\s*=\s*'[^']*'/gi, '')
+                        .replace(/javascript:/gi, '');
+                } catch (error) {
+                    console.error('Error sanitizing HTML:', error.message);
+                    return '';
+                }
             }
         }
 
@@ -1109,7 +880,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            tempMail.showStatus(document.querySelector('.btn-generate'), 'Welcome to TempMail! Generate an email.', 'info');
+            tempMail.showStatus(document.querySelector('button[onclick="generateEmail()"]'), 'Welcome to TempMail! Generate an email.', 'info');
         });
 
         window.addEventListener('beforeunload', function() {
