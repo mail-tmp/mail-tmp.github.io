@@ -1,0 +1,108 @@
+body {
+    font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+    background-color: #111827;
+    color: #F3F4F6;
+}
+
+.loading-spinner {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid #F3F4F6;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.tooltip .tooltip-inner {
+    font-family: monospace;
+    font-size: 0.875rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.tooltip.bs-tooltip-top .tooltip-inner.alert-info {
+    background-color: #1E40AF;
+    color: #F3F4F6;
+    border-left: 4px solid #60A5FA;
+}
+
+.tooltip.bs-tooltip-top .tooltip-inner.alert-success {
+    background-color: #065F46;
+    color: #F3F4F6;
+    border-left: 4px solid #34D399;
+}
+
+.tooltip.bs-tooltip-top .tooltip-inner.alert-warning {
+    background-color: #92400E;
+    color: #F3F4F6;
+    border-left: 4px solid #FBBF24;
+}
+
+.tooltip.bs-tooltip-top .tooltip-inner.alert-danger {
+    background-color: #991B1B;
+    color: #F3F4F6;
+    border-left: 4px solid #F87171;
+}
+
+#sidebar {
+    transition: all 0.3s ease-in-out;
+}
+
+@media (max-width: 1024px) {
+    #sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        z-index: 50;
+        width: 100%;
+        max-width: 20rem;
+        background-color: #1F2937;
+        overflow-y: auto;
+    }
+
+    #sidebar.hidden {
+        transform: translateX(-100%);
+    }
+
+    body {
+        overflow-x: hidden;
+    }
+}
+
+#headerSection {
+    position: relative;
+    z-index: 20;
+}
+
+#headerSection:hover {
+    background-color: rgba(31, 41, 55, 0.9);
+}
+
+#aboutBanner {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease-in-out;
+    transform: translateY(-10px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+#aboutBanner.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+@media (max-width: 640px) {
+    #aboutBanner {
+        position: fixed;
+        left: 1rem;
+        right: 1rem;
+        width: auto;
+    }
+}
