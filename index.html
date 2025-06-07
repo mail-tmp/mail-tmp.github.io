@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,15 +7,61 @@
     <title>TempMail - Disposable Email for Devs</title>
 
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Generate disposable email addresses instantly. Built for developers. No ads, no registration, completely free temporary email service.">
-    <meta name="keywords" content="temporary email, disposable email, temp mail, email generator, developer tools">
+    <meta name="description" content="Generate disposable email addresses instantly. Built for developers. No ads, no registration, completely free temporary email service with real-time inbox monitoring.">
+    <meta name="keywords" content="temporary email, disposable email, temp mail, email generator, developer tools, testing email, privacy email, anonymous email, fake email, 10 minute mail">
     <meta name="author" content="TempMail">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+    <link rel="canonical" href="https://mail-tmp.github.io">
 
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="TempMail - Disposable Email for Devs">
-    <meta property="og:description" content="Generate disposable email addresses instantly. Built for developers. No ads, no registration, completely free.">
+    <meta property="og:title" content="TempMail - Free Disposable Email Generator for Developers">
+    <meta property="og:description" content="Generate unlimited temporary email addresses instantly. Perfect for testing, privacy protection, and development. No registration required - completely free forever.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="">
+    <meta property="og:url" content="https://mail-tmp.github.io">
+    <meta property="og:image" content="https://mail-tmp.github.io/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="TempMail">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="TempMail - Free Disposable Email Generator">
+    <meta name="twitter:description" content="Generate unlimited temporary email addresses instantly. Perfect for testing and privacy protection.">
+    <meta name="twitter:image" content="https://mail-tmp.github.io/og-image.png">
+
+    <!-- Additional SEO Tags -->
+    <meta name="theme-color" content="#10B981">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="TempMail">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "TempMail",
+        "description": "Free disposable email generator for developers and privacy protection",
+        "url": "https://mail-tmp.github.io",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": [
+            "Instant email generation",
+            "Real-time email monitoring",
+            "No registration required",
+            "Privacy focused",
+            "Mobile responsive",
+            "Developer friendly"
+        ]
+    }
+    </script>
 
     <!-- Fira Code Font -->
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&display=swap" rel="stylesheet">
@@ -112,8 +159,6 @@
             flex-direction: column;
         }
 
-        
-
         .header:hover {
             background-color: #1F2937;
             transform: translateY(-1px);
@@ -140,16 +185,6 @@
             margin: 0;
         }
 
-        .about-btn-header {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            padding: 0.5rem;
-            font-size: 0.875rem;
-            min-width: auto;
-            width: auto;
-        }
-
         .about-banner {
             background-color: #1F2937;
             border-radius: 0.75rem;
@@ -163,8 +198,6 @@
             overflow-x: hidden;
             margin: auto;
         }
-
-
 
         .about-banner h2 {
             font-size: 1.25rem;
@@ -227,6 +260,13 @@
             .controls {
                 grid-template-columns: 1fr 1fr;
             }
+        }
+
+        .mailbox-controls {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            align-items: center;
         }
 
         .btn {
@@ -293,6 +333,8 @@
             color: #F3F4F6;
             font-family: inherit;
             min-height: 42px;
+            flex: 1;
+            min-width: 0;
         }
 
         .email-display {
@@ -672,28 +714,290 @@
         }
 
         @media (max-width: 640px) {
-            .about-banner {
-                position: fixed;
-                left: 1rem;
-                right: 1rem;
-                width: auto;
+            body {
+                padding: 0.5rem;
             }
 
             .container {
+                padding: 0;
+            }
+
+            .main-card {
+                min-height: calc(100vh - 1rem);
+                border-radius: 0.25rem;
+            }
+
+            .header {
                 padding: 1rem;
+                position: relative;
+            }
+
+            .header h1 {
+                font-size: 1.375rem;
+                margin-bottom: 0.25rem;
+            }
+
+            .header p {
+                font-size: 0.875rem;
+            }
+
+            .about-banner {
+                position: fixed;
+                left: 0.5rem;
+                right: 0.5rem;
+                top: 0.5rem;
+                bottom: 0.5rem;
+                width: auto;
+                max-width: none;
+                max-height: none;
+                margin: 0;
+            }
+
+            .content {
+                padding: 1rem;
+            }
+
+            .controls {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+
+            .mailbox-controls {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .mailbox-controls select,
+            .mailbox-controls button {
+                width: 100%;
+                min-width: auto;
             }
 
             .email-actions {
                 flex-direction: column;
+                gap: 0.5rem;
             }
 
             .btn {
                 min-width: 100px;
+                padding: 0.75rem 1rem;
+                font-size: 0.875rem;
+            }
+
+            .btn-action, .btn-refresh {
+                min-width: auto;
+            }
+
+            .email-display {
+                padding: 0.75rem;
+                font-size: 0.875rem;
+                word-break: break-all;
+            }
+
+            .email-item {
+                padding: 0.75rem;
+            }
+
+            .email-header {
+                flex-direction: column;
+                gap: 0.25rem;
+                align-items: flex-start;
+            }
+
+            .email-from {
+                font-size: 0.875rem;
+            }
+
+            .email-date {
+                font-size: 0.75rem;
+            }
+
+            .email-subject {
+                font-size: 0.875rem;
+                margin-top: 0.25rem;
+            }
+
+            .modal-content {
+                margin: 1rem;
+                max-width: calc(100% - 2rem);
+                max-height: calc(100% - 2rem);
+                padding: 1rem;
             }
 
             .modal-buttons {
                 flex-direction: column;
+                gap: 0.5rem;
             }
+
+            .delete-modal-content {
+                margin: 1rem;
+                width: calc(100% - 2rem);
+                padding: 1.5rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .collapsible-header {
+                padding: 0.75rem;
+            }
+
+            .collapsible-body {
+                padding: 0.75rem;
+            }
+
+            .shared-item {
+                padding: 0.5rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .shared-item > div:nth-child(2) {
+                width: 100%;
+            }
+
+            .shared-item > div:nth-child(3) {
+                width: 100%;
+                justify-content: flex-end;
+            }
+
+            .bulk-actions {
+                padding: 0.5rem;
+                flex-wrap: wrap;
+            }
+
+            #emailSearch {
+                font-size: 1rem;
+                padding: 0.75rem;
+            }
+
+            .select {
+                font-size: 0.875rem;
+                padding: 0.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.25rem;
+            }
+
+            .header svg {
+                width: 24px;
+                height: 24px;
+                margin-right: 0.5rem;
+            }
+
+            .content {
+                padding: 0.75rem;
+            }
+
+            .btn {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.8125rem;
+            }
+
+            .email-display {
+                padding: 0.5rem;
+                font-size: 0.8125rem;
+            }
+
+            .about-banner {
+                left: 0.25rem;
+                right: 0.25rem;
+                top: 0.25rem;
+                bottom: 0.25rem;
+                padding: 1rem;
+            }
+        }
+
+        /* Icon button styles */
+        .btn-icon {
+            min-width: 42px;
+            width: 42px;
+            padding: 0.5rem;
+            justify-content: center;
+        }
+
+        /* Mailbox dropdown styles */
+        .mailbox-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: #1F2937;
+            border: 1px solid #374151;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            margin-top: 0.25rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .mailbox-dropdown.hidden {
+            display: none;
+        }
+
+        .dropdown-header {
+            padding: 0.75rem;
+            border-bottom: 1px solid #374151;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #111827;
+            gap: 0.5rem;
+        }
+
+        .mailbox-list {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .mailbox-item {
+            padding: 0.75rem;
+            border-bottom: 1px solid #374151;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .mailbox-item:hover {
+            background-color: #111827;
+        }
+
+        .mailbox-item.selected {
+            background-color: #1E3A8A;
+            border-color: #3B82F6;
+        }
+
+        .mailbox-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .mailbox-email {
+            color: #10B981;
+            font-weight: 500;
+            word-break: break-all;
+            font-size: 0.875rem;
+        }
+
+        .mailbox-details {
+            color: #9CA3AF;
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+        }
+
+        .btn-sm {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+            min-width: auto;
         }
 
         /* Keyboard focus styles */
@@ -714,7 +1018,7 @@
     <div class="container">
         <div class="main-card">
             <!-- Header -->
-            <div class="header" onclick="toggleAbout()" tabindex="0" onkeydown="handleHeaderKeydown(event)">
+            <div class="header" onclick="toggleAbout()" tabindex="0" onkeydown="handleHeaderKeydown(event)" title="Click to learn more about TempMail">
                 <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 0.5rem;">
                     <svg width="32" height="32" viewBox="0 0 100 100" style="margin-right: 0.75rem;">
                         <!-- Email envelope with modern gradient -->
@@ -752,11 +1056,7 @@
                     </svg>
                     <h1 style="margin: 0; font-size: 1.75rem; font-weight: bold; background: linear-gradient(135deg, #10B981, #059669); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">TempMail</h1>
                 </div>
-                <p>Disposable Email for Devs</p>
-                <button id="aboutBtnHeader" class="btn btn-secondary about-btn-header" onclick="event.stopPropagation(); toggleAbout()" tabindex="0">
-                    <i class="fas fa-info-circle"></i>
-                </button>
-
+                <p>Disposable Email for Devs - Click to learn more</p>
             </div>
 
             <!-- About Banner Modal -->
@@ -905,19 +1205,34 @@
                         <i class="fas fa-plus-circle" style="margin-right: 0.5rem;"></i>
                         <span id="generateText">Generate Email</span>
                     </button>
-                    <div style="display: flex; gap: 0.5rem;">
-                        <select id="mailboxSelector" class="select" onchange="switchMailbox()" style="flex: 1;" title="Switch between your saved mailboxes">
-                            <option value="">Select Mailbox</option>
-                        </select>
-                        <button id="copyEmailBtn" class="btn btn-primary hidden" onclick="copyEmail()" title="Copy current email address to clipboard">
+                    <div class="mailbox-controls">
+                        <div style="position: relative; flex: 1;">
+                            <select id="mailboxSelector" class="select" onchange="switchMailbox()" title="Switch between your saved mailboxes">
+                                <option value="">Select Mailbox</option>
+                            </select>
+                            <div id="mailboxDropdown" class="mailbox-dropdown hidden">
+                                <div class="dropdown-header">
+                                    <div class="checkbox-wrapper">
+                                        <input type="checkbox" id="selectAllMailboxes" class="checkbox" onchange="toggleSelectAllMailboxes()">
+                                        <label for="selectAllMailboxes">Select All</label>
+                                    </div>
+                                    <button id="deleteSelectedBtn" class="btn btn-danger btn-sm hidden" onclick="deleteSelectedMailboxes()">
+                                        <i class="fas fa-trash"></i> Delete Selected
+                                    </button>
+                                </div>
+                                <div id="mailboxList" class="mailbox-list"></div>
+                            </div>
+                        </div>
+                        <button id="toggleDropdownBtn" class="btn btn-secondary btn-icon" onclick="toggleMailboxDropdown()" title="Manage mailboxes">
+                            <i class="fas fa-cog"></i>
+                        </button>
+                        <button id="copyEmailBtn" class="btn btn-primary btn-icon hidden" onclick="copyEmail()" title="Copy current email address to clipboard">
                             <i class="fas fa-copy"></i>
                         </button>
+                        <button id="deleteAllBtn" class="btn btn-danger hidden" onclick="deleteAllMailboxes()" title="Delete all saved mailboxes">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
                     </div>
-                </div>
-
-                <!-- Current Email Display -->
-                <div id="emailDisplay" class="email-display hidden" onclick="copyEmail()">
-                    Click to copy: <span id="currentEmail"></span>
                 </div>
 
                 <div style="display: flex; align-items: center; margin-bottom: 1rem;">
@@ -992,10 +1307,15 @@
                             <i class="fas fa-sync-alt" style="margin-right: 0.25rem;"></i>
                             <span id="refreshText">Refresh</span>
                         </button>
-                        <button class="btn btn-danger btn-action" onclick="deleteMailbox()" title="Permanently delete this mailbox and all its emails">
-                            <i class="fas fa-trash" style="margin-right: 0.25rem;"></i>
-                            Delete
-                        </button>
+                    </div>
+
+                    <!-- Current Email Display -->
+                    <div id="currentEmailDisplay" class="email-display hidden" onclick="copyEmail()" title="Click to copy email address">
+                        <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                            <i class="fas fa-envelope"></i>
+                            <span id="currentEmailText"></span>
+                            <i class="fas fa-copy" style="font-size: 0.875rem; opacity: 0.7;"></i>
+                        </div>
                     </div>
 
                     <!-- Email Search & Controls -->
@@ -1104,6 +1424,8 @@
                 this.refreshFrequency = 5000;
                 this.aboutVisible = false;
                 this.deleteEmailToConfirm = '';
+                this.dropdownVisible = false;
+                this.selectedMailboxesForDeletion = new Set();
 
                 this.loadSavedData();
                 this.updateMailboxSelector();
@@ -1134,13 +1456,20 @@
                     }
                 });
 
-                // Setup click outside handler for about modal
+                // Setup click outside handler for about modal and dropdown
                 document.addEventListener('click', (e) => {
                     const aboutModal = document.getElementById('aboutModal');
                     const aboutBanner = document.getElementById('aboutBanner');
+                    const dropdown = document.getElementById('mailboxDropdown');
+                    const toggleBtn = document.getElementById('toggleDropdownBtn');
 
                     if (e.target === aboutModal && this.aboutVisible) {
                         this.toggleAbout();
+                    }
+
+                    // Close dropdown if clicking outside
+                    if (this.dropdownVisible && !dropdown.contains(e.target) && e.target !== toggleBtn && !toggleBtn.contains(e.target)) {
+                        this.closeMailboxDropdown();
                     }
                 });
 
@@ -1186,6 +1515,29 @@
                 localStorage.setItem('tempmail_mailboxes', JSON.stringify(this.savedMailboxes));
                 localStorage.setItem('tempmail_last_used', this.currentEmail);
                 this.updateMailboxSelector();
+            }
+
+            async deleteMailboxFromServer(email, token) {
+                try {
+                    // First get the account ID
+                    const accountResponse = await fetch(`${this.apiBase}/me`, {
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    });
+
+                    if (accountResponse.ok) {
+                        const accountData = await accountResponse.json();
+                        const accountId = accountData.id;
+
+                        // Delete the account from server
+                        await fetch(`${this.apiBase}/accounts/${accountId}`, {
+                            method: 'DELETE',
+                            headers: { 'Authorization': `Bearer ${token}` }
+                        });
+                    }
+                } catch (error) {
+                    console.error('Error deleting mailbox from server:', error);
+                    // Continue with local deletion even if server deletion fails
+                }
             }
 
             checkURLParams() {
@@ -1307,7 +1659,13 @@
                         headers: { 'Authorization': `Bearer ${this.currentToken}` }
                     });
 
-                    if (!response.ok) throw new Error('Failed to fetch messages');
+                    if (!response.ok) {
+                        if (response.status === 401) {
+                            this.showTooltip('Session expired. Please generate a new email.', 'warning');
+                            return;
+                        }
+                        throw new Error(`Failed to fetch messages: ${response.status}`);
+                    }
 
                     const data = await response.json();
                     const messages = data['hydra:member'] || [];
@@ -1327,7 +1685,12 @@
                     this.updateEmailList();
                 } catch (error) {
                     console.error('Check emails error:', error);
-                    this.showTooltip('Error checking emails', 'error');
+                    // Don't show error tooltip for every failed request to avoid spam
+                    if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+                        console.log('Network error, will retry automatically');
+                    } else {
+                        this.showTooltip('Error checking emails', 'error');
+                    }
                 } finally {
                     refreshText.textContent = 'Refresh';
                 }
@@ -1349,20 +1712,28 @@
             }
 
             updateEmailDisplay() {
-                const emailDisplay = document.getElementById('emailDisplay');
-                const currentEmailSpan = document.getElementById('currentEmail');
                 const emailActions = document.getElementById('emailActions');
                 const copyBtn = document.getElementById('copyEmailBtn');
+                const deleteAllBtn = document.getElementById('deleteAllBtn');
+                const currentEmailDisplay = document.getElementById('currentEmailDisplay');
+                const currentEmailText = document.getElementById('currentEmailText');
 
                 if (this.currentEmail) {
-                    currentEmailSpan.textContent = this.currentEmail;
-                    emailDisplay.classList.remove('hidden');
                     emailActions.classList.remove('hidden');
                     copyBtn.classList.remove('hidden');
+                    currentEmailDisplay.classList.remove('hidden');
+                    currentEmailText.textContent = this.currentEmail;
                 } else {
-                    emailDisplay.classList.add('hidden');
                     emailActions.classList.add('hidden');
                     copyBtn.classList.add('hidden');
+                    currentEmailDisplay.classList.add('hidden');
+                }
+
+                // Show delete all button if there are multiple saved mailboxes
+                if (Object.keys(this.savedMailboxes).length > 1) {
+                    deleteAllBtn.classList.remove('hidden');
+                } else {
+                    deleteAllBtn.classList.add('hidden');
                 }
             }
 
@@ -1616,19 +1987,26 @@
                 document.getElementById('deleteModal').classList.add('show');
             }
 
-            confirmDeleteMailbox() {
+            async confirmDeleteMailbox() {
                 if (!this.deleteEmailToConfirm || !document.getElementById('confirmDelete').checked) return;
 
-                delete this.savedMailboxes[this.deleteEmailToConfirm];
-                delete this.sharedMailboxes[this.deleteEmailToConfirm];
+                const emailToDelete = this.deleteEmailToConfirm;
+                const tokenToDelete = this.savedMailboxes[emailToDelete]?.token;
+
+                // Delete from server first
+                if (tokenToDelete) {
+                    await this.deleteMailboxFromServer(emailToDelete, tokenToDelete);
+                }
+
+                // Delete from local storage
+                delete this.savedMailboxes[emailToDelete];
+                delete this.sharedMailboxes[emailToDelete];
 
                 localStorage.setItem('tempmail_mailboxes', JSON.stringify(this.savedMailboxes));
                 localStorage.setItem('tempmail_shared_mailboxes', JSON.stringify(this.sharedMailboxes));
 
-                this.currentEmail = '';
-                this.currentToken = '';
-                this.emails = [];
-                this.stopAutoRefresh();
+                // Switch to next available mailbox or reset
+                this.switchToNextAvailableMailbox();
 
                 this.updateEmailDisplay();
                 this.updateMailboxSelector();
@@ -1637,6 +2015,68 @@
                 this.closeDeleteModal();
 
                 this.showTooltip('Mailbox permanently deleted', 'success');
+            }
+
+            switchToNextAvailableMailbox() {
+                const availableMailboxes = Object.keys(this.savedMailboxes);
+                
+                if (availableMailboxes.length > 0) {
+                    // Switch to the most recently used mailbox
+                    const sortedMailboxes = availableMailboxes
+                        .map(email => this.savedMailboxes[email])
+                        .sort((a, b) => b.lastUsed - a.lastUsed);
+                    
+                    this.loadMailbox(sortedMailboxes[0].email);
+                } else {
+                    // No mailboxes available, reset current state
+                    this.currentEmail = '';
+                    this.currentToken = '';
+                    this.emails = [];
+                    this.stopAutoRefresh();
+                    localStorage.removeItem('tempmail_last_used');
+                    this.updateEmailDisplay();
+                    this.updateEmailList();
+                }
+            }
+
+            deleteAllMailboxes() {
+                if (Object.keys(this.savedMailboxes).length === 0) {
+                    this.showTooltip('No mailboxes to delete', 'warning');
+                    return;
+                }
+
+                const mailboxCount = Object.keys(this.savedMailboxes).length;
+                
+                if (confirm(`Are you sure you want to delete all ${mailboxCount} mailboxes? This action cannot be undone.`)) {
+                    // Delete from server for all mailboxes
+                    Object.values(this.savedMailboxes).forEach(async (mailbox) => {
+                        if (mailbox.token) {
+                            await this.deleteMailboxFromServer(mailbox.email, mailbox.token);
+                        }
+                    });
+
+                    this.savedMailboxes = {};
+                    this.sharedMailboxes = {};
+                    this.importedMailboxes = {};
+
+                    localStorage.setItem('tempmail_mailboxes', JSON.stringify(this.savedMailboxes));
+                    localStorage.setItem('tempmail_shared_mailboxes', JSON.stringify(this.sharedMailboxes));
+                    localStorage.setItem('tempmail_imported_mailboxes', JSON.stringify(this.importedMailboxes));
+                    localStorage.removeItem('tempmail_last_used');
+
+                    this.currentEmail = '';
+                    this.currentToken = '';
+                    this.emails = [];
+                    this.stopAutoRefresh();
+
+                    this.updateEmailDisplay();
+                    this.updateMailboxSelector();
+                    this.updateSharedMailboxes();
+                    this.updateImportedMailboxes();
+                    this.updateEmailList();
+
+                    this.showTooltip(`All ${mailboxCount} mailboxes deleted`, 'success');
+                }
             }
 
             closeDeleteModal() {
@@ -1815,6 +2255,138 @@
                 modal.classList.add('show');
             }
 
+            toggleMailboxDropdown() {
+                const dropdown = document.getElementById('mailboxDropdown');
+                this.dropdownVisible = !this.dropdownVisible;
+
+                if (this.dropdownVisible) {
+                    dropdown.classList.remove('hidden');
+                    this.updateMailboxDropdown();
+                } else {
+                    dropdown.classList.add('hidden');
+                    this.selectedMailboxesForDeletion.clear();
+                    this.updateDeleteSelectedButton();
+                }
+            }
+
+            closeMailboxDropdown() {
+                const dropdown = document.getElementById('mailboxDropdown');
+                dropdown.classList.add('hidden');
+                this.dropdownVisible = false;
+                this.selectedMailboxesForDeletion.clear();
+                this.updateDeleteSelectedButton();
+            }
+
+            updateMailboxDropdown() {
+                const mailboxList = document.getElementById('mailboxList');
+                const sortedMailboxes = Object.values(this.savedMailboxes)
+                    .sort((a, b) => b.lastUsed - a.lastUsed);
+
+                if (sortedMailboxes.length === 0) {
+                    mailboxList.innerHTML = '<div style="padding: 1rem; text-align: center; color: #9CA3AF;">No saved mailboxes</div>';
+                    return;
+                }
+
+                mailboxList.innerHTML = sortedMailboxes.map(mailbox => `
+                    <div class="mailbox-item ${mailbox.email === this.currentEmail ? 'selected' : ''}" data-email="${mailbox.email}">
+                        <div class="checkbox-wrapper">
+                            <input type="checkbox" class="checkbox mailbox-checkbox" data-email="${mailbox.email}" ${this.selectedMailboxesForDeletion.has(mailbox.email) ? 'checked' : ''} onchange="toggleMailboxForDeletion('${mailbox.email}')">
+                        </div>
+                        <div class="mailbox-info" onclick="selectMailboxFromDropdown('${mailbox.email}')">
+                            <div class="mailbox-email">${mailbox.email}</div>
+                            <div class="mailbox-details">${mailbox.emails?.length || 0} emails • Last used ${new Date(mailbox.lastUsed).toLocaleDateString()}</div>
+                        </div>
+                    </div>
+                `).join('');
+
+                this.updateSelectAllCheckbox();
+                this.updateDeleteSelectedButton();
+            }
+
+            toggleSelectAllMailboxes() {
+                const selectAllCheckbox = document.getElementById('selectAllMailboxes');
+                const mailboxEmails = Object.keys(this.savedMailboxes);
+
+                if (selectAllCheckbox.checked) {
+                    mailboxEmails.forEach(email => this.selectedMailboxesForDeletion.add(email));
+                } else {
+                    this.selectedMailboxesForDeletion.clear();
+                }
+
+                this.updateMailboxDropdown();
+            }
+
+            toggleMailboxForDeletion(email) {
+                if (this.selectedMailboxesForDeletion.has(email)) {
+                    this.selectedMailboxesForDeletion.delete(email);
+                } else {
+                    this.selectedMailboxesForDeletion.add(email);
+                }
+
+                this.updateSelectAllCheckbox();
+                this.updateDeleteSelectedButton();
+            }
+
+            updateSelectAllCheckbox() {
+                const selectAllCheckbox = document.getElementById('selectAllMailboxes');
+                const mailboxEmails = Object.keys(this.savedMailboxes);
+                const selectedCount = this.selectedMailboxesForDeletion.size;
+
+                selectAllCheckbox.checked = selectedCount > 0 && selectedCount === mailboxEmails.length;
+                selectAllCheckbox.indeterminate = selectedCount > 0 && selectedCount < mailboxEmails.length;
+            }
+
+            updateDeleteSelectedButton() {
+                const deleteBtn = document.getElementById('deleteSelectedBtn');
+                if (this.selectedMailboxesForDeletion.size > 0) {
+                    deleteBtn.classList.remove('hidden');
+                    deleteBtn.innerHTML = `<i class="fas fa-trash"></i> Delete (${this.selectedMailboxesForDeletion.size})`;
+                } else {
+                    deleteBtn.classList.add('hidden');
+                }
+            }
+
+            selectMailboxFromDropdown(email) {
+                if (email !== this.currentEmail) {
+                    this.stopAutoRefresh();
+                    this.loadMailbox(email);
+                }
+                this.closeMailboxDropdown();
+            }
+
+            async deleteSelectedMailboxes() {
+                const selectedEmails = Array.from(this.selectedMailboxesForDeletion);
+                if (selectedEmails.length === 0) return;
+
+                if (confirm(`Are you sure you want to delete ${selectedEmails.length} selected mailbox(es)? This action cannot be undone.`)) {
+                    for (const email of selectedEmails) {
+                        const mailbox = this.savedMailboxes[email];
+                        if (mailbox && mailbox.token) {
+                            await this.deleteMailboxFromServer(email, mailbox.token);
+                        }
+                        delete this.savedMailboxes[email];
+                        delete this.sharedMailboxes[email];
+                    }
+
+                    localStorage.setItem('tempmail_mailboxes', JSON.stringify(this.savedMailboxes));
+                    localStorage.setItem('tempmail_shared_mailboxes', JSON.stringify(this.sharedMailboxes));
+
+                    // If current mailbox was deleted, switch to next available
+                    if (selectedEmails.includes(this.currentEmail)) {
+                        this.switchToNextAvailableMailbox();
+                    }
+
+                    this.selectedMailboxesForDeletion.clear();
+                    this.updateMailboxSelector();
+                    this.updateMailboxDropdown();
+                    this.updateSharedMailboxes();
+                    this.updateEmailDisplay();
+
+                    this.showTooltip(`Deleted ${selectedEmails.length} mailbox(es)`, 'success');
+                    this.closeMailboxDropdown();
+                }
+            }
+
             showTooltip(message, type = 'info') {
                 const tooltip = document.getElementById('tooltip');
                 tooltip.textContent = message;
@@ -1905,8 +2477,8 @@
             tempMail.removeImportedMailbox(email);
         }
 
-        function loadImportedMailbox(email) {
-            tempMail.loadImportedMailbox(email);
+        function deleteAllMailboxes() {
+            tempMail.deleteAllMailboxes();
         }
 
         function handleHeaderKeydown(event) {
@@ -1918,6 +2490,26 @@
 
         function filterEmails() {
             tempMail.filterEmails();
+        }
+
+        function toggleMailboxDropdown() {
+            tempMail.toggleMailboxDropdown();
+        }
+
+        function toggleSelectAllMailboxes() {
+            tempMail.toggleSelectAllMailboxes();
+        }
+
+        function toggleMailboxForDeletion(email) {
+            tempMail.toggleMailboxForDeletion(email);
+        }
+
+        function selectMailboxFromDropdown(email) {
+            tempMail.selectMailboxFromDropdown(email);
+        }
+
+        function deleteSelectedMailboxes() {
+            tempMail.deleteSelectedMailboxes();
         }
 
         // Collapsible section functionality
