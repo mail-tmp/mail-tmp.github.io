@@ -1,428 +1,745 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TempMail - Disposable Email for Devs</title>
-
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Generate disposable email addresses instantly. Built for developers. No ads, no registration, completely free temporary email service with real-time inbox monitoring.">
-    <meta name="keywords" content="temporary email, disposable email, temp mail, email generator, developer tools, testing email, privacy email, anonymous email, fake email, 10 minute mail">
-    <meta name="author" content="TempMail">
-    <meta name="robots" content="index, follow">
-    <meta name="language" content="English">
-    <meta name="revisit-after" content="7 days">
-    <link rel="canonical" href="https://mail-tmp.github.io">
-
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="TempMail - Free Disposable Email Generator for Developers">
-    <meta property="og:description" content="Generate unlimited temporary email addresses instantly. Perfect for testing, privacy protection, and development. No registration required - completely free forever.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://mail-tmp.github.io">
-    <meta property="og:image" content="https://mail-tmp.github.io/og-image.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:site_name" content="TempMail">
-
-    <!-- Twitter Card Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="TempMail - Free Disposable Email Generator">
-    <meta name="twitter:description" content="Generate unlimited temporary email addresses instantly. Perfect for testing and privacy protection.">
-    <meta name="twitter:image" content="https://mail-tmp.github.io/og-image.png">
-
-    <!-- Additional SEO Tags -->
-    <meta name="theme-color" content="#10B981">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="TempMail">
-
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "TempMail",
-        "description": "Free disposable email generator for developers and privacy protection",
-        "url": "https://mail-tmp.github.io",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Any",
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-        },
-        "featureList": [
-            "Instant email generation",
-            "Real-time email monitoring",
-            "No registration required",
-            "Privacy focused",
-            "Mobile responsive",
-            "Developer friendly"
-        ]
-    }
-    </script>
-
-    <!-- Fira Code Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SB7HX1CZRX"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-SB7HX1CZRX');
-    </script>
-
+    <title>TempMail - Replit Style</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
     <style>
-        body {
-            font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
-            background-color: #111827;
-            color: #F3F4F6;
-            margin: 0;
-            padding: 20px;
-            min-height: 100vh;
+        :root {
+            --bg-primary: #0e1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --bg-hover: #30363d;
+            --text-primary: #f0f6fc;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            --accent-primary: #238636;
+            --accent-secondary: #1f6feb;
+            --border: #30363d;
+            --success: #238636;
+            --warning: #d29922;
+            --error: #f85149;
+            --replit-orange: #f26207;
+            --replit-blue: #56d8ff;
+        }
+
+        * {
             box-sizing: border-box;
-            overflow-x: hidden;
-        }
-
-        .loading-spinner {
-            display: inline-block;
-            width: 1rem;
-            height: 1rem;
-            border: 2px solid #F3F4F6;
-            border-top-color: transparent;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .email-loading {
-            display: inline-block;
-            width: 1rem;
-            height: 1rem;
-            animation: emailPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes emailPulse {
-            0%, 100% { opacity: 0.4; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.1); }
-        }
-
-        .gear-loading {
-            display: inline-block;
-            width: 1rem;
-            height: 1rem;
-            animation: gearRotate 2s linear infinite;
-        }
-
-        @keyframes gearRotate {
-            to { transform: rotate(360deg); }
-        }
-
-        .email-animation {
-            display: inline-block;
-            font-size: 1rem;
-            animation: emailFlow 3s ease-in-out infinite;
-        }
-
-        @keyframes emailFlow {
-            0% { opacity: 0.3; transform: translateX(-10px) scale(0.8); }
-            25% { opacity: 0.7; transform: translateX(0) scale(1); }
-            50% { opacity: 1; transform: translateX(5px) scale(1.1); }
-            75% { opacity: 0.7; transform: translateX(10px) scale(1); }
-            100% { opacity: 0.3; transform: translateX(15px) scale(0.8); }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
+            margin: 0;
             padding: 0;
-            position: relative;
         }
 
-        .main-card {
-            background-color: #1F2937;
-            border-radius: 0.5rem;
-            border: 1px solid #374151;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .app-container {
+            display: flex;
+            height: 100vh;
             overflow: hidden;
-            min-height: calc(100vh - 40px);
-            display: flex;
-            flex-direction: column;
         }
 
-        .header:hover {
-            background-color: #1F2937;
-            transform: translateY(-1px);
-        }
-
-        .header {
-            background-color: #111827;
-            padding: 1.5rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            position: relative;
-        }
-
-        .header h1 {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: white;
-            margin: 0 0 0.5rem 0;
-        }
-
-        .header p {
-            color: #D1D5DB;
-            margin: 0;
-        }
-
+        /* About Banner - Replit Style */
         .about-banner {
-            background-color: #1F2937;
-            border-radius: 0.75rem;
-            padding: 2rem;
-            border: 1px solid #374151;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
-            max-width: 800px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            overflow-x: hidden;
-            margin: auto;
-        }
-
-        .about-banner h2 {
-            font-size: 1.25rem;
-            font-weight: bold;
+            background: linear-gradient(90deg, var(--replit-orange), var(--replit-blue));
             color: white;
-            margin: 0 0 1rem 0;
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 500;
+            position: relative;
+            z-index: 1001;
         }
 
-        .about-banner p {
-            color: #D1D5DB;
-            margin: 0 0 1rem 0;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
-        }
-
-        @media (min-width: 768px) {
-            .feature-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        .feature-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .feature-list li {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.5rem;
-            color: #D1D5DB;
-        }
-
-        .feature-list i {
-            color: #10B981;
-            margin-right: 0.5rem;
-            width: 1rem;
-        }
-
-        .content {
-            padding: 1.5rem;
-            flex: 1;
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
-
-        .controls {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 0.75rem;
-            margin-bottom: 1.5rem;
-        }
-
-        @media (min-width: 768px) {
-            .controls {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        .mailbox-controls {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .btn {
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
+        .banner-close {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
             border: none;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
             cursor: pointer;
-            font-family: inherit;
-            font-size: 0.875rem;
-            transition: all 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-width: 120px;
-            min-height: 42px;
-            white-space: nowrap;
+            font-size: 16px;
         }
 
-        .btn-action {
-            min-width: 200px;
+        .banner-close:hover {
+            background: rgba(255, 255, 255, 0.3);
         }
 
-        .btn-refresh {
-            min-width: 220px;
+        /* Sidebar - Replit Style */
+        .sidebar {
+            width: 280px;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
         }
 
-        .btn:disabled {
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--replit-orange), var(--replit-blue));
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .logo-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .generate-btn {
+            width: 100%;
+            background: var(--replit-orange);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 12px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .generate-btn:hover {
+            background: #e55a06;
+        }
+
+        .generate-btn:disabled {
+            background: var(--text-muted);
+            cursor: not-allowed;
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            padding: 16px;
+        }
+
+        .nav-section {
+            margin-bottom: 24px;
+        }
+
+        .nav-section-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            padding: 0 8px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: 2px;
+        }
+
+        .nav-item:hover {
+            background-color: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        .nav-item.active {
+            background-color: var(--accent-secondary);
+            color: white;
+        }
+
+        .nav-item .material-icons {
+            font-size: 18px;
+        }
+
+        .nav-badge {
+            background: var(--success);
+            color: white;
+            border-radius: 10px;
+            padding: 2px 6px;
+            font-size: 10px;
+            font-weight: 500;
+            margin-left: auto;
+        }
+
+        /* Main Content - Replit Style */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-primary);
+            overflow: hidden;
+        }
+
+        .header {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-secondary);
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: var(--bg-tertiary);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+        }
+
+        .icon-btn:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        .icon-btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
         }
 
-        .btn-primary {
-            background-color: #059669;
-            color: #F3F4F6;
-        }
-
-        .btn-primary:hover:not(:disabled) {
-            background-color: #047857;
-        }
-
-        .btn-secondary {
-            background-color: #374151;
-            color: #F3F4F6;
-        }
-
-        .btn-secondary:hover:not(:disabled) {
-            background-color: #4B5563;
-        }
-
-        .btn-danger {
-            background-color: #DC2626;
-            color: #F3F4F6;
-        }
-
-        .btn-danger:hover:not(:disabled) {
-            background-color: #B91C1C;
-        }
-
-        .select {
-            padding: 0.5rem;
-            border-radius: 0.5rem;
-            border: 1px solid #374151;
-            background-color: #111827;
-            color: #F3F4F6;
-            font-family: inherit;
-            min-height: 42px;
+        .content-area {
             flex: 1;
-            min-width: 0;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        /* Email Tabs */
+        .mailbox-tabs {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .tabs-header {
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-tertiary);
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tabs-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 16px;
+        }
+
+        .mailbox-tab {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            max-width: 200px;
+        }
+
+        .mailbox-tab.active {
+            background: var(--accent-secondary);
+            color: white;
+            border-color: var(--accent-secondary);
+        }
+
+        .mailbox-tab:hover:not(.active) {
+            background: var(--bg-hover);
+        }
+
+        .tab-email {
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .tab-close {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: inherit;
+        }
+
+        /* Current Email Card */
+        .current-email-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .current-email-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--replit-orange), var(--replit-blue));
         }
 
         .email-display {
-            background-color: #111827;
-            border: 1px solid #374151;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            color: #10B981;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            text-align: center;
-            margin-bottom: 1rem;
-            word-break: break-all;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
         }
 
-        .email-display:hover {
-            background-color: #1F2937;
+        .email-address {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-primary);
+            font-family: 'Courier New', monospace;
         }
 
         .email-actions {
             display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
+            gap: 8px;
         }
 
+        .copy-btn, .share-btn {
+            background: var(--accent-secondary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .copy-btn:hover, .share-btn:hover {
+            background: #1a5db8;
+        }
+
+        .share-btn {
+            background: var(--success);
+        }
+
+        .share-btn:hover {
+            background: #1a7f37;
+        }
+
+        .email-info {
+            display: flex;
+            gap: 20px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .email-info-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Email List */
         .email-list {
-            max-height: 400px;
-            overflow-y: auto;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
         }
 
         .email-item {
-            background-color: #111827;
-            border: 1px solid #374151;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            margin-bottom: 0.5rem;
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
         }
 
         .email-item:hover {
-            background-color: #1F2937;
+            background: var(--bg-hover);
+        }
+
+        .email-item:last-child {
+            border-bottom: none;
+        }
+
+        .email-item.unread {
+            background: rgba(31, 111, 235, 0.05);
+            border-left: 3px solid var(--accent-secondary);
+        }
+
+        .email-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--replit-orange), var(--replit-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        .email-content {
+            flex: 1;
+            min-width: 0;
         }
 
         .email-header {
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: start;
-            margin-bottom: 0.5rem;
+            margin-bottom: 6px;
         }
 
         .email-from {
-            font-weight: 600;
-            color: #F3F4F6;
+            font-weight: 500;
+            color: var(--text-primary);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
-        .email-date {
-            font-size: 0.875rem;
-            color: #9CA3AF;
+        .email-time {
+            font-size: 11px;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            margin-left: 12px;
         }
 
         .email-subject {
-            color: #D1D5DB;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
-        .empty-inbox {
+        .email-preview {
+            color: var(--text-secondary);
+            font-size: 12px;
+            line-height: 1.4;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .email-to {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-top: 4px;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Email Viewer Modal */
+        .email-viewer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            z-index: 1000;
+        }
+
+        .email-viewer.show {
+            display: flex;
+        }
+
+        .email-viewer-content {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .email-viewer-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-tertiary);
+        }
+
+        .email-viewer-subject {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .email-viewer-meta {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 8px 16px;
+            font-size: 12px;
+        }
+
+        .email-meta-label {
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .email-meta-value {
+            color: var(--text-primary);
+            font-family: 'Courier New', monospace;
+        }
+
+        .email-viewer-body {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: var(--bg-primary);
+        }
+
+        .email-body-content {
+            color: var(--text-primary);
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .email-body-html {
+            background: white;
+            color: #000;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+
+        .email-viewer-actions {
+            padding: 16px 20px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            background: var(--bg-tertiary);
+        }
+
+        /* About Section */
+        .about-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .about-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-tertiary);
+        }
+
+        .about-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .about-subtitle {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .about-content {
+            padding: 20px;
+        }
+
+        .about-item {
+            margin-bottom: 20px;
+        }
+
+        .about-item h3 {
+            color: var(--text-primary);
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .about-item p {
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .disclaimer-box {
+            background: rgba(248, 81, 73, 0.1);
+            border: 1px solid rgba(248, 81, 73, 0.3);
+            border-radius: 6px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+
+        .disclaimer-title {
+            color: var(--error);
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .disclaimer-text {
+            color: var(--text-secondary);
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        .api-info {
+            background: rgba(31, 111, 235, 0.1);
+            border: 1px solid rgba(31, 111, 235, 0.3);
+            border-radius: 6px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+
+        .api-info-title {
+            color: var(--accent-secondary);
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .api-link {
+            color: var(--accent-secondary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .api-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Empty State */
+        .empty-state {
             text-align: center;
-            padding: 2rem;
-            color: #9CA3AF;
+            padding: 60px 20px;
+            color: var(--text-secondary);
         }
 
-        .empty-inbox i {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            animation: emailFlow 4s ease-in-out infinite;
+        .empty-state .material-icons {
+            font-size: 48px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
         }
 
+        .empty-state h3 {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        /* Modal */
         .modal {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
             display: none;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             z-index: 1000;
         }
 
@@ -431,2184 +748,1328 @@
         }
 
         .modal-content {
-            background-color: #1F2937;
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            max-width: 90%;
-            max-height: 90%;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
             overflow-y: auto;
-            border: 1px solid #374151;
         }
 
         .modal-header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid #374151;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .modal-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
         }
 
         .modal-close {
             background: none;
             border: none;
-            color: #9CA3AF;
+            color: var(--text-secondary);
             cursor: pointer;
-            font-size: 1.5rem;
+            font-size: 20px;
         }
 
-        .modal-close:hover {
-            color: #F3F4F6;
+        .form-group {
+            margin-bottom: 16px;
         }
 
-        .info-text {
-            font-size: 0.875rem;
-            color: #9CA3AF;
-            margin-top: 0.5rem;
-        }
-
-        .tooltip {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #1E40AF;
-            color: #F3F4F6;
-            padding: 0.5rem 1rem;
-            border-radius: 0.25rem;
-            font-size: 0.875rem;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.2s ease;
-            border-left: 4px solid #60A5FA;
-        }
-
-        .tooltip.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .tooltip.success {
-            background: #065F46;
-            border-left-color: #10B981;
-        }
-
-        .tooltip.warning {
-            background: #92400E;
-            border-left-color: #F59E0B;
-        }
-
-        .tooltip.error {
-            background: #991B1B;
-            border-left-color: #EF4444;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .shared-list {
-            display: grid;
-            gap: 0.5rem;
-        }
-
-        .shared-item {
-            background-color: #111827;
-            border: 1px solid #374151;
-            border-radius: 0.5rem;
-            padding: 0.75rem;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .shared-item:hover {
-            background-color: #1F2937;
-        }
-
-        .shared-item.selected {
-            background-color: #1E3A8A;
-            border-color: #3B82F6;
-        }
-
-        .shared-email {
-            color: #10B981;
+        .form-label {
+            display: block;
+            margin-bottom: 6px;
             font-weight: 500;
+            color: var(--text-primary);
         }
 
-        .shared-info {
-            color: #9CA3AF;
-            font-size: 0.875rem;
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 10px 12px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-size: 14px;
+            font-family: inherit;
         }
 
-        /* Collapsible Sections */
-        .collapsible-section {
-            margin-bottom: 1.5rem;
-            border: 1px solid #374151;
-            border-radius: 0.5rem;
-            overflow: hidden;
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--accent-secondary);
         }
 
-        .collapsible-header {
-            background-color: #111827;
-            padding: 1rem;
+        .form-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-top: 16px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid #374151;
+            gap: 6px;
         }
 
-        .collapsible-header:hover {
-            background-color: #1F2937;
+        .btn-primary {
+            background: var(--accent-secondary);
+            color: white;
+            border: none;
         }
 
-        .collapsible-header h3 {
-            margin: 0;
-            font-size: 1rem;
-            color: #F3F4F6;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .btn-primary:hover {
+            background: #1a5db8;
         }
 
-        .collapsible-toggle {
-            color: #9CA3AF;
-            transition: transform 0.3s ease;
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
         }
 
-        .collapsible-header.expanded .collapsible-toggle {
-            transform: rotate(180deg);
+        .btn-secondary:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
         }
 
-        .collapsible-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
+        /* Status Indicators */
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
         }
 
-        .collapsible-content.expanded {
-            max-height: 500px;
+        .status-online {
+            background: var(--success);
         }
 
-        .collapsible-body {
-            padding: 1rem;
-            background-color: #1F2937;
+        .status-offline {
+            background: var(--text-muted);
         }
 
-        /* Bulk Selection */
-        .bulk-actions {
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-            margin-bottom: 1rem;
-            padding: 0.75rem;
-            background-color: #111827;
-            border-radius: 0.5rem;
-            border: 1px solid #374151;
-        }
-
-        .bulk-actions.hidden {
-            display: none;
-        }
-
-        .checkbox-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .checkbox {
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
             width: 16px;
             height: 16px;
-            accent-color: #059669;
+            border: 2px solid var(--bg-hover);
+            border-radius: 50%;
+            border-top-color: var(--accent-secondary);
+            animation: spin 1s ease-in-out infinite;
         }
 
-        .email-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
-        .email-content {
-            flex: 1;
-        }
-
-        /* Search section styling */
-        #emailSearchSection {
-            position: relative;
-            z-index: 10;
-            background-color: transparent;
-        }
-
-        #emailSearch {
-            box-sizing: border-box;
-            font-size: 0.875rem;
-            line-height: 1.25rem;
-            border: 1px solid #374151 !important;
-            background-color: #111827 !important;
-            color: #F3F4F6 !important;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-
-        #emailSearch:focus {
-            border-color: #10B981 !important;
-            outline: 2px solid transparent;
-            outline-offset: 2px;
-        }
-
-        #emailSearch::placeholder {
-            color: #9CA3AF;
-        }
-
-        .delete-modal {
+        /* Toast Notifications */
+        .toast {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1100;
+            top: 20px;
+            right: 20px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 12px 16px;
+            color: var(--text-primary);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            z-index: 1001;
         }
 
-        .delete-modal.show {
-            display: flex;
+        .toast.show {
+            transform: translateX(0);
         }
 
-        .delete-modal-content {
-            background-color: #1F2937;
-            border-radius: 0.5rem;
-            padding: 2rem;
-            max-width: 400px;
-            width: 90%;
-            border: 1px solid #374151;
-            text-align: center;
+        .toast.success {
+            border-left: 4px solid var(--success);
         }
 
-        .checkbox-container {
-            display: flex;
-            align-items: center;
-            margin: 1.5rem 0;
-            gap: 0.5rem;
+        .toast.error {
+            border-left: 4px solid var(--error);
         }
 
-        .checkbox-container input[type="checkbox"] {
-            width: 1.25rem;
-            height: 1.25rem;
-            accent-color: #DC2626;
-        }
-
-        .modal-buttons {
-            display: flex;
-            gap: 0.75rem;
-            justify-content: center;
-            margin-top: 1.5rem;
-        }
-
-        @media (max-width: 640px) {
-            body {
-                padding: 0.5rem;
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 240px;
             }
-
-            .container {
-                padding: 0;
+            
+            .content-area {
+                padding: 16px;
             }
-
-            .main-card {
-                min-height: calc(100vh - 1rem);
-                border-radius: 0.25rem;
-            }
-
-            .header {
-                padding: 1rem;
-                position: relative;
-            }
-
-            .header h1 {
-                font-size: 1.375rem;
-                margin-bottom: 0.25rem;
-            }
-
-            .header p {
-                font-size: 0.875rem;
-            }
-
-            .about-banner {
-                position: fixed;
-                left: 0.5rem;
-                right: 0.5rem;
-                top: 0.5rem;
-                bottom: 0.5rem;
-                width: auto;
-                max-width: none;
-                max-height: none;
-                margin: 0;
-            }
-
-            .content {
-                padding: 1rem;
-            }
-
-            .controls {
-                grid-template-columns: 1fr;
-                gap: 0.5rem;
-            }
-
-            .mailbox-controls {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-
-            .mailbox-controls select,
-            .mailbox-controls button {
-                width: 100%;
-                min-width: auto;
+            
+            .current-email-card {
+                padding: 16px;
             }
 
             .email-actions {
                 flex-direction: column;
-                gap: 0.5rem;
+                align-items: stretch;
             }
 
-            .btn {
-                min-width: 100px;
-                padding: 0.75rem 1rem;
-                font-size: 0.875rem;
+            .email-viewer-content {
+                margin: 10px;
             }
+        }
 
-            .btn-action, .btn-refresh {
-                min-width: auto;
-            }
-
-            .email-display {
-                padding: 0.75rem;
-                font-size: 0.875rem;
-                word-break: break-all;
-            }
-
-            .email-item {
-                padding: 0.75rem;
-            }
-
-            .email-header {
+        @media (max-width: 640px) {
+            .app-container {
                 flex-direction: column;
-                gap: 0.25rem;
-                align-items: flex-start;
             }
-
-            .email-from {
-                font-size: 0.875rem;
-            }
-
-            .email-date {
-                font-size: 0.75rem;
-            }
-
-            .email-subject {
-                font-size: 0.875rem;
-                margin-top: 0.25rem;
-            }
-
-            .modal-content {
-                margin: 1rem;
-                max-width: calc(100% - 2rem);
-                max-height: calc(100% - 2rem);
-                padding: 1rem;
-            }
-
-            .modal-buttons {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-
-            .delete-modal-content {
-                margin: 1rem;
-                width: calc(100% - 2rem);
-                padding: 1.5rem;
-            }
-
-            .feature-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-
-            .collapsible-header {
-                padding: 0.75rem;
-            }
-
-            .collapsible-body {
-                padding: 0.75rem;
-            }
-
-            .shared-item {
-                padding: 0.5rem;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.5rem;
-            }
-
-            .shared-item > div:nth-child(2) {
+            
+            .sidebar {
                 width: 100%;
+                height: auto;
+                max-height: 200px;
             }
-
-            .shared-item > div:nth-child(3) {
-                width: 100%;
-                justify-content: flex-end;
+            
+            .sidebar-nav {
+                display: none;
             }
-
-            .bulk-actions {
-                padding: 0.5rem;
-                flex-wrap: wrap;
+            
+            .main-content {
+                flex: 1;
             }
-
-            #emailSearch {
-                font-size: 1rem;
-                padding: 0.75rem;
-            }
-
-            .select {
-                font-size: 0.875rem;
-                padding: 0.75rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .header h1 {
-                font-size: 1.25rem;
-            }
-
-            .header svg {
-                width: 24px;
-                height: 24px;
-                margin-right: 0.5rem;
-            }
-
-            .content {
-                padding: 0.75rem;
-            }
-
-            .btn {
-                padding: 0.5rem 0.75rem;
-                font-size: 0.8125rem;
-            }
-
-            .email-display {
-                padding: 0.5rem;
-                font-size: 0.8125rem;
-            }
-
-            .about-banner {
-                left: 0.25rem;
-                right: 0.25rem;
-                top: 0.25rem;
-                bottom: 0.25rem;
-                padding: 1rem;
-            }
-        }
-
-        /* Icon button styles */
-        .btn-icon {
-            min-width: 42px;
-            width: 42px;
-            padding: 0.5rem;
-            justify-content: center;
-        }
-
-        /* Mailbox dropdown styles */
-        .mailbox-dropdown {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background-color: #1F2937;
-            border: 1px solid #374151;
-            border-radius: 0.5rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            margin-top: 0.25rem;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-
-        .mailbox-dropdown.hidden {
-            display: none;
-        }
-
-        .dropdown-header {
-            padding: 0.75rem;
-            border-bottom: 1px solid #374151;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #111827;
-            gap: 0.5rem;
-        }
-
-        .mailbox-list {
-            max-height: 200px;
-            overflow-y: auto;
-        }
-
-        .mailbox-item {
-            padding: 0.75rem;
-            border-bottom: 1px solid #374151;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .mailbox-item:hover {
-            background-color: #111827;
-        }
-
-        .mailbox-item.selected {
-            background-color: #1E3A8A;
-            border-color: #3B82F6;
-        }
-
-        .mailbox-info {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .mailbox-email {
-            color: #10B981;
-            font-weight: 500;
-            word-break: break-all;
-            font-size: 0.875rem;
-        }
-
-        .mailbox-details {
-            color: #9CA3AF;
-            font-size: 0.75rem;
-            margin-top: 0.25rem;
-        }
-
-        .btn-sm {
-            padding: 0.25rem 0.5rem;
-            font-size: 0.75rem;
-            min-width: auto;
-        }
-
-        /* Keyboard focus styles */
-        .btn:focus,
-        .select:focus,
-        .email-display:focus {
-            outline: 2px solid #10B981;
-            outline-offset: 2px;
-        }
-
-        .header:focus {
-            outline: 2px solid #10B981;
-            outline-offset: -2px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="main-card">
-            <!-- Header -->
-            <div class="header" onclick="toggleAbout()" tabindex="0" onkeydown="handleHeaderKeydown(event)" title="Click to learn more about TempMail">
-                <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 0.5rem;">
-                    <svg width="32" height="32" viewBox="0 0 100 100" style="margin-right: 0.75rem;">
-                        <!-- Email envelope with modern gradient -->
-                        <defs>
-                            <linearGradient id="mailGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#10B981;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
-                            </linearGradient>
-                            <linearGradient id="shadowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#374151;stop-opacity:0.3" />
-                                <stop offset="100%" style="stop-color:#1F2937;stop-opacity:0.6" />
-                            </linearGradient>
-                        </defs>
+    <!-- About Banner -->
+    <div class="about-banner" id="about-banner">
+        🚀 TempMail Pro - Professional temporary email service powered by mail.tm API with multi-mailbox support
+        <button class="banner-close" onclick="closeBanner()">×</button>
+    </div>
 
-                        <!-- Shadow -->
-                        <rect x="22" y="32" width="58" height="38" rx="4" ry="4" fill="url(#shadowGradient)" />
-
-                        <!-- Main envelope -->
-                        <rect x="20" y="30" width="58" height="38" rx="4" ry="4" fill="url(#mailGradient)" stroke="#047857" stroke-width="1"/>
-
-                        <!-- Envelope flap -->
-                        <polygon points="20,30 49,48 78,30" fill="#047857" opacity="0.8"/>
-                        <polygon points="20,30 49,45 78,30" fill="none" stroke="#F3F4F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-
-                        <!-- Floating elements for "temp" concept -->
-                        <circle cx="15" cy="20" r="3" fill="#10B981" opacity="0.6">
-                            <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2s" repeatCount="indefinite"/>
-                        </circle>
-                        <circle cx="85" cy="75" r="2.5" fill="#059669" opacity="0.5">
-                            <animate attributeName="opacity" values="0.2;0.7;0.2" dur="1.8s" repeatCount="indefinite"/>
-                        </circle>
-                        <circle cx="88" cy="25" r="2" fill="#10B981" opacity="0.4">
-                            <animate attributeName="opacity" values="0.1;0.6;0.1" dur="2.2s" repeatCount="indefinite"/>
-                        </circle>
-                    </svg>
-                    <h1 style="margin: 0; font-size: 1.75rem; font-weight: bold; background: linear-gradient(135deg, #10B981, #059669); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">TempMail</h1>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <div class="logo-icon">TM</div>
+                    <div class="logo-text">TempMail</div>
                 </div>
-                <p>Disposable Email for Devs - Click to learn more</p>
+                <button class="generate-btn" onclick="generateNewEmail()" id="generate-btn">
+                    <span class="material-icons">add</span>
+                    Generate New Email
+                </button>
             </div>
-
-            <!-- About Banner Modal -->
-            <div id="aboutModal" class="modal" style="z-index: 1001;">
-                <div id="aboutBanner" class="about-banner">
-                    <!-- Hero Section -->
-                    <div style="text-align: center; margin-bottom: 2rem;">
-                        <div style="background: linear-gradient(135deg, #059669, #10B981); padding: 1.5rem; border-radius: 1rem; margin-bottom: 1rem;">
-                            <h2 style="margin: 0 0 0.5rem 0; font-size: 1.5rem; color: white;">🚀 TempMail for Developers</h2>
-                            <p style="margin: 0; color: rgba(255, 255, 255, 0.9); font-size: 1rem;">
-                                Instant, secure, disposable emails. No sign-up, no tracking, just code.
-                            </p>
-                        </div>
-                        
-                        <!-- Quick Stats -->
-                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem;">
-                            <div style="background: #111827; padding: 1rem; border-radius: 0.5rem; border: 1px solid #374151;">
-                                <div style="font-size: 1.5rem; color: #10B981; font-weight: bold;">∞</div>
-                                <div style="font-size: 0.875rem; color: #D1D5DB;">Unlimited</div>
-                            </div>
-                            <div style="background: #111827; padding: 1rem; border-radius: 0.5rem; border: 1px solid #374151;">
-                                <div style="font-size: 1.5rem; color: #10B981; font-weight: bold;">0s</div>
-                                <div style="font-size: 0.875rem; color: #D1D5DB;">Setup Time</div>
-                            </div>
-                            <div style="background: #111827; padding: 1rem; border-radius: 0.5rem; border: 1px solid #374151;">
-                                <div style="font-size: 1.5rem; color: #10B981; font-weight: bold;">$0</div>
-                                <div style="font-size: 0.875rem; color: #D1D5DB;">Forever</div>
-                            </div>
-                        </div>
+            
+            <div class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Inbox</div>
+                    <div class="nav-item active" onclick="switchTab('inbox')">
+                        <span class="material-icons">inbox</span>
+                        <span>All Emails</span>
+                        <span class="nav-badge" id="inbox-count">0</span>
                     </div>
-
-                    <!-- Use Cases -->
-                    <div style="margin-bottom: 2rem;">
-                        <h3 style="color: white; margin: 0 0 1rem 0; font-size: 1.125rem; display: flex; align-items: center;">
-                            <i class="fas fa-lightbulb" style="margin-right: 0.5rem; color: #F59E0B;"></i>
-                            Perfect For
-                        </h3>
-                        <div style="display: grid; gap: 0.75rem;">
-                            <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 0.5rem; padding: 0.75rem;">
-                                <div style="font-weight: 600; color: #10B981; margin-bottom: 0.25rem;">🧪 Testing & Development</div>
-                                <div style="font-size: 0.875rem; color: #D1D5DB;">Test email workflows, user registration, password resets</div>
-                            </div>
-                            <div style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 0.5rem; padding: 0.75rem;">
-                                <div style="font-weight: 600; color: #3B82F6; margin-bottom: 0.25rem;">🔒 Privacy Protection</div>
-                                <div style="font-size: 0.875rem; color: #D1D5DB;">Sign up for services without using your real email</div>
-                            </div>
-                            <div style="background: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 0.5rem; padding: 0.75rem;">
-                                <div style="font-weight: 600; color: #A855F7; margin-bottom: 0.25rem;">🤝 Team Collaboration</div>
-                                <div style="font-size: 0.875rem; color: #D1D5DB;">Share temporary inboxes with your development team</div>
-                            </div>
-                        </div>
+                    <div class="nav-item" onclick="switchTab('unread')">
+                        <span class="material-icons">mark_email_unread</span>
+                        <span>Unread</span>
+                        <span class="nav-badge" id="unread-count">0</span>
                     </div>
-
-                    <!-- Features Grid -->
-                    <div class="feature-grid" style="margin-bottom: 2rem;">
-                        <div>
-                            <h3 style="color: white; margin: 0 0 0.75rem 0; font-size: 1.125rem; display: flex; align-items: center;">
-                                <i class="fas fa-cogs" style="margin-right: 0.5rem; color: #10B981;"></i>
-                                Features
-                            </h3>
-                            <ul class="feature-list">
-                                <li><i class="fas fa-zap" style="color: #F59E0B;"></i>Instant email generation</li>
-                                <li><i class="fas fa-sync-alt" style="color: #3B82F6;"></i>Real-time email updates</li>
-                                <li><i class="fas fa-share-alt" style="color: #A855F7;"></i>Share inboxes with URLs</li>
-                                <li><i class="fas fa-mobile-alt" style="color: #10B981;"></i>Works on any device</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h3 style="color: white; margin: 0 0 0.75rem 0; font-size: 1.125rem; display: flex; align-items: center;">
-                                <i class="fas fa-shield-alt" style="margin-right: 0.5rem; color: #10B981;"></i>
-                                Privacy First
-                            </h3>
-                            <ul class="feature-list">
-                                <li><i class="fas fa-user-slash" style="color: #EF4444;"></i>No registration needed</li>
-                                <li><i class="fas fa-eye-slash" style="color: #6B7280;"></i>No tracking or analytics</li>
-                                <li><i class="fas fa-database" style="color: #8B5CF6;"></i>Local browser storage</li>
-                                <li><i class="fas fa-lock" style="color: #059669;"></i>Secure mail.tm API</li>
-                            </ul>
-                        </div>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Mailboxes</div>
+                    <div class="nav-item" onclick="switchTab('active')">
+                        <span class="material-icons">tab</span>
+                        <span>Active Boxes</span>
+                        <span class="nav-badge" id="active-count">0</span>
                     </div>
-
-                    <!-- How It Works -->
-                    <div style="background: rgba(17, 24, 39, 0.8); border-radius: 0.75rem; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid #374151;">
-                        <h3 style="color: white; margin: 0 0 1rem 0; font-size: 1.125rem; display: flex; align-items: center;">
-                            <i class="fas fa-play-circle" style="margin-right: 0.5rem; color: #10B981;"></i>
-                            How It Works
-                        </h3>
-                        <div style="display: grid; gap: 1rem;">
-                            <div style="display: flex; align-items: center; gap: 1rem;">
-                                <div style="background: #10B981; color: white; width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">1</div>
-                                <div>
-                                    <div style="font-weight: 600; color: white;">Click "Generate Email"</div>
-                                    <div style="font-size: 0.875rem; color: #9CA3AF;">Instantly creates a new temporary email address</div>
-                                </div>
-                            </div>
-                            <div style="display: flex; align-items: center; gap: 1rem;">
-                                <div style="background: #3B82F6; color: white; width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">2</div>
-                                <div>
-                                    <div style="font-weight: 600; color: white;">Use Anywhere</div>
-                                    <div style="font-size: 0.875rem; color: #9CA3AF;">Copy the email and use it for sign-ups, testing, etc.</div>
-                                </div>
-                            </div>
-                            <div style="display: flex; align-items: center; gap: 1rem;">
-                                <div style="background: #A855F7; color: white; width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">3</div>
-                                <div>
-                                    <div style="font-weight: 600; color: white;">Receive & Read</div>
-                                    <div style="font-size: 0.875rem; color: #9CA3AF;">Emails appear instantly in your temporary inbox</div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="nav-item" onclick="importMailbox()">
+                        <span class="material-icons">cloud_download</span>
+                        <span>Import Mailbox</span>
                     </div>
-
-                    <!-- Pro Tips -->
-                    <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(59, 130, 246, 0.1)); border-radius: 0.75rem; padding: 1.5rem; border: 1px solid rgba(16, 185, 129, 0.3);">
-                        <h3 style="color: white; margin: 0 0 1rem 0; font-size: 1.125rem; display: flex; align-items: center;">
-                            <i class="fas fa-magic" style="margin-right: 0.5rem; color: #F59E0B;"></i>
-                            Pro Tips
-                        </h3>
-                        <div style="display: grid; gap: 0.75rem; font-size: 0.875rem;">
-                            <div style="display: flex; align-items: center; gap: 0.75rem;">
-                                <kbd style="background: #374151; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-family: inherit; font-size: 0.75rem;">Ctrl+K</kbd>
-                                <span style="color: #D1D5DB;">Quick generate new email</span>
-                            </div>
-                            <div style="display: flex; align-items: center; gap: 0.75rem;">
-                                <i class="fas fa-share" style="color: #10B981; width: 1rem;"></i>
-                                <span style="color: #D1D5DB;">Share inbox URLs with your team for collaborative testing</span>
-                            </div>
-                            <div style="display: flex; align-items: center; gap: 0.75rem;">
-                                <i class="fas fa-sync-alt" style="color: #3B82F6; width: 1rem;"></i>
-                                <span style="color: #D1D5DB;">Emails auto-refresh every 5 seconds when inbox is active</span>
-                            </div>
-                            <div style="display: flex; align-items: center; gap: 0.75rem;">
-                                <i class="fas fa-mobile-alt" style="color: #A855F7; width: 1rem;"></i>
-                                <span style="color: #D1D5DB;">Works perfectly on mobile devices for on-the-go testing</span>
-                            </div>
-                        </div>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Info</div>
+                    <div class="nav-item" onclick="switchTab('about')">
+                        <span class="material-icons">info</span>
+                        <span>About</span>
+                    </div>
+                    <div class="nav-item" onclick="switchTab('settings')">
+                        <span class="material-icons">settings</span>
+                        <span>Settings</span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Content -->
-            <div class="content">
-                <!-- Email Controls -->
-                <div class="controls">
-                    <button id="generateBtn" class="btn btn-primary" onclick="generateEmail()" title="Create a new temporary email address">
-                        <i class="fas fa-plus-circle" style="margin-right: 0.5rem;"></i>
-                        <span id="generateText">Generate Email</span>
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <div class="header-title" id="page-title">All Emails</div>
+                <div class="header-actions">
+                    <button class="icon-btn" onclick="refreshEmails()" title="Refresh" id="refresh-btn">
+                        <span class="material-icons">refresh</span>
                     </button>
-                    <div class="mailbox-controls">
-                        <div style="position: relative; flex: 1;">
-                            <select id="mailboxSelector" class="select" onchange="switchMailbox()" title="Switch between your saved mailboxes">
-                                <option value="">Select Mailbox</option>
-                            </select>
-                            <div id="mailboxDropdown" class="mailbox-dropdown hidden">
-                                <div class="dropdown-header">
-                                    <div class="checkbox-wrapper">
-                                        <input type="checkbox" id="selectAllMailboxes" class="checkbox" onchange="toggleSelectAllMailboxes()">
-                                        <label for="selectAllMailboxes">Select All</label>
-                                    </div>
-                                    <button id="deleteSelectedBtn" class="btn btn-danger btn-sm hidden" onclick="deleteSelectedMailboxes()">
-                                        <i class="fas fa-trash"></i> Delete Selected
-                                    </button>
-                                </div>
-                                <div id="mailboxList" class="mailbox-list"></div>
-                            </div>
+                    <button class="icon-btn" onclick="markAllAsRead()" title="Mark all as read">
+                        <span class="material-icons">drafts</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="content-area">
+                <!-- Mailbox Tabs -->
+                <div class="mailbox-tabs" id="mailbox-tabs" style="display: none;">
+                    <div class="tabs-header">
+                        <div class="section-title">
+                            <span class="material-icons">tab</span>
+                            Active Mailboxes
                         </div>
-                        <button id="toggleDropdownBtn" class="btn btn-secondary btn-icon" onclick="toggleMailboxDropdown()" title="Manage mailboxes">
-                            <i class="fas fa-cog"></i>
-                        </button>
-                        <button id="copyEmailBtn" class="btn btn-primary btn-icon hidden" onclick="copyEmail()" title="Copy current email address to clipboard">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                        <button id="deleteAllBtn" class="btn btn-danger hidden" onclick="deleteAllMailboxes()" title="Delete all saved mailboxes">
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
+                    </div>
+                    <div class="tabs-container" id="tabs-container">
+                        <!-- Tabs will be added dynamically -->
                     </div>
                 </div>
 
-                <div style="display: flex; align-items: center; margin-bottom: 1rem;">
-                    <div style="margin-right: 0.75rem; color: #10B981; font-size: 1.25rem;">
-                        <i class="fas fa-database"></i>
-                    </div>
-                    <p class="info-text" style="margin: 0;">
-                        Mailboxes saved locally in browser
-                    </p>
-                </div>
-
-                <!-- Shared Mailboxes Section -->
-                <div id="sharedMailboxes" class="hidden collapsible-section" style="margin-bottom: 1.5rem;">
-                    <div class="collapsible-header" onclick="toggleSection(this)">
-                        <h3>
-                            <i class="fas fa-share-alt" style="color: #10B981;"></i>
-                            My Shared Mailboxes (<span id="sharedCount">0</span>)
-                        </h3>
-                        <i class="fas fa-chevron-down collapsible-toggle"></i>
-                    </div>
-                    <div class="collapsible-content">
-                        <div class="collapsible-body">
-                            <!-- Bulk Actions for Shared -->
-                            <div id="sharedBulkActions" class="bulk-actions hidden">
-                                <div class="checkbox-wrapper">
-                                    <input type="checkbox" id="selectAllShared" class="checkbox" onchange="toggleSelectAll('shared')">
-                                    <label for="selectAllShared">Select All</label>
-                                </div>
-                                <button class="btn btn-danger" onclick="bulkDeleteMailboxes('shared')">
-                                    <i class="fas fa-trash"></i> Delete Selected
-                                </button>
-                            </div>
-                            <div id="sharedList" class="shared-list"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Imported Mailboxes Section -->
-                <div id="importedMailboxes" class="hidden collapsible-section" style="margin-bottom: 1.5rem;">
-                    <div class="collapsible-header" onclick="toggleSection(this)">
-                        <h3>
-                            <i class="fas fa-download" style="color: #3B82F6;"></i>
-                            Imported Mailboxes (<span id="importedCount">0</span>)
-                        </h3>
-                        <i class="fas fa-chevron-down collapsible-toggle"></i>
-                    </div>
-                    <div class="collapsible-content">
-                        <div class="collapsible-body">
-                            <!-- Bulk Actions for Imported -->
-                            <div id="importedBulkActions" class="bulk-actions hidden">
-                                <div class="checkbox-wrapper">
-                                    <input type="checkbox" id="selectAllImported" class="checkbox" onchange="toggleSelectAll('imported')">
-                                    <label for="selectAllImported">Select All</label>
-                                </div>
-                                <button class="btn btn-danger" onclick="bulkDeleteMailboxes('imported')">
-                                    <i class="fas fa-trash"></i> Delete Selected
-                                </button>
-                            </div>
-                            <div id="importedList" class="shared-list"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Email Actions (only when mailbox is selected) -->
-                <div id="emailActions" class="hidden">
-                    <div class="email-actions" style="justify-content: center;">
-                        <button class="btn btn-secondary btn-action" onclick="shareEmail()" title="Generate a shareable URL for this mailbox that others can access">
-                            <i class="fas fa-share" style="margin-right: 0.25rem;"></i>
-                            Share
-                        </button>
-                        <button class="btn btn-secondary btn-refresh" onclick="checkEmails()" title="Check for new emails in this mailbox">
-                            <i class="fas fa-sync-alt" style="margin-right: 0.25rem;"></i>
-                            <span id="refreshText">Refresh</span>
-                        </button>
-                    </div>
-
-                    <!-- Current Email Display -->
-                    <div id="currentEmailDisplay" class="email-display hidden" onclick="copyEmail()" title="Click to copy email address">
-                        <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
-                            <i class="fas fa-envelope"></i>
-                            <span id="currentEmailText"></span>
-                            <i class="fas fa-copy" style="font-size: 0.875rem; opacity: 0.7;"></i>
-                        </div>
-                    </div>
-
-                    <!-- Email Search & Controls -->
-                    <div style="margin-bottom: 1rem;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                            <h3 style="color: white; margin: 0;">
-                                <i class="fas fa-inbox" style="margin-right: 0.5rem;"></i>
-                                Emails (<span id="emailCount">0</span>)
-                            </h3>
-                            <button id="clearAllBtn" class="btn btn-danger hidden" onclick="clearAllEmails()" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" title="Delete all emails from this mailbox">
-                                Clear All
+                <!-- Current Email Display -->
+                <div class="current-email-card" id="current-email-card" style="display: none;">
+                    <div class="email-display">
+                        <div class="email-address" id="current-email">No active email</div>
+                        <div class="email-actions">
+                            <button class="copy-btn" onclick="copyCurrentEmail()">
+                                <span class="material-icons">content_copy</span>
+                                Copy
+                            </button>
+                            <button class="share-btn" onclick="shareCurrentEmail()">
+                                <span class="material-icons">share</span>
+                                Share
                             </button>
                         </div>
-                        
-                        <!-- Search and Filter -->
-                        <div id="emailSearchSection" class="hidden" style="display: flex; gap: 0.5rem; margin-bottom: 1rem; position: relative; z-index: 5;">
-                            <div style="flex: 1; position: relative;">
-                                <input 
-                                    type="text" 
-                                    id="emailSearch" 
-                                    placeholder="Search emails by sender, subject..." 
-                                    style="width: 100%; padding: 0.75rem 2.5rem 0.75rem 0.75rem; border-radius: 0.5rem; font-family: inherit; min-height: 44px; box-sizing: border-box;"
-                                    oninput="filterEmails()"
-                                />
-                                <i class="fas fa-search" style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); color: #9CA3AF; pointer-events: none;"></i>
+                    </div>
+                    <div class="email-info">
+                        <div class="email-info-item">
+                            <span class="material-icons">schedule</span>
+                            <span>Auto-refresh: <span id="refresh-interval">30s</span></span>
+                        </div>
+                        <div class="email-info-item">
+                            <span class="status-indicator status-online"></span>
+                            <span>Active</span>
+                        </div>
+                        <div class="email-info-item">
+                            <span class="material-icons">security</span>
+                            <span>Temporary</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dynamic Content Area -->
+                <div id="dynamic-content">
+                    <!-- Email List Content -->
+                    <div id="inbox-content" class="content-section">
+                        <div class="email-list" id="email-list">
+                            <div class="empty-state">
+                                <span class="material-icons">mail_outline</span>
+                                <h3>No emails yet</h3>
+                                <p>Generate a temporary email to start receiving messages</p>
                             </div>
-                            <select id="emailSortFilter" class="select" onchange="filterEmails()" style="min-width: 120px;" title="Sort emails">
-                                <option value="newest">Newest First</option>
-                                <option value="oldest">Oldest First</option>
-                                <option value="sender">By Sender</option>
-                                <option value="subject">By Subject</option>
-                            </select>
                         </div>
                     </div>
 
-                    <!-- Email List -->
-                    <div class="email-list">
-                        <div id="emptyInbox" class="empty-inbox">
-                            <div>
-                                <i class="fas fa-envelope email-animation"></i>
-                                <p>No emails yet</p>
-                                <p style="font-size: 0.875rem;">Emails will appear here automatically</p>
+                    <!-- Active Mailboxes Content -->
+                    <div id="active-content" class="content-section" style="display: none;">
+                        <div class="email-list" id="active-mailbox-list">
+                            <div class="empty-state">
+                                <span class="material-icons">tab</span>
+                                <h3>No active mailboxes</h3>
+                                <p>Generate or import mailboxes to see them here</p>
                             </div>
                         </div>
-                        <div id="emailList"></div>
+                    </div>
+
+                    <!-- About Content -->
+                    <div id="about-content" class="content-section" style="display: none;">
+                        <div class="about-section">
+                            <div class="about-header">
+                                <div class="about-title">
+                                    <span class="material-icons">info</span>
+                                    About TempMail Pro
+                                </div>
+                                <div class="about-subtitle">Professional temporary email service</div>
+                            </div>
+                            <div class="about-content">
+                                <div class="about-item">
+                                    <h3>
+                                        <span class="material-icons">security</span>
+                                        What is TempMail Pro?
+                                    </h3>
+                                    <p>TempMail Pro is a professional temporary email service that provides you with disposable email addresses for testing, privacy protection, and avoiding spam.</p>
+                                </div>
+
+                                <div class="about-item">
+                                    <h3>
+                                        <span class="material-icons">features</span>
+                                        Features
+                                    </h3>
+                                    <p>• Multi-mailbox support with tabbed interface</p>
+                                    <p>• Real-time email monitoring and notifications</p>
+                                    <p>• Import and share mailboxes via links</p>
+                                    <p>• Clean, Replit-inspired user interface</p>
+                                    <p>• No registration required</p>
+                                </div>
+
+                                <div class="api-info">
+                                    <div class="api-info-title">
+                                        <span class="material-icons">cloud</span>
+                                        Powered by mail.tm API
+                                    </div>
+                                    <p>This service uses the free mail.tm API to provide temporary email functionality. Visit <a href="https://mail.tm" target="_blank" class="api-link">mail.tm</a> for more information about the underlying service.</p>
+                                </div>
+
+                                <div class="disclaimer-box">
+                                    <div class="disclaimer-title">
+                                        <span class="material-icons">warning</span>
+                                        Important Disclaimer
+                                    </div>
+                                    <div class="disclaimer-text">
+                                        <p><strong>We do not own, operate, or control the mail.tm service.</strong></p>
+                                        <p>• This website is simply a user interface wrapper around the mail.tm API</p>
+                                        <p>• We do not store, process, or have access to any email data</p>
+                                        <p>• All emails are handled directly by mail.tm servers</p>
+                                        <p>• Use of this service is subject to mail.tm's terms and conditions</p>
+                                        <p>• We are not responsible for any data loss, privacy breaches, or service interruptions</p>
+                                        <p>• This service is provided "as-is" without any warranties</p>
+                                    </div>
+                                </div>
+
+                                <div class="about-item">
+                                    <h3>
+                                        <span class="material-icons">privacy_tip</span>
+                                        Privacy & Security
+                                    </h3>
+                                    <p>• Temporary emails expire automatically</p>
+                                    <p>• No personal information required</p>
+                                    <p>• All data is handled by mail.tm infrastructure</p>
+                                    <p>• Use only for non-sensitive communications</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Settings Content -->
+                    <div id="settings-content" class="content-section" style="display: none;">
+                        <div class="about-section">
+                            <div class="about-header">
+                                <div class="about-title">
+                                    <span class="material-icons">settings</span>
+                                    Settings
+                                </div>
+                                <div class="about-subtitle">Configure your preferences</div>
+                            </div>
+                            <div class="about-content">
+                                <div class="about-item">
+                                    <h3>
+                                        <span class="material-icons">notifications</span>
+                                        Notifications
+                                    </h3>
+                                    <p>Email notifications are handled by your browser. Enable browser notifications to get alerts for new emails.</p>
+                                </div>
+
+                                <div class="about-item">
+                                    <h3>
+                                        <span class="material-icons">refresh</span>
+                                        Auto Refresh
+                                    </h3>
+                                    <p>Emails are automatically refreshed every 30 seconds when you have active mailboxes.</p>
+                                </div>
+
+                                <div class="about-item">
+                                    <h3>
+                                        <span class="material-icons">storage</span>
+                                        Data Storage
+                                    </h3>
+                                    <p>Your mailbox data is stored locally in your browser. Clear your browser data to remove all saved mailboxes.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Email Modal -->
-    <div id="emailModal" class="modal" onclick="closeModalOnBackdrop(event)">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="modalSubject" style="color: white; margin: 0;">Email Details</h3>
-                <button class="modal-close" onclick="closeEmailModal()">&times;</button>
+    <!-- Email Viewer Modal -->
+    <div class="email-viewer" id="email-viewer">
+        <div class="email-viewer-content">
+            <div class="email-viewer-header">
+                <div class="email-viewer-subject" id="viewer-subject">Email Subject</div>
+                <div class="email-viewer-meta">
+                    <div class="email-meta-label">From:</div>
+                    <div class="email-meta-value" id="viewer-from">sender@example.com</div>
+                    <div class="email-meta-label">To:</div>
+                    <div class="email-meta-value" id="viewer-to">recipient@example.com</div>
+                    <div class="email-meta-label">Date:</div>
+                    <div class="email-meta-value" id="viewer-date">2024-01-01 12:00:00</div>
+                </div>
             </div>
-            <div id="modalContent"></div>
-        </div>
-    </div>
-
-    <!-- Delete Confirmation Modal -->
-    <div id="deleteModal" class="delete-modal" onclick="closeDeleteModalOnBackdrop(event)">
-        <div class="delete-modal-content">
-            <div style="margin-bottom: 1rem;">
-                <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: #DC2626; margin-bottom: 1rem;"></i>
+            <div class="email-viewer-body">
+                <div class="email-body-content" id="viewer-body">Email content will appear here...</div>
             </div>
-            <h3 style="color: white; margin: 0 0 1rem 0;">Delete Mailbox</h3>
-            <p style="color: #D1D5DB; margin: 0 0 1rem 0;">
-                Are you sure you want to delete this mailbox? This action cannot be undone.
-            </p>
-            <p id="deleteEmailText" style="color: #10B981; font-weight: 600; margin: 0 0 1rem 0;"></p>
-
-            <div class="checkbox-container">
-                <input type="checkbox" id="confirmDelete" />
-                <label for="confirmDelete" style="color: #D1D5DB;">
-                    I understand this mailbox will be permanently deleted and cannot be recovered
-                </label>
-            </div>
-
-            <div class="modal-buttons">
-                <button class="btn btn-secondary" onclick="closeDeleteModal()">Cancel</button>
-                <button id="confirmDeleteBtn" class="btn btn-danger" onclick="confirmDeleteMailbox()" disabled>
-                    <i class="fas fa-trash" style="margin-right: 0.5rem;"></i>
-                    Delete Permanently
+            <div class="email-viewer-actions">
+                <button class="btn btn-secondary" onclick="closeEmailViewer()">
+                    <span class="material-icons">close</span>
+                    Close
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Tooltip -->
-    <div id="tooltip" class="tooltip"></div>
+    <!-- Import Mailbox Modal -->
+    <div class="modal" id="import-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Import Mailbox</div>
+                <button class="modal-close" onclick="closeImportModal()">×</button>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" class="form-input" id="import-email" placeholder="Enter email address">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-input" id="import-password" placeholder="Enter password">
+            </div>
+            <div class="form-actions">
+                <button class="btn btn-secondary" onclick="closeImportModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="performImport()">
+                    <span class="material-icons">cloud_download</span>
+                    Import
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share Modal -->
+    <div class="modal" id="share-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Share Mailbox</div>
+                <button class="modal-close" onclick="closeShareModal()">×</button>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Share Link</label>
+                <div style="display: flex; gap: 8px;">
+                    <input type="text" class="form-input" id="share-link" readonly>
+                    <button class="btn btn-primary" onclick="copyShareLink()">
+                        <span class="material-icons">content_copy</span>
+                        Copy
+                    </button>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button class="btn btn-secondary" onclick="closeShareModal()">Close</button>
+            </div>
+        </div>
+    </div>
 
     <script>
-        class TempMail {
-            constructor() {
-                this.currentEmail = '';
-                this.currentToken = '';
-                this.emails = [];
-                this.savedMailboxes = {};
-                this.sharedMailboxes = {};
-                this.importedMailboxes = {};
-                this.refreshInterval = null;
-                this.apiBase = 'https://api.mail.tm';
-                this.refreshFrequency = 5000;
-                this.aboutVisible = false;
-                this.deleteEmailToConfirm = '';
-                this.dropdownVisible = false;
-                this.selectedMailboxesForDeletion = new Set();
+        // Global variables - FIXED initialization
+        let mailAccounts = [];
+        let currentAccount = null;
+        let allEmails = [];
+        let currentTab = 'inbox';
+        let refreshInterval = null;
+        let isRefreshing = false;
 
-                this.loadSavedData();
-                this.updateMailboxSelector();
-                this.updateSharedMailboxes();
-                this.updateImportedMailboxes();
-                this.checkURLParams();
+        // Mail.tm API configuration
+        const API_BASE = 'https://api.mail.tm';
 
-                // Auto-load last used mailbox or generate new one
-                const lastUsed = this.getLastUsedMailbox();
-                if (lastUsed && this.savedMailboxes[lastUsed]) {
-                    this.loadMailbox(lastUsed);
-                } else if (Object.keys(this.savedMailboxes).length === 0) {
-                    this.generateEmail();
-                }
-
-                // Setup keyboard shortcuts
-                document.addEventListener('keydown', (e) => {
-                    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-                        e.preventDefault();
-                        this.generateEmail();
-                    }
-                    if (e.key === 'Escape') {
-                        this.closeEmailModal();
-                        this.closeDeleteModal();
-                        if (this.aboutVisible) {
-                            this.toggleAbout();
-                        }
-                    }
-                });
-
-                // Setup click outside handler for about modal and dropdown
-                document.addEventListener('click', (e) => {
-                    const aboutModal = document.getElementById('aboutModal');
-                    const aboutBanner = document.getElementById('aboutBanner');
-                    const dropdown = document.getElementById('mailboxDropdown');
-                    const toggleBtn = document.getElementById('toggleDropdownBtn');
-
-                    if (e.target === aboutModal && this.aboutVisible) {
-                        this.toggleAbout();
-                    }
-
-                    // Close dropdown if clicking outside
-                    if (this.dropdownVisible && !dropdown.contains(e.target) && e.target !== toggleBtn && !toggleBtn.contains(e.target)) {
-                        this.closeMailboxDropdown();
-                    }
-                });
-
-                // Setup delete confirmation checkbox
-                document.getElementById('confirmDelete').addEventListener('change', (e) => {
-                    document.getElementById('confirmDeleteBtn').disabled = !e.target.checked;
-                });
+        // Initialize the application - FIXED
+        function initializeApp() {
+            try {
+                console.log('Initializing TempMail app...');
+                loadStoredData();
+                updateUI();
+                startAutoRefresh();
+                console.log('App initialized successfully');
+            } catch (error) {
+                console.error('Error initializing app:', error);
+                showToast('Failed to initialize app: ' + error.message, 'error');
             }
-
-            loadSavedData() {
-                try {
-                    const savedData = localStorage.getItem('tempmail_mailboxes');
-                    if (savedData) {
-                        this.savedMailboxes = JSON.parse(savedData);
-                    }
-                    const sharedData = localStorage.getItem('tempmail_shared_mailboxes');
-                    if (sharedData) {
-                        this.sharedMailboxes = JSON.parse(sharedData);
-                    }
-                    this.importedMailboxes = JSON.parse(localStorage.getItem('tempmail_imported_mailboxes') || '{}');
-                } catch (error) {
-                    console.error('Error loading saved data:', error);
-                    this.savedMailboxes = {};
-                    this.sharedMailboxes = {};
-                    this.importedMailboxes = {};
-                }
-            }
-
-            getLastUsedMailbox() {
-                return localStorage.getItem('tempmail_last_used');
-            }
-
-            saveMailbox() {
-                if (!this.currentEmail) return;
-
-                this.savedMailboxes[this.currentEmail] = {
-                    email: this.currentEmail,
-                    token: this.currentToken,
-                    emails: this.emails,
-                    lastUsed: Date.now()
-                };
-
-                localStorage.setItem('tempmail_mailboxes', JSON.stringify(this.savedMailboxes));
-                localStorage.setItem('tempmail_last_used', this.currentEmail);
-                this.updateMailboxSelector();
-            }
-
-            async deleteMailboxFromServer(email, token) {
-                try {
-                    // First get the account ID
-                    const accountResponse = await fetch(`${this.apiBase}/me`, {
-                        headers: { 'Authorization': `Bearer ${token}` }
-                    });
-
-                    if (accountResponse.ok) {
-                        const accountData = await accountResponse.json();
-                        const accountId = accountData.id;
-
-                        // Delete the account from server
-                        await fetch(`${this.apiBase}/accounts/${accountId}`, {
-                            method: 'DELETE',
-                            headers: { 'Authorization': `Bearer ${token}` }
-                        });
-                    }
-                } catch (error) {
-                    console.error('Error deleting mailbox from server:', error);
-                    // Continue with local deletion even if server deletion fails
-                }
-            }
-
-            checkURLParams() {
-                const urlParams = new URLSearchParams(window.location.search);
-                const shareParam = urlParams.get('share');
-
-                if (shareParam) {
-                    try {
-                        const shareData = JSON.parse(atob(shareParam));
-                        this.currentEmail = shareData.email;
-                        this.currentToken = atob(shareData.token);
-
-                        // Add to imported mailboxes if not already exists
-                        if (!this.importedMailboxes[this.currentEmail]) {
-                            this.importedMailboxes[this.currentEmail] = {
-                                email: this.currentEmail,
-                                token: this.currentToken,
-                                importedAt: Date.now(),
-                                emails: []
-                            };
-                            localStorage.setItem('tempmail_imported_mailboxes', JSON.stringify(this.importedMailboxes));
-                            this.updateImportedMailboxes();
-                        }
-
-                        this.updateEmailDisplay();
-                        this.showTooltip('Shared email imported successfully!', 'success');
-                        // Clear URL params
-                        window.history.replaceState({}, document.title, window.location.pathname);
-                        this.startAutoRefresh();
-                    } catch (error) {
-                        console.error('Invalid share URL:', error);
-                        this.showTooltip('Invalid share URL', 'error');
-                    }
-                }
-            }
-
-            generateRandomString(length) {
-                const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-                return Array.from({length}, () => chars[Math.floor(Math.random() * chars.length)]).join('');
-            }
-
-            async generateEmail() {
-                const btn = document.getElementById('generateBtn');
-                const text = document.getElementById('generateText');
-
-                btn.disabled = true;
-                text.innerHTML = '<i class="fas fa-cog gear-loading" style="margin-right: 0.5rem;"></i>Generating...';
-
-                try {
-                    const domainsResponse = await fetch(`${this.apiBase}/domains`);
-                    if (!domainsResponse.ok) throw new Error('Failed to get domains');
-
-                    const domains = await domainsResponse.json();
-                    if (!domains['hydra:member'] || domains['hydra:member'].length === 0) {
-                        throw new Error('No domains available');
-                    }
-
-                    const domain = domains['hydra:member'][0].domain;
-                    const username = this.generateRandomString(8);
-                    const newEmail = `${username}@${domain}`;
-
-                    const createResponse = await fetch(`${this.apiBase}/accounts`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            address: newEmail,
-                            password: 'temppassword123'
-                        })
-                    });
-
-                    if (!createResponse.ok) throw new Error('Failed to create account');
-
-                    const authResponse = await fetch(`${this.apiBase}/token`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            address: newEmail,
-                            password: 'temppassword123'
-                        })
-                    });
-
-                    if (!authResponse.ok) throw new Error('Failed to authenticate');
-
-                    const authData = await authResponse.json();
-                    this.currentEmail = newEmail;
-                    this.currentToken = authData.token;
-                    this.emails = [];
-
-                    this.updateEmailDisplay();
-                    this.updateEmailList();
-                    this.saveMailbox();
-                    this.startAutoRefresh();
-
-                    // Automatically copy the new email
-                    navigator.clipboard.writeText(this.currentEmail)
-                        .then(() => this.showTooltip(`${this.currentEmail} generated & copied!`, 'success'))
-                        .catch(() => this.showTooltip('Email generated successfully!', 'success'));
-
-                } catch (error) {
-                    console.error('Generate email error:', error);
-                    this.showTooltip('Error generating email. Please try again.', 'error');
-                } finally {
-                    btn.disabled = false;
-                    text.textContent = 'Generate Email';
-                }
-            }
-
-            async checkEmails() {
-                if (!this.currentEmail || !this.currentToken) {
-                    this.showTooltip('Generate an email first', 'warning');
-                    return;
-                }
-
-                const refreshText = document.getElementById('refreshText');
-                refreshText.innerHTML = '<i class="fas fa-envelope email-loading" style="margin-right: 0.5rem;"></i>Checking...';
-
-                try {
-                    const response = await fetch(`${this.apiBase}/messages`, {
-                        headers: { 'Authorization': `Bearer ${this.currentToken}` }
-                    });
-
-                    if (!response.ok) {
-                        if (response.status === 401) {
-                            this.showTooltip('Session expired. Please generate a new email.', 'warning');
-                            return;
-                        }
-                        throw new Error(`Failed to fetch messages: ${response.status}`);
-                    }
-
-                    const data = await response.json();
-                    const messages = data['hydra:member'] || [];
-
-                    if (messages.length > 0) {
-                        const existingIds = new Set(this.emails.map(email => email.id));
-                        const newEmails = messages.filter(msg => !existingIds.has(msg.id));
-
-                        if (newEmails.length > 0) {
-                            this.emails = [...newEmails, ...this.emails];
-                            this.updateEmailList();
-                            this.saveMailbox();
-                            this.showTooltip(`${newEmails.length} new email(s)!`, 'success');
-                        }
-                    }
-
-                    this.updateEmailList();
-                } catch (error) {
-                    console.error('Check emails error:', error);
-                    // Don't show error tooltip for every failed request to avoid spam
-                    if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
-                        console.log('Network error, will retry automatically');
-                    } else {
-                        this.showTooltip('Error checking emails', 'error');
-                    }
-                } finally {
-                    refreshText.textContent = 'Refresh';
-                }
-            }
-
-            async loadMailbox(email) {
-                const mailbox = this.savedMailboxes[email];
-                if (!mailbox) return;
-
-                this.currentEmail = mailbox.email;
-                this.currentToken = mailbox.token;
-                this.emails = mailbox.emails || [];
-
-                this.updateEmailDisplay();
-                this.updateEmailList();
-                this.updateMailboxSelector();
-                localStorage.setItem('tempmail_last_used', email);
-                this.startAutoRefresh();
-            }
-
-            updateEmailDisplay() {
-                const emailActions = document.getElementById('emailActions');
-                const copyBtn = document.getElementById('copyEmailBtn');
-                const deleteAllBtn = document.getElementById('deleteAllBtn');
-                const currentEmailDisplay = document.getElementById('currentEmailDisplay');
-                const currentEmailText = document.getElementById('currentEmailText');
-
-                if (this.currentEmail) {
-                    emailActions.classList.remove('hidden');
-                    copyBtn.classList.remove('hidden');
-                    currentEmailDisplay.classList.remove('hidden');
-                    currentEmailText.textContent = this.currentEmail;
-                } else {
-                    emailActions.classList.add('hidden');
-                    copyBtn.classList.add('hidden');
-                    currentEmailDisplay.classList.add('hidden');
-                }
-
-                // Show delete all button if there are multiple saved mailboxes
-                if (Object.keys(this.savedMailboxes).length > 1) {
-                    deleteAllBtn.classList.remove('hidden');
-                } else {
-                    deleteAllBtn.classList.add('hidden');
-                }
-            }
-
-            updateEmailList() {
-                const emailList = document.getElementById('emailList');
-                const emptyInbox = document.getElementById('emptyInbox');
-                const emailCount = document.getElementById('emailCount');
-                const clearAllBtn = document.getElementById('clearAllBtn');
-                const searchSection = document.getElementById('emailSearchSection');
-
-                emailCount.textContent = this.emails.length;
-
-                if (this.emails.length === 0) {
-                    emptyInbox.style.display = 'block';
-                    emailList.innerHTML = '';
-                    clearAllBtn.classList.add('hidden');
-                    searchSection.classList.add('hidden');
-                } else {
-                    emptyInbox.style.display = 'none';
-                    clearAllBtn.classList.remove('hidden');
-                    searchSection.classList.remove('hidden');
-                    this.filterEmails();
-                }
-            }
-
-            filterEmails() {
-                const emailList = document.getElementById('emailList');
-                const searchTerm = document.getElementById('emailSearch')?.value.toLowerCase() || '';
-                const sortOption = document.getElementById('emailSortFilter')?.value || 'newest';
-                
-                let filteredEmails = [...this.emails];
-
-                // Filter by search term
-                if (searchTerm) {
-                    filteredEmails = filteredEmails.filter(email => 
-                        email.from.address.toLowerCase().includes(searchTerm) ||
-                        (email.subject || '').toLowerCase().includes(searchTerm)
-                    );
-                }
-
-                // Sort emails
-                switch (sortOption) {
-                    case 'oldest':
-                        filteredEmails.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
-                        break;
-                    case 'sender':
-                        filteredEmails.sort((a, b) => a.from.address.localeCompare(b.from.address));
-                        break;
-                    case 'subject':
-                        filteredEmails.sort((a, b) => (a.subject || '').localeCompare(b.subject || ''));
-                        break;
-                    case 'newest':
-                    default:
-                        filteredEmails.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-                        break;
-                }
-
-                // Update display
-                if (filteredEmails.length === 0 && searchTerm) {
-                    emailList.innerHTML = `
-                        <div class="empty-inbox">
-                            <div>
-                                <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem; color: #9CA3AF;"></i>
-                                <p>No emails found</p>
-                                <p style="font-size: 0.875rem;">Try adjusting your search terms</p>
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    emailList.innerHTML = filteredEmails.map(email => `
-                        <div class="email-item" onclick="showEmailDetails('${email.id}')">
-                            <div class="email-header">
-                                <div class="email-from">${email.from.address}</div>
-                                <div class="email-date">${new Date(email.createdAt).toLocaleString()}</div>
-                            </div>
-                            <div class="email-subject">${email.subject || 'No Subject'}</div>
-                        </div>
-                    `).join('');
-                }
-
-                // Update count to show filtered results
-                const totalCount = this.emails.length;
-                const filteredCount = filteredEmails.length;
-                const emailCount = document.getElementById('emailCount');
-                
-                if (searchTerm && filteredCount !== totalCount) {
-                    emailCount.textContent = `${filteredCount}/${totalCount}`;
-                } else {
-                    emailCount.textContent = totalCount;
-                }
-            }
-
-            updateMailboxSelector() {
-                const selector = document.getElementById('mailboxSelector');
-                const sortedMailboxes = Object.values(this.savedMailboxes)
-                    .sort((a, b) => b.lastUsed - a.lastUsed);
-
-                selector.innerHTML = '<option value="">Select Mailbox</option>' + 
-                    sortedMailboxes.map(mailbox => 
-                        `<option value="${mailbox.email}" ${mailbox.email === this.currentEmail ? 'selected' : ''}>
-                            ${mailbox.email} (${mailbox.emails?.length || 0} emails)
-                        </option>`
-                    ).join('');
-            }
-
-            updateSharedMailboxes() {
-                const sharedSection = document.getElementById('sharedMailboxes');
-                const sharedList = document.getElementById('sharedList');
-                const sharedCount = document.getElementById('sharedCount');
-                const sharedEmails = Object.values(this.sharedMailboxes)
-                    .sort((a, b) => b.sharedAt - a.sharedAt);
-
-                sharedCount.textContent = sharedEmails.length;
-
-                if (sharedEmails.length === 0) {
-                    sharedSection.classList.add('hidden');
-                } else {
-                    sharedSection.classList.remove('hidden');
-                    sharedList.innerHTML = sharedEmails.map(shared => `
-                        <div class="shared-item ${selectedMailboxes.shared.has(shared.email) ? 'selected' : ''}" onclick="toggleMailboxSelection('shared', '${shared.email}')">
-                            <div class="checkbox-wrapper">
-                                <input type="checkbox" class="checkbox" ${selectedMailboxes.shared.has(shared.email) ? 'checked' : ''} onchange="event.stopPropagation(); toggleMailboxSelection('shared', '${shared.email}')">
-                            </div>
-                            <div style="flex: 1; cursor: pointer;" onclick="event.stopPropagation(); loadSharedMailbox('${shared.email}')">
-                                <div class="shared-email">${shared.email}</div>
-                                <div class="shared-info">Shared ${new Date(shared.sharedAt).toLocaleDateString()}</div>
-                            </div>
-                            <div style="display: flex; gap: 0.5rem;">
-                                <button class="btn btn-secondary" onclick="event.stopPropagation(); copySharedUrl('${shared.email}')" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" title="Copy share URL">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                                <button class="btn btn-danger" onclick="event.stopPropagation(); removeSharedMailbox('${shared.email}')" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" title="Remove from shared list">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                    `).join('');
-                }
-            }
-
-            updateImportedMailboxes() {
-                const importedSection = document.getElementById('importedMailboxes');
-                const importedList = document.getElementById('importedList');
-                const importedCount = document.getElementById('importedCount');
-                const importedEmails = Object.values(this.importedMailboxes)
-                    .sort((a, b) => b.importedAt - a.importedAt);
-
-                importedCount.textContent = importedEmails.length;
-
-                if (importedEmails.length === 0) {
-                    importedSection.classList.add('hidden');
-                } else {
-                    importedSection.classList.remove('hidden');
-                    importedList.innerHTML = importedEmails.map(imported => `
-                        <div class="shared-item ${selectedMailboxes.imported.has(imported.email) ? 'selected' : ''}" onclick="toggleMailboxSelection('imported', '${imported.email}')">
-                            <div class="checkbox-wrapper">
-                                <input type="checkbox" class="checkbox" ${selectedMailboxes.imported.has(imported.email) ? 'checked' : ''} onchange="event.stopPropagation(); toggleMailboxSelection('imported', '${imported.email}')">
-                            </div>
-                            <div style="flex: 1; cursor: pointer;" onclick="event.stopPropagation(); loadImportedMailbox('${imported.email}')">
-                                <div class="shared-email">${imported.email}</div>
-                                <div class="shared-info">Imported ${new Date(imported.importedAt).toLocaleDateString()}</div>
-                            </div>
-                            <div style="display: flex; gap: 0.5rem;">
-                                <button class="btn btn-danger" onclick="event.stopPropagation(); removeImportedMailbox('${imported.email}')" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" title="Remove imported mailbox">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                    `).join('');
-                }
-            }
-
-            async showEmailDetails(emailId) {
-                const email = this.emails.find(e => e.id === emailId);
-                if (!email) return;
-
-                try {
-                    const response = await fetch(`${this.apiBase}/messages/${emailId}`, {
-                        headers: { 'Authorization': `Bearer ${this.currentToken}` }
-                    });
-
-                    if (!response.ok) throw new Error('Failed to fetch email details');
-
-                    const emailData = await response.json();
-
-                    document.getElementById('modalSubject').textContent = emailData.subject || 'No Subject';
-                    document.getElementById('modalContent').innerHTML = `
-                        <div style="margin-bottom: 1rem;">
-                            <strong>From:</strong> ${emailData.from.address}<br>
-                            <strong>To:</strong> ${emailData.to[0].address}<br>
-                            <strong>Date:</strong> ${new Date(emailData.createdAt).toLocaleString()}
-                        </div>
-                        <div style="border-top: 1px solid #374151; padding-top: 1rem;">
-                            ${emailData.html || emailData.text || 'No content available'}
-                        </div>
-                    `;
-
-                    document.getElementById('emailModal').classList.add('show');
-                } catch (error) {
-                    console.error('Error loading email details:', error);
-                    this.showTooltip('Error loading email details', 'error');
-                }
-            }
-
-            copyEmail() {
-                if (!this.currentEmail) {
-                    this.showTooltip('No email to copy', 'warning');
-                    return;
-                }
-
-                navigator.clipboard.writeText(this.currentEmail)
-                    .then(() => this.showTooltip('Email copied to clipboard!', 'success'))
-                    .catch(() => this.showTooltip('Failed to copy email', 'error'));
-            }
-
-            shareEmail() {
-                if (!this.currentEmail || !this.currentToken) {
-                    this.showTooltip('No email to share', 'warning');
-                    return;
-                }
-
-                const shareData = {
-                    email: this.currentEmail,
-                    token: btoa(this.currentToken)
-                };
-
-                const shareUrl = `${window.location.origin}${window.location.pathname}?share=${btoa(JSON.stringify(shareData))}`;
-
-                // Add to shared mailboxes
-                this.sharedMailboxes[this.currentEmail] = {
-                    email: this.currentEmail,
-                    token: this.currentToken,
-                    sharedAt: Date.now(),
-                    url: shareUrl
-                };
-                localStorage.setItem('tempmail_shared_mailboxes', JSON.stringify(this.sharedMailboxes));
-                this.updateSharedMailboxes();
-
-                navigator.clipboard.writeText(shareUrl)
-                    .then(() => this.showTooltip('Share URL copied to clipboard!', 'success'))
-                    .catch(() => this.showTooltip('Failed to copy share URL', 'error'));
-            }
-
-            deleteMailbox() {
-                if (!this.currentEmail) return;
-
-                this.deleteEmailToConfirm = this.currentEmail;
-                document.getElementById('deleteEmailText').textContent = this.currentEmail;
-                document.getElementById('confirmDelete').checked = false;
-                document.getElementById('confirmDeleteBtn').disabled = true;
-                document.getElementById('deleteModal').classList.add('show');
-            }
-
-            async confirmDeleteMailbox() {
-                if (!this.deleteEmailToConfirm || !document.getElementById('confirmDelete').checked) return;
-
-                const emailToDelete = this.deleteEmailToConfirm;
-                const tokenToDelete = this.savedMailboxes[emailToDelete]?.token;
-
-                // Delete from server first
-                if (tokenToDelete) {
-                    await this.deleteMailboxFromServer(emailToDelete, tokenToDelete);
-                }
-
-                // Delete from local storage
-                delete this.savedMailboxes[emailToDelete];
-                delete this.sharedMailboxes[emailToDelete];
-
-                localStorage.setItem('tempmail_mailboxes', JSON.stringify(this.savedMailboxes));
-                localStorage.setItem('tempmail_shared_mailboxes', JSON.stringify(this.sharedMailboxes));
-
-                // Switch to next available mailbox or reset
-                this.switchToNextAvailableMailbox();
-
-                this.updateEmailDisplay();
-                this.updateMailboxSelector();
-                this.updateSharedMailboxes();
-                this.updateEmailList();
-                this.closeDeleteModal();
-
-                this.showTooltip('Mailbox permanently deleted', 'success');
-            }
-
-            switchToNextAvailableMailbox() {
-                const availableMailboxes = Object.keys(this.savedMailboxes);
-                
-                if (availableMailboxes.length > 0) {
-                    // Switch to the most recently used mailbox
-                    const sortedMailboxes = availableMailboxes
-                        .map(email => this.savedMailboxes[email])
-                        .sort((a, b) => b.lastUsed - a.lastUsed);
+        }
+
+        // Load data from localStorage - FIXED
+        function loadStoredData() {
+            try {
+                const stored = localStorage.getItem('tempmail-data');
+                if (stored) {
+                    const data = JSON.parse(stored);
+                    // Ensure arrays are properly initialized
+                    mailAccounts = Array.isArray(data.mailAccounts) ? data.mailAccounts : [];
+                    allEmails = Array.isArray(data.allEmails) ? data.allEmails : [];
                     
-                    this.loadMailbox(sortedMailboxes[0].email);
-                } else {
-                    // No mailboxes available, reset current state
-                    this.currentEmail = '';
-                    this.currentToken = '';
-                    this.emails = [];
-                    this.stopAutoRefresh();
-                    localStorage.removeItem('tempmail_last_used');
-                    this.updateEmailDisplay();
-                    this.updateEmailList();
+                    // Set current account if exists
+                    if (data.currentAccount && mailAccounts.length > 0) {
+                        currentAccount = mailAccounts.find(acc => acc.id === data.currentAccount.id) || mailAccounts[0];
+                    }
                 }
+                console.log('Loaded data:', { mailAccounts: mailAccounts.length, allEmails: allEmails.length });
+            } catch (error) {
+                console.error('Error loading stored data:', error);
+                // Reset to defaults on error
+                mailAccounts = [];
+                allEmails = [];
+                currentAccount = null;
             }
+        }
 
-            deleteAllMailboxes() {
-                if (Object.keys(this.savedMailboxes).length === 0) {
-                    this.showTooltip('No mailboxes to delete', 'warning');
-                    return;
+        // Save data to localStorage - FIXED
+        function saveData() {
+            try {
+                const data = {
+                    mailAccounts: mailAccounts || [],
+                    allEmails: allEmails || [],
+                    currentAccount: currentAccount
+                };
+                localStorage.setItem('tempmail-data', JSON.stringify(data));
+                console.log('Data saved successfully');
+            } catch (error) {
+                console.error('Error saving data:', error);
+            }
+        }
+
+        // Generate a new temporary email - FIXED
+        async function generateNewEmail() {
+            try {
+                console.log('Generating new email...');
+                const generateBtn = document.getElementById('generate-btn');
+                generateBtn.disabled = true;
+                generateBtn.innerHTML = '<span class="loading"></span> Generating...';
+
+                // Get available domains
+                const domains = await getAvailableDomains();
+                if (!domains || domains.length === 0) {
+                    throw new Error('No domains available');
                 }
 
-                const mailboxCount = Object.keys(this.savedMailboxes).length;
+                // Create random email
+                const randomString = Math.random().toString(36).substring(2, 10);
+                const email = `${randomString}@${domains[0].domain}`;
+                const password = Math.random().toString(36).substring(2, 15);
+
+                // Register account
+                const account = await registerAccount(email, password);
                 
-                if (confirm(`Are you sure you want to delete all ${mailboxCount} mailboxes? This action cannot be undone.`)) {
-                    // Delete from server for all mailboxes
-                    Object.values(this.savedMailboxes).forEach(async (mailbox) => {
-                        if (mailbox.token) {
-                            await this.deleteMailboxFromServer(mailbox.email, mailbox.token);
+                // Get auth token
+                const token = await getAuthToken(email, password);
+                account.token = token;
+
+                // Add to accounts
+                mailAccounts.push(account);
+                currentAccount = account;
+
+                updateUI();
+                saveData();
+                showToast('Email generated successfully!', 'success');
+                
+                // Start fetching emails for this account
+                await refreshEmails();
+                
+            } catch (error) {
+                console.error('Error generating email:', error);
+                showToast('Failed to generate email: ' + error.message, 'error');
+            } finally {
+                const generateBtn = document.getElementById('generate-btn');
+                generateBtn.disabled = false;
+                generateBtn.innerHTML = '<span class="material-icons">add</span> Generate New Email';
+            }
+        }
+
+        // Get available domains from mail.tm API - FIXED
+        async function getAvailableDomains() {
+            try {
+                const response = await fetch(`${API_BASE}/domains`);
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                const data = await response.json();
+                return data['hydra:member'] || [];
+            } catch (error) {
+                console.error('Error fetching domains:', error);
+                throw error;
+            }
+        }
+
+        // Register account with mail.tm API - FIXED
+        async function registerAccount(email, password) {
+            try {
+                const response = await fetch(`${API_BASE}/accounts`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        address: email,
+                        password: password
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    throw new Error(errorData.message || `Registration failed: ${response.status}`);
+                }
+
+                const account = await response.json();
+                account.password = password; // Store password for token renewal
+                account.createdAt = new Date().toISOString();
+                
+                return account;
+            } catch (error) {
+                console.error('Error registering account:', error);
+                throw error;
+            }
+        }
+
+        // Get authentication token - FIXED
+        async function getAuthToken(email, password) {
+            try {
+                const response = await fetch(`${API_BASE}/token`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        address: email,
+                        password: password
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Authentication failed: ${response.status}`);
+                }
+
+                const data = await response.json();
+                return data.token;
+            } catch (error) {
+                console.error('Error getting auth token:', error);
+                throw error;
+            }
+        }
+
+        // Refresh emails for all accounts - FIXED
+        async function refreshEmails() {
+            if (isRefreshing || mailAccounts.length === 0) {
+                return;
+            }
+
+            try {
+                isRefreshing = true;
+                const refreshBtn = document.getElementById('refresh-btn');
+                if (refreshBtn) {
+                    refreshBtn.disabled = true;
+                }
+
+                console.log('Refreshing emails for', mailAccounts.length, 'accounts');
+
+                for (const account of mailAccounts) {
+                    if (account && account.token) {
+                        try {
+                            await fetchEmailsForAccount(account);
+                        } catch (error) {
+                            console.error(`Error fetching emails for ${account.address}:`, error);
                         }
-                    });
+                    }
+                }
 
-                    this.savedMailboxes = {};
-                    this.sharedMailboxes = {};
-                    this.importedMailboxes = {};
-
-                    localStorage.setItem('tempmail_mailboxes', JSON.stringify(this.savedMailboxes));
-                    localStorage.setItem('tempmail_shared_mailboxes', JSON.stringify(this.sharedMailboxes));
-                    localStorage.setItem('tempmail_imported_mailboxes', JSON.stringify(this.importedMailboxes));
-                    localStorage.removeItem('tempmail_last_used');
-
-                    this.currentEmail = '';
-                    this.currentToken = '';
-                    this.emails = [];
-                    this.stopAutoRefresh();
-
-                    this.updateEmailDisplay();
-                    this.updateMailboxSelector();
-                    this.updateSharedMailboxes();
-                    this.updateImportedMailboxes();
-                    this.updateEmailList();
-
-                    this.showTooltip(`All ${mailboxCount} mailboxes deleted`, 'success');
+                updateUI();
+                saveData();
+                
+            } catch (error) {
+                console.error('Error refreshing emails:', error);
+                showToast('Failed to refresh emails: ' + error.message, 'error');
+            } finally {
+                isRefreshing = false;
+                const refreshBtn = document.getElementById('refresh-btn');
+                if (refreshBtn) {
+                    refreshBtn.disabled = false;
                 }
             }
+        }
 
-            closeDeleteModal() {
-                document.getElementById('deleteModal').classList.remove('show');
-                this.deleteEmailToConfirm = '';
-            }
-
-            closeDeleteModalOnBackdrop(event) {
-                if (event.target === event.currentTarget) {
-                    this.closeDeleteModal();
-                }
-            }
-
-            clearAllEmails() {
-                if (this.emails.length === 0) return;
-
-                this.showClearAllConfirmation();
-            }
-
-            showClearAllConfirmation() {
-                const modal = document.getElementById('deleteModal');
-                const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
-                const deleteEmailText = document.getElementById('deleteEmailText');
-                const confirmDeleteCheckbox = document.getElementById('confirmDelete');
-                const modalTitle = document.querySelector('#deleteModal h3');
-                const modalText = document.querySelector('#deleteModal p:nth-of-type(1)');
-
-                deleteEmailText.textContent = `${this.emails.length} emails from ${this.currentEmail}`;
-                confirmDeleteCheckbox.checked = false;
-                confirmDeleteBtn.disabled = true;
-
-                modalTitle.textContent = 'Clear All Emails';
-                modalText.textContent = 'Are you sure you want to clear all emails from this mailbox? This action cannot be undone.';
-
-                confirmDeleteBtn.onclick = () => {
-                    this.confirmClearAllEmails();
-                };
-
-                modal.classList.add('show');
-            }
-
-            confirmClearAllEmails() {
-                if (!document.getElementById('confirmDelete').checked) return;
-
-                this.emails = [];
-                this.updateEmailList();
-                this.saveMailbox();
-                this.closeDeleteModal();
-                this.showTooltip('All emails cleared', 'success');
-            }
-
-            switchMailbox() {
-                const selector = document.getElementById('mailboxSelector');
-                const selectedEmail = selector.value;
-
-                if (selectedEmail && selectedEmail !== this.currentEmail) {
-                    this.stopAutoRefresh();
-                    this.loadMailbox(selectedEmail);
-                }
-            }
-
-            toggleAbout() {
-                const aboutModal = document.getElementById('aboutModal');
-                this.aboutVisible = !this.aboutVisible;
-
-                if (this.aboutVisible) {
-                    aboutModal.classList.add('show');
-                } else {
-                    aboutModal.classList.remove('show');
-                }
-            }
-
-            closeEmailModal() {
-                document.getElementById('emailModal').classList.remove('show');
-            }
-
-            closeModalOnBackdrop(event) {
-                if (event.target === event.currentTarget) {
-                    this.closeEmailModal();
-                }
-            }
-
-            startAutoRefresh() {
-                this.stopAutoRefresh();
-                this.refreshInterval = setInterval(() => {
-                    this.checkEmails();
-                }, this.refreshFrequency);
-            }
-
-            stopAutoRefresh() {
-                if (this.refreshInterval) {
-                    clearInterval(this.refreshInterval);
-                    this.refreshInterval = null;
-                }
-            }
-
-            loadSharedMailbox(email) {
-                const shared = this.sharedMailboxes[email];
-                if (!shared) return;
-
-                this.currentEmail = shared.email;
-                this.currentToken = shared.token;
-                this.emails = [];
-
-                this.updateEmailDisplay();
-                this.updateEmailList();
-                this.startAutoRefresh();
-                this.checkEmails();
-
-                this.showTooltip(`Loaded shared mailbox: ${email}`, 'success');
-            }
-
-            loadImportedMailbox(email) {
-                const imported = this.importedMailboxes[email];
-                if (!imported) return;
-
-                this.currentEmail = imported.email;
-                this.currentToken = imported.token;
-                this.emails = imported.emails || [];
-
-                this.updateEmailDisplay();
-                this.updateEmailList();
-                this.startAutoRefresh();
-                this.checkEmails();
-
-                this.showTooltip(`Loaded imported mailbox: ${email}`, 'success');
-            }
-
-            copySharedUrl(email) {
-                const shared = this.sharedMailboxes[email];
-                if (!shared) return;
-
-                navigator.clipboard.writeText(shared.url)
-                    .then(() => this.showTooltip('Share URL copied to clipboard!', 'success'))
-                    .catch(() => this.showTooltip('Failed to copy share URL', 'error'));
-            }
-
-            removeSharedMailbox(email) {
-                this.showRemoveMailboxConfirmation(email, 'shared', (emailToRemove) => {
-                    delete this.sharedMailboxes[emailToRemove];
-                    localStorage.setItem('tempmail_shared_mailboxes', JSON.stringify(this.sharedMailboxes));
-                    this.updateSharedMailboxes();
-                    this.showTooltip('Removed from shared mailboxes', 'success');
+        // Fetch emails for a specific account - FIXED
+        async function fetchEmailsForAccount(account) {
+            try {
+                const response = await fetch(`${API_BASE}/messages`, {
+                    headers: {
+                        'Authorization': `Bearer ${account.token}`
+                    }
                 });
-            }
 
-            removeImportedMailbox(email) {
-                this.showRemoveMailboxConfirmation(email, 'imported', (emailToRemove) => {
-                    delete this.importedMailboxes[emailToRemove];
-                    localStorage.setItem('tempmail_imported_mailboxes', JSON.stringify(this.importedMailboxes));
-                    this.updateImportedMailboxes();
-                    this.showTooltip('Removed from imported mailboxes', 'success');
-                });
-            }
-
-            showRemoveMailboxConfirmation(email, type, onConfirm) {
-                const modal = document.getElementById('deleteModal');
-                const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
-                const deleteEmailText = document.getElementById('deleteEmailText');
-                const confirmDeleteCheckbox = document.getElementById('confirmDelete');
-                const modalTitle = document.querySelector('#deleteModal h3');
-                const modalText = document.querySelector('#deleteModal p:nth-of-type(1)');
-        
-                deleteEmailText.textContent = email;
-                confirmDeleteCheckbox.checked = false;
-                confirmDeleteBtn.disabled = true;
-        
-                modalTitle.textContent = `Remove ${type === 'shared' ? 'Shared' : 'Imported'} Mailbox`;
-                modalText.textContent = `Are you sure you want to remove ${email} from your ${type} mailboxes? This will not delete the original mailbox.`;
-        
-                confirmDeleteBtn.onclick = () => {
-                    onConfirm(email);
-                    this.closeDeleteModal();
-                };
-        
-                modal.classList.add('show');
-            }
-
-            toggleMailboxDropdown() {
-                const dropdown = document.getElementById('mailboxDropdown');
-                this.dropdownVisible = !this.dropdownVisible;
-
-                if (this.dropdownVisible) {
-                    dropdown.classList.remove('hidden');
-                    this.updateMailboxDropdown();
-                } else {
-                    dropdown.classList.add('hidden');
-                    this.selectedMailboxesForDeletion.clear();
-                    this.updateDeleteSelectedButton();
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        // Token expired, try to refresh
+                        account.token = await getAuthToken(account.address, account.password);
+                        return await fetchEmailsForAccount(account);
+                    }
+                    throw new Error(`Failed to fetch emails: ${response.status}`);
                 }
+
+                const data = await response.json();
+                const messages = data['hydra:member'] || [];
+
+                // Process and store emails
+                for (const message of messages) {
+                    const existingEmail = allEmails.find(e => e.id === message.id);
+                    if (!existingEmail) {
+                        message.accountEmail = account.address;
+                        message.isRead = false;
+                        allEmails.push(message);
+                    }
+                }
+
+                console.log(`Fetched ${messages.length} emails for ${account.address}`);
+                
+            } catch (error) {
+                console.error(`Error fetching emails for account ${account.address}:`, error);
+                throw error;
             }
+        }
 
-            closeMailboxDropdown() {
-                const dropdown = document.getElementById('mailboxDropdown');
-                dropdown.classList.add('hidden');
-                this.dropdownVisible = false;
-                this.selectedMailboxesForDeletion.clear();
-                this.updateDeleteSelectedButton();
+        // Update UI elements - FIXED
+        function updateUI() {
+            try {
+                updateCounts();
+                updateActiveMailboxes();
+                updateEmailList();
+                updateCurrentEmailDisplay();
+                console.log('UI updated successfully');
+            } catch (error) {
+                console.error('Error updating UI:', error);
             }
+        }
 
-            updateMailboxDropdown() {
-                const mailboxList = document.getElementById('mailboxList');
-                const sortedMailboxes = Object.values(this.savedMailboxes)
-                    .sort((a, b) => b.lastUsed - a.lastUsed);
+        // Update email counts - FIXED
+        function updateCounts() {
+            try {
+                const inboxCount = allEmails ? allEmails.length : 0;
+                const unreadCount = allEmails ? allEmails.filter(email => !email.isRead).length : 0;
+                const activeCount = mailAccounts ? mailAccounts.length : 0;
 
-                if (sortedMailboxes.length === 0) {
-                    mailboxList.innerHTML = '<div style="padding: 1rem; text-align: center; color: #9CA3AF;">No saved mailboxes</div>';
+                const inboxCountEl = document.getElementById('inbox-count');
+                const unreadCountEl = document.getElementById('unread-count');
+                const activeCountEl = document.getElementById('active-count');
+
+                if (inboxCountEl) inboxCountEl.textContent = inboxCount;
+                if (unreadCountEl) unreadCountEl.textContent = unreadCount;
+                if (activeCountEl) activeCountEl.textContent = activeCount;
+                
+            } catch (error) {
+                console.error('Error updating counts:', error);
+            }
+        }
+
+        // Update active mailboxes display - FIXED
+        function updateActiveMailboxes() {
+            try {
+                const tabsContainer = document.getElementById('tabs-container');
+                const mailboxTabs = document.getElementById('mailbox-tabs');
+                
+                if (!tabsContainer || !mailboxTabs) return;
+
+                if (!mailAccounts || mailAccounts.length === 0) {
+                    mailboxTabs.style.display = 'none';
                     return;
                 }
 
-                mailboxList.innerHTML = sortedMailboxes.map(mailbox => `
-                    <div class="mailbox-item ${mailbox.email === this.currentEmail ? 'selected' : ''}" data-email="${mailbox.email}">
-                        <div class="checkbox-wrapper">
-                            <input type="checkbox" class="checkbox mailbox-checkbox" data-email="${mailbox.email}" ${this.selectedMailboxesForDeletion.has(mailbox.email) ? 'checked' : ''} onchange="toggleMailboxForDeletion('${mailbox.email}')">
-                        </div>
-                        <div class="mailbox-info" onclick="selectMailboxFromDropdown('${mailbox.email}')">
-                            <div class="mailbox-email">${mailbox.email}</div>
-                            <div class="mailbox-details">${mailbox.emails?.length || 0} emails • Last used ${new Date(mailbox.lastUsed).toLocaleDateString()}</div>
-                        </div>
-                    </div>
-                `).join('');
+                mailboxTabs.style.display = 'block';
+                tabsContainer.innerHTML = '';
 
-                this.updateSelectAllCheckbox();
-                this.updateDeleteSelectedButton();
-            }
+                mailAccounts.forEach((account, index) => {
+                    if (!account || !account.address) return;
 
-            toggleSelectAllMailboxes() {
-                const selectAllCheckbox = document.getElementById('selectAllMailboxes');
-                const mailboxEmails = Object.keys(this.savedMailboxes);
-
-                if (selectAllCheckbox.checked) {
-                    mailboxEmails.forEach(email => this.selectedMailboxesForDeletion.add(email));
-                } else {
-                    this.selectedMailboxesForDeletion.clear();
-                }
-
-                this.updateMailboxDropdown();
-            }
-
-            toggleMailboxForDeletion(email) {
-                if (this.selectedMailboxesForDeletion.has(email)) {
-                    this.selectedMailboxesForDeletion.delete(email);
-                } else {
-                    this.selectedMailboxesForDeletion.add(email);
-                }
-
-                this.updateSelectAllCheckbox();
-                this.updateDeleteSelectedButton();
-            }
-
-            updateSelectAllCheckbox() {
-                const selectAllCheckbox = document.getElementById('selectAllMailboxes');
-                const mailboxEmails = Object.keys(this.savedMailboxes);
-                const selectedCount = this.selectedMailboxesForDeletion.size;
-
-                selectAllCheckbox.checked = selectedCount > 0 && selectedCount === mailboxEmails.length;
-                selectAllCheckbox.indeterminate = selectedCount > 0 && selectedCount < mailboxEmails.length;
-            }
-
-            updateDeleteSelectedButton() {
-                const deleteBtn = document.getElementById('deleteSelectedBtn');
-                if (this.selectedMailboxesForDeletion.size > 0) {
-                    deleteBtn.classList.remove('hidden');
-                    deleteBtn.innerHTML = `<i class="fas fa-trash"></i> Delete (${this.selectedMailboxesForDeletion.size})`;
-                } else {
-                    deleteBtn.classList.add('hidden');
-                }
-            }
-
-            selectMailboxFromDropdown(email) {
-                if (email !== this.currentEmail) {
-                    this.stopAutoRefresh();
-                    this.loadMailbox(email);
-                }
-                this.closeMailboxDropdown();
-            }
-
-            async deleteSelectedMailboxes() {
-                const selectedEmails = Array.from(this.selectedMailboxesForDeletion);
-                if (selectedEmails.length === 0) return;
-
-                if (confirm(`Are you sure you want to delete ${selectedEmails.length} selected mailbox(es)? This action cannot be undone.`)) {
-                    for (const email of selectedEmails) {
-                        const mailbox = this.savedMailboxes[email];
-                        if (mailbox && mailbox.token) {
-                            await this.deleteMailboxFromServer(email, mailbox.token);
+                    const tab = document.createElement('div');
+                    tab.className = `mailbox-tab ${currentAccount && currentAccount.id === account.id ? 'active' : ''}`;
+                    
+                    tab.innerHTML = `
+                        <span class="tab-email">${account.address}</span>
+                        <button class="tab-close" onclick="removeAccount('${account.id}')" title="Remove">×</button>
+                    `;
+                    
+                    tab.onclick = (e) => {
+                        if (!e.target.classList.contains('tab-close')) {
+                            setCurrentAccount(account.id);
                         }
-                        delete this.savedMailboxes[email];
-                        delete this.sharedMailboxes[email];
-                    }
+                    };
+                    
+                    tabsContainer.appendChild(tab);
+                });
+                
+            } catch (error) {
+                console.error('Error updating active mailboxes:', error);
+            }
+        }
 
-                    localStorage.setItem('tempmail_mailboxes', JSON.stringify(this.savedMailboxes));
-                    localStorage.setItem('tempmail_shared_mailboxes', JSON.stringify(this.sharedMailboxes));
+        // Update email list display - FIXED
+        function updateEmailList() {
+            try {
+                const emailList = document.getElementById('email-list');
+                if (!emailList) return;
 
-                    // If current mailbox was deleted, switch to next available
-                    if (selectedEmails.includes(this.currentEmail)) {
-                        this.switchToNextAvailableMailbox();
-                    }
+                let emailsToShow = [];
 
-                    this.selectedMailboxesForDeletion.clear();
-                    this.updateMailboxSelector();
-                    this.updateMailboxDropdown();
-                    this.updateSharedMailboxes();
-                    this.updateEmailDisplay();
-
-                    this.showTooltip(`Deleted ${selectedEmails.length} mailbox(es)`, 'success');
-                    this.closeMailboxDropdown();
+                if (currentTab === 'inbox') {
+                    emailsToShow = allEmails || [];
+                } else if (currentTab === 'unread') {
+                    emailsToShow = allEmails ? allEmails.filter(email => !email.isRead) : [];
                 }
+
+                if (emailsToShow.length === 0) {
+                    emailList.innerHTML = `
+                        <div class="empty-state">
+                            <span class="material-icons">mail_outline</span>
+                            <h3>No emails ${currentTab === 'unread' ? 'unread' : 'yet'}</h3>
+                            <p>${currentTab === 'unread' ? 'All emails have been read' : 'Generate a temporary email to start receiving messages'}</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // Sort emails by date (newest first)
+                emailsToShow.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+                emailList.innerHTML = emailsToShow.map(email => {
+                    const fromName = email.from?.name || email.from?.address || 'Unknown';
+                    const fromAddress = email.from?.address || '';
+                    const subject = email.subject || 'No Subject';
+                    const preview = email.intro || 'No preview available';
+                    const date = new Date(email.createdAt).toLocaleDateString();
+                    const time = new Date(email.createdAt).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                    const avatar = fromName.charAt(0).toUpperCase();
+
+                    return `
+                        <div class="email-item ${email.isRead ? '' : 'unread'}" onclick="openEmail('${email.id}')">
+                            <div class="email-avatar">${avatar}</div>
+                            <div class="email-content">
+                                <div class="email-header">
+                                    <div class="email-from">${fromName}</div>
+                                    <div class="email-time">${time}</div>
+                                </div>
+                                <div class="email-subject">${subject}</div>
+                                <div class="email-preview">${preview}</div>
+                                <div class="email-to">to: ${email.accountEmail}</div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+            } catch (error) {
+                console.error('Error updating email list:', error);
+            }
+        }
+
+        // Update current email display - FIXED
+        function updateCurrentEmailDisplay() {
+            try {
+                const currentEmailCard = document.getElementById('current-email-card');
+                const currentEmailEl = document.getElementById('current-email');
+                
+                if (!currentEmailCard || !currentEmailEl) return;
+
+                if (!currentAccount) {
+                    currentEmailCard.style.display = 'none';
+                    return;
+                }
+
+                currentEmailCard.style.display = 'block';
+                currentEmailEl.textContent = currentAccount.address || 'No active email';
+                
+            } catch (error) {
+                console.error('Error updating current email display:', error);
+            }
+        }
+
+        // Open email viewer - FIXED
+        async function openEmail(emailId) {
+            try {
+                const email = allEmails.find(e => e.id === emailId);
+                if (!email) {
+                    showToast('Email not found', 'error');
+                    return;
+                }
+
+                // Mark as read
+                email.isRead = true;
+                updateUI();
+                saveData();
+
+                // Get full email content
+                const account = mailAccounts.find(acc => acc.address === email.accountEmail);
+                if (!account || !account.token) {
+                    showToast('Account not found', 'error');
+                    return;
+                }
+
+                const response = await fetch(`${API_BASE}/messages/${emailId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${account.token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch email content');
+                }
+
+                const fullEmail = await response.json();
+
+                // Display email
+                document.getElementById('viewer-subject').textContent = fullEmail.subject || 'No Subject';
+                document.getElementById('viewer-from').textContent = fullEmail.from?.address || 'Unknown';
+                document.getElementById('viewer-to').textContent = fullEmail.to?.[0]?.address || email.accountEmail;
+                document.getElementById('viewer-date').textContent = new Date(fullEmail.createdAt).toLocaleString();
+                
+                const bodyContent = document.getElementById('viewer-body');
+                if (fullEmail.html) {
+                    bodyContent.innerHTML = `<div class="email-body-html">${fullEmail.html}</div>`;
+                } else {
+                    bodyContent.innerHTML = `<div class="email-body-content">${fullEmail.text || 'No content'}</div>`;
+                }
+
+                document.getElementById('email-viewer').classList.add('show');
+                
+            } catch (error) {
+                console.error('Error opening email:', error);
+                showToast('Failed to open email: ' + error.message, 'error');
+            }
+        }
+
+        // Close email viewer - FIXED
+        function closeEmailViewer() {
+            document.getElementById('email-viewer').classList.remove('show');
+        }
+
+        // Set current account - FIXED
+        function setCurrentAccount(accountId) {
+            try {
+                const account = mailAccounts.find(acc => acc.id === accountId);
+                if (account) {
+                    currentAccount = account;
+                    updateUI();
+                    saveData();
+                }
+            } catch (error) {
+                console.error('Error setting current account:', error);
+            }
+        }
+
+        // Remove account - FIXED
+        function removeAccount(accountId) {
+            try {
+                mailAccounts = mailAccounts.filter(acc => acc.id !== accountId);
+                allEmails = allEmails.filter(email => {
+                    const account = mailAccounts.find(acc => acc.address === email.accountEmail);
+                    return account !== undefined;
+                });
+                
+                if (currentAccount && currentAccount.id === accountId) {
+                    currentAccount = mailAccounts.length > 0 ? mailAccounts[0] : null;
+                }
+                
+                updateUI();
+                saveData();
+                showToast('Mailbox removed', 'success');
+            } catch (error) {
+                console.error('Error removing account:', error);
+                showToast('Failed to remove mailbox', 'error');
+            }
+        }
+
+        // Copy current email address - FIXED
+        async function copyCurrentEmail() {
+            if (!currentAccount) {
+                showToast('No active email to copy', 'error');
+                return;
             }
 
-            showTooltip(message, type = 'info') {
-                const tooltip = document.getElementById('tooltip');
-                tooltip.textContent = message;
-                tooltip.className = `tooltip show ${type}`;
+            try {
+                await navigator.clipboard.writeText(currentAccount.address);
+                showToast('Email copied to clipboard!', 'success');
+            } catch (error) {
+                console.error('Error copying email:', error);
+                showToast('Failed to copy email', 'error');
+            }
+        }
 
+        // Share current email - FIXED
+        function shareCurrentEmail() {
+            if (!currentAccount) {
+                showToast('No active email to share', 'error');
+                return;
+            }
+
+            try {
+                const shareData = {
+                    email: currentAccount.address,
+                    password: currentAccount.password,
+                    id: currentAccount.id
+                };
+                
+                const shareLink = `${window.location.origin}${window.location.pathname}?import=${btoa(JSON.stringify(shareData))}`;
+                
+                document.getElementById('share-link').value = shareLink;
+                document.getElementById('share-modal').classList.add('show');
+            } catch (error) {
+                console.error('Error creating share link:', error);
+                showToast('Failed to create share link', 'error');
+            }
+        }
+
+        // Copy share link - FIXED
+        async function copyShareLink() {
+            try {
+                const shareLink = document.getElementById('share-link').value;
+                await navigator.clipboard.writeText(shareLink);
+                showToast('Share link copied!', 'success');
+            } catch (error) {
+                console.error('Error copying share link:', error);
+                showToast('Failed to copy share link', 'error');
+            }
+        }
+
+        // Close share modal - FIXED
+        function closeShareModal() {
+            document.getElementById('share-modal').classList.remove('show');
+        }
+
+        // Import mailbox - FIXED
+        function importMailbox() {
+            document.getElementById('import-modal').classList.add('show');
+        }
+
+        // Close import modal - FIXED
+        function closeImportModal() {
+            document.getElementById('import-modal').classList.remove('show');
+            document.getElementById('import-email').value = '';
+            document.getElementById('import-password').value = '';
+        }
+
+        // Perform import - FIXED
+        async function performImport() {
+            try {
+                const email = document.getElementById('import-email').value.trim();
+                const password = document.getElementById('import-password').value.trim();
+
+                if (!email || !password) {
+                    showToast('Please enter both email and password', 'error');
+                    return;
+                }
+
+                // Check if already exists
+                if (mailAccounts.find(acc => acc.address === email)) {
+                    showToast('Mailbox already exists', 'error');
+                    return;
+                }
+
+                // Try to authenticate
+                const token = await getAuthToken(email, password);
+                
+                // Create account object
+                const account = {
+                    id: email,
+                    address: email,
+                    password: password,
+                    token: token,
+                    createdAt: new Date().toISOString()
+                };
+
+                mailAccounts.push(account);
+                currentAccount = account;
+
+                updateUI();
+                saveData();
+                closeImportModal();
+                showToast('Mailbox imported successfully!', 'success');
+
+                // Fetch emails for imported account
+                await refreshEmails();
+                
+            } catch (error) {
+                console.error('Error importing mailbox:', error);
+                showToast('Failed to import mailbox: ' + error.message, 'error');
+            }
+        }
+
+        // Switch tab - FIXED
+        function switchTab(tab) {
+            try {
+                // Update active nav item
+                document.querySelectorAll('.nav-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                event.currentTarget.classList.add('active');
+
+                // Hide all content sections
+                document.querySelectorAll('.content-section').forEach(section => {
+                    section.style.display = 'none';
+                });
+
+                // Show selected content
+                const contentId = tab + '-content';
+                const contentEl = document.getElementById(contentId);
+                if (contentEl) {
+                    contentEl.style.display = 'block';
+                }
+
+                // Update page title
+                const pageTitleEl = document.getElementById('page-title');
+                if (pageTitleEl) {
+                    const titles = {
+                        'inbox': 'All Emails',
+                        'unread': 'Unread Emails',
+                        'active': 'Active Mailboxes',
+                        'about': 'About & Legal',
+                        'settings': 'Settings'
+                    };
+                    pageTitleEl.textContent = titles[tab] || 'TempMail';
+                }
+
+                currentTab = tab;
+                updateUI();
+                
+            } catch (error) {
+                console.error('Error switching tab:', error);
+            }
+        }
+
+        // Mark all as read - FIXED
+        function markAllAsRead() {
+            try {
+                if (!allEmails || allEmails.length === 0) {
+                    showToast('No emails to mark as read', 'error');
+                    return;
+                }
+
+                allEmails.forEach(email => {
+                    email.isRead = true;
+                });
+
+                updateUI();
+                saveData();
+                showToast('All emails marked as read', 'success');
+            } catch (error) {
+                console.error('Error marking all as read:', error);
+                showToast('Failed to mark emails as read', 'error');
+            }
+        }
+
+        // Start auto refresh - FIXED
+        function startAutoRefresh() {
+            try {
+                // Clear existing interval
+                if (refreshInterval) {
+                    clearInterval(refreshInterval);
+                }
+
+                // Start new interval
+                refreshInterval = setInterval(() => {
+                    if (mailAccounts.length > 0 && !isRefreshing) {
+                        refreshEmails();
+                    }
+                }, 30000); // 30 seconds
+
+                console.log('Auto refresh started');
+            } catch (error) {
+                console.error('Error starting auto refresh:', error);
+            }
+        }
+
+        // Close banner - FIXED
+        function closeBanner() {
+            document.getElementById('about-banner').style.display = 'none';
+        }
+
+        // Show toast notification - FIXED
+        function showToast(message, type = 'info') {
+            try {
+                const toast = document.createElement('div');
+                toast.className = `toast ${type}`;
+                toast.textContent = message;
+                document.body.appendChild(toast);
+
+                // Trigger animation
+                setTimeout(() => toast.classList.add('show'), 100);
+
+                // Remove after 3 seconds
                 setTimeout(() => {
-                    tooltip.classList.remove('show');
+                    toast.classList.remove('show');
+                    setTimeout(() => {
+                        if (toast.parentNode) {
+                            toast.parentNode.removeChild(toast);
+                        }
+                    }, 300);
                 }, 3000);
+            } catch (error) {
+                console.error('Error showing toast:', error);
             }
         }
 
-        // Global functions for HTML event handlers
-        let tempMail;
-
-        function generateEmail() {
-            tempMail.generateEmail();
-        }
-
-        function checkEmails() {
-            tempMail.checkEmails();
-        }
-
-        function copyEmail() {
-            tempMail.copyEmail();
-        }
-
-        function shareEmail() {
-            tempMail.shareEmail();
-        }
-
-        function deleteMailbox() {
-            tempMail.deleteMailbox();
-        }
-
-        function confirmDeleteMailbox() {
-            tempMail.confirmDeleteMailbox();
-        }
-
-        function closeDeleteModal() {
-            tempMail.closeDeleteModal();
-        }
-
-        function closeDeleteModalOnBackdrop(event) {
-            tempMail.closeDeleteModalOnBackdrop(event);
-        }
-
-        function clearAllEmails() {
-            tempMail.clearAllEmails();
-        }
-
-        function switchMailbox() {
-            tempMail.switchMailbox();
-        }
-
-        function toggleAbout() {
-            tempMail.toggleAbout();
-        }
-
-        function showEmailDetails(emailId) {
-            tempMail.showEmailDetails(emailId);
-        }
-
-        function closeEmailModal() {
-            tempMail.closeEmailModal();
-        }
-
-        function closeModalOnBackdrop(event) {
-            tempMail.closeModalOnBackdrop(event);
-        }
-
-        function loadSharedMailbox(email) {
-            tempMail.loadSharedMailbox(email);
-        }
-
-        function copySharedUrl(email) {
-            tempMail.copySharedUrl(email);
-        }
-
-        function removeSharedMailbox(email) {
-            tempMail.removeSharedMailbox(email);
-        }
-
-        function loadImportedMailbox(email) {
-            tempMail.loadImportedMailbox(email);
-        }
-
-        function removeImportedMailbox(email) {
-            tempMail.removeImportedMailbox(email);
-        }
-
-        function deleteAllMailboxes() {
-            tempMail.deleteAllMailboxes();
-        }
-
-        function handleHeaderKeydown(event) {
-            if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                toggleAbout();
-            }
-        }
-
-        function filterEmails() {
-            tempMail.filterEmails();
-        }
-
-        function toggleMailboxDropdown() {
-            tempMail.toggleMailboxDropdown();
-        }
-
-        function toggleSelectAllMailboxes() {
-            tempMail.toggleSelectAllMailboxes();
-        }
-
-        function toggleMailboxForDeletion(email) {
-            tempMail.toggleMailboxForDeletion(email);
-        }
-
-        function selectMailboxFromDropdown(email) {
-            tempMail.selectMailboxFromDropdown(email);
-        }
-
-        function deleteSelectedMailboxes() {
-            tempMail.deleteSelectedMailboxes();
-        }
-
-        // Collapsible section functionality
-        function toggleSection(header) {
-            const content = header.nextElementSibling;
-            const isExpanded = header.classList.contains('expanded');
-            
-            if (isExpanded) {
-                header.classList.remove('expanded');
-                content.classList.remove('expanded');
-            } else {
-                header.classList.add('expanded');
-                content.classList.add('expanded');
-            }
-        }
-
-        // Bulk selection variables
-        let selectedMailboxes = {
-            shared: new Set(),
-            imported: new Set()
-        };
-
-        // Toggle select all checkboxes
-        function toggleSelectAll(type) {
-            const selectAllCheckbox = document.getElementById(`selectAll${type.charAt(0).toUpperCase() + type.slice(1)}`);
-            const mailboxes = type === 'shared' ? tempMail.sharedMailboxes : tempMail.importedMailboxes;
-            
-            if (selectAllCheckbox.checked) {
-                Object.keys(mailboxes).forEach(email => selectedMailboxes[type].add(email));
-            } else {
-                selectedMailboxes[type].clear();
-            }
-            
-            updateBulkActionsVisibility(type);
-            updateMailboxList(type);
-        }
-
-        // Toggle individual mailbox selection
-        function toggleMailboxSelection(type, email) {
-            if (selectedMailboxes[type].has(email)) {
-                selectedMailboxes[type].delete(email);
-            } else {
-                selectedMailboxes[type].add(email);
-            }
-            
-            updateBulkActionsVisibility(type);
-            updateMailboxList(type);
-        }
-
-        // Update bulk actions visibility
-        function updateBulkActionsVisibility(type) {
-            const bulkActions = document.getElementById(`${type}BulkActions`);
-            const hasSelection = selectedMailboxes[type].size > 0;
-            
-            if (hasSelection) {
-                bulkActions.classList.remove('hidden');
-            } else {
-                bulkActions.classList.add('hidden');
-            }
-        }
-
-        // Update mailbox list with selection states
-        function updateMailboxList(type) {
-            if (type === 'shared') {
-                tempMail.updateSharedMailboxes();
-            } else {
-                tempMail.updateImportedMailboxes();
-            }
-        }
-
-        // Bulk delete mailboxes
-        function bulkDeleteMailboxes(type) {
-            const selectedEmails = Array.from(selectedMailboxes[type]);
-            if (selectedEmails.length === 0) return;
-            
-            if (confirm(`Delete ${selectedEmails.length} selected mailbox(es)? This action cannot be undone.`)) {
-                const mailboxes = type === 'shared' ? tempMail.sharedMailboxes : tempMail.importedMailboxes;
-                const storageKey = type === 'shared' ? 'tempmail_shared_mailboxes' : 'tempmail_imported_mailboxes';
+        // Handle URL import parameter - FIXED
+        function handleURLImport() {
+            try {
+                const urlParams = new URLSearchParams(window.location.search);
+                const importData = urlParams.get('import');
                 
-                selectedEmails.forEach(email => {
-                    delete mailboxes[email];
-                });
-                
-                localStorage.setItem(storageKey, JSON.stringify(mailboxes));
-                selectedMailboxes[type].clear();
-                
-                if (type === 'shared') {
-                    tempMail.updateSharedMailboxes();
-                } else {
-                    tempMail.updateImportedMailboxes();
+                if (importData) {
+                    try {
+                        const shareData = JSON.parse(atob(importData));
+                        document.getElementById('import-email').value = shareData.email || '';
+                        document.getElementById('import-password').value = shareData.password || '';
+                        importMailbox();
+                        
+                        // Clean URL
+                        window.history.replaceState({}, document.title, window.location.pathname);
+                    } catch (error) {
+                        console.error('Error parsing import data:', error);
+                        showToast('Invalid import link', 'error');
+                    }
                 }
-                
-                tempMail.showTooltip(`Deleted ${selectedEmails.length} mailbox(es)`, 'success');
+            } catch (error) {
+                console.error('Error handling URL import:', error);
             }
         }
 
-        // Initialize the application
-        document.addEventListener('DOMContentLoaded', () => {
-            tempMail = new TempMail();
+        // Initialize when DOM is loaded - FIXED
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                console.log('DOM loaded, initializing app...');
+                handleURLImport();
+                initializeApp();
+            } catch (error) {
+                console.error('Error during initialization:', error);
+                showToast('Failed to initialize application', 'error');
+            }
+        });
+
+        // Handle page unload - FIXED
+        window.addEventListener('beforeunload', function() {
+            try {
+                saveData();
+                if (refreshInterval) {
+                    clearInterval(refreshInterval);
+                }
+            } catch (error) {
+                console.error('Error during page unload:', error);
+            }
         });
     </script>
 </body>
