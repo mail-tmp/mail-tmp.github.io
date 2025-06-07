@@ -23,12 +23,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SB7HX1CZRX"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'G-SB7HX1CZRX');
+        gtag('config', 'GA_MEASUREMENT_ID');
     </script>
 
     <style>
@@ -37,10 +37,10 @@
             background-color: #111827;
             color: #F3F4F6;
             margin: 0;
-            padding: 72px; /* 1 inch = 72px at 72 DPI */
+            padding: 20px;
             min-height: 100vh;
             box-sizing: border-box;
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
         .loading-spinner {
@@ -95,12 +95,10 @@
         }
 
         .container {
-            width: calc(100vw - 144px); /* Full width minus 2 inches (144px) */
-            height: calc(100vh - 144px); /* Full height minus 2 inches (144px) */
-            max-width: none;
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 0;
-            overflow-y: auto;
-            overflow-x: hidden;
+            position: relative;
         }
 
         .main-card {
@@ -109,7 +107,7 @@
             border: 1px solid #374151;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             overflow: hidden;
-            height: 100%;
+            min-height: calc(100vh - 40px);
             display: flex;
             flex-direction: column;
         }
@@ -153,32 +151,20 @@
         }
 
         .about-banner {
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 100%;
-            margin-top: 0.5rem;
             background-color: #1F2937;
             border-radius: 0.75rem;
             padding: 2rem;
             border: 1px solid #374151;
-            z-index: 50;
-            margin-left: 1rem;
-            margin-right: 1rem;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            transform: translateY(-20px) scale(0.95);
-            max-height: 80vh;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
             overflow-y: auto;
+            overflow-x: hidden;
+            margin: auto;
         }
 
-        .about-banner.visible {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0) scale(1);
-        }
+
 
         .about-banner h2 {
             font-size: 1.25rem;
@@ -501,6 +487,11 @@
             background-color: #1F2937;
         }
 
+        .shared-item.selected {
+            background-color: #1E3A8A;
+            border-color: #3B82F6;
+        }
+
         .shared-email {
             color: #10B981;
             font-weight: 500;
@@ -509,6 +500,128 @@
         .shared-info {
             color: #9CA3AF;
             font-size: 0.875rem;
+        }
+
+        /* Collapsible Sections */
+        .collapsible-section {
+            margin-bottom: 1.5rem;
+            border: 1px solid #374151;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        .collapsible-header {
+            background-color: #111827;
+            padding: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #374151;
+        }
+
+        .collapsible-header:hover {
+            background-color: #1F2937;
+        }
+
+        .collapsible-header h3 {
+            margin: 0;
+            font-size: 1rem;
+            color: #F3F4F6;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .collapsible-toggle {
+            color: #9CA3AF;
+            transition: transform 0.3s ease;
+        }
+
+        .collapsible-header.expanded .collapsible-toggle {
+            transform: rotate(180deg);
+        }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .collapsible-content.expanded {
+            max-height: 500px;
+        }
+
+        .collapsible-body {
+            padding: 1rem;
+            background-color: #1F2937;
+        }
+
+        /* Bulk Selection */
+        .bulk-actions {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            background-color: #111827;
+            border-radius: 0.5rem;
+            border: 1px solid #374151;
+        }
+
+        .bulk-actions.hidden {
+            display: none;
+        }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox {
+            width: 16px;
+            height: 16px;
+            accent-color: #059669;
+        }
+
+        .email-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .email-content {
+            flex: 1;
+        }
+
+        /* Search section styling */
+        #emailSearchSection {
+            position: relative;
+            z-index: 10;
+            background-color: transparent;
+        }
+
+        #emailSearch {
+            box-sizing: border-box;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            border: 1px solid #374151 !important;
+            background-color: #111827 !important;
+            color: #F3F4F6 !important;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        #emailSearch:focus {
+            border-color: #10B981 !important;
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+        }
+
+        #emailSearch::placeholder {
+            color: #9CA3AF;
         }
 
         .delete-modal {
@@ -644,7 +757,10 @@
                     <i class="fas fa-info-circle"></i>
                 </button>
 
-                <!-- About Banner -->
+            </div>
+
+            <!-- About Banner Modal -->
+            <div id="aboutModal" class="modal" style="z-index: 1001;">
                 <div id="aboutBanner" class="about-banner">
                     <!-- Hero Section -->
                     <div style="text-align: center; margin-bottom: 2rem;">
@@ -814,21 +930,55 @@
                 </div>
 
                 <!-- Shared Mailboxes Section -->
-                <div id="sharedMailboxes" class="hidden" style="margin-bottom: 1.5rem;">
-                    <h3 style="color: white; margin: 0 0 1rem 0; display: flex; align-items: center;">
-                        <i class="fas fa-share-alt" style="margin-right: 0.5rem; color: #10B981;"></i>
-                        My Shared Mailboxes
-                    </h3>
-                    <div id="sharedList" class="shared-list"></div>
+                <div id="sharedMailboxes" class="hidden collapsible-section" style="margin-bottom: 1.5rem;">
+                    <div class="collapsible-header" onclick="toggleSection(this)">
+                        <h3>
+                            <i class="fas fa-share-alt" style="color: #10B981;"></i>
+                            My Shared Mailboxes (<span id="sharedCount">0</span>)
+                        </h3>
+                        <i class="fas fa-chevron-down collapsible-toggle"></i>
+                    </div>
+                    <div class="collapsible-content">
+                        <div class="collapsible-body">
+                            <!-- Bulk Actions for Shared -->
+                            <div id="sharedBulkActions" class="bulk-actions hidden">
+                                <div class="checkbox-wrapper">
+                                    <input type="checkbox" id="selectAllShared" class="checkbox" onchange="toggleSelectAll('shared')">
+                                    <label for="selectAllShared">Select All</label>
+                                </div>
+                                <button class="btn btn-danger" onclick="bulkDeleteMailboxes('shared')">
+                                    <i class="fas fa-trash"></i> Delete Selected
+                                </button>
+                            </div>
+                            <div id="sharedList" class="shared-list"></div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Imported Mailboxes Section -->
-                <div id="importedMailboxes" class="hidden" style="margin-bottom: 1.5rem;">
-                    <h3 style="color: white; margin: 0 0 1rem 0; display: flex; align-items: center;">
-                        <i class="fas fa-download" style="margin-right: 0.5rem; color: #3B82F6;"></i>
-                        Imported Mailboxes
-                    </h3>
-                    <div id="importedList" class="shared-list"></div>
+                <div id="importedMailboxes" class="hidden collapsible-section" style="margin-bottom: 1.5rem;">
+                    <div class="collapsible-header" onclick="toggleSection(this)">
+                        <h3>
+                            <i class="fas fa-download" style="color: #3B82F6;"></i>
+                            Imported Mailboxes (<span id="importedCount">0</span>)
+                        </h3>
+                        <i class="fas fa-chevron-down collapsible-toggle"></i>
+                    </div>
+                    <div class="collapsible-content">
+                        <div class="collapsible-body">
+                            <!-- Bulk Actions for Imported -->
+                            <div id="importedBulkActions" class="bulk-actions hidden">
+                                <div class="checkbox-wrapper">
+                                    <input type="checkbox" id="selectAllImported" class="checkbox" onchange="toggleSelectAll('imported')">
+                                    <label for="selectAllImported">Select All</label>
+                                </div>
+                                <button class="btn btn-danger" onclick="bulkDeleteMailboxes('imported')">
+                                    <i class="fas fa-trash"></i> Delete Selected
+                                </button>
+                            </div>
+                            <div id="importedList" class="shared-list"></div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Email Actions (only when mailbox is selected) -->
@@ -861,16 +1011,16 @@
                         </div>
                         
                         <!-- Search and Filter -->
-                        <div id="emailSearchSection" class="hidden" style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                        <div id="emailSearchSection" class="hidden" style="display: flex; gap: 0.5rem; margin-bottom: 1rem; position: relative; z-index: 5;">
                             <div style="flex: 1; position: relative;">
                                 <input 
                                     type="text" 
                                     id="emailSearch" 
                                     placeholder="Search emails by sender, subject..." 
-                                    style="width: 100%; padding: 0.5rem 2.5rem 0.5rem 0.75rem; border-radius: 0.5rem; border: 1px solid #374151; background-color: #111827; color: #F3F4F6; font-family: inherit;"
+                                    style="width: 100%; padding: 0.75rem 2.5rem 0.75rem 0.75rem; border-radius: 0.5rem; font-family: inherit; min-height: 44px; box-sizing: border-box;"
                                     oninput="filterEmails()"
                                 />
-                                <i class="fas fa-search" style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); color: #9CA3AF;"></i>
+                                <i class="fas fa-search" style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); color: #9CA3AF; pointer-events: none;"></i>
                             </div>
                             <select id="emailSortFilter" class="select" onchange="filterEmails()" style="min-width: 120px;" title="Sort emails">
                                 <option value="newest">Newest First</option>
@@ -984,12 +1134,12 @@
                     }
                 });
 
-                // Setup click outside handler for about banner
+                // Setup click outside handler for about modal
                 document.addEventListener('click', (e) => {
-                    const header = document.querySelector('.header');
+                    const aboutModal = document.getElementById('aboutModal');
                     const aboutBanner = document.getElementById('aboutBanner');
 
-                    if (this.aboutVisible && !header.contains(e.target) && !aboutBanner.contains(e.target)) {
+                    if (e.target === aboutModal && this.aboutVisible) {
                         this.toggleAbout();
                     }
                 });
@@ -1321,16 +1471,22 @@
             updateSharedMailboxes() {
                 const sharedSection = document.getElementById('sharedMailboxes');
                 const sharedList = document.getElementById('sharedList');
+                const sharedCount = document.getElementById('sharedCount');
                 const sharedEmails = Object.values(this.sharedMailboxes)
                     .sort((a, b) => b.sharedAt - a.sharedAt);
+
+                sharedCount.textContent = sharedEmails.length;
 
                 if (sharedEmails.length === 0) {
                     sharedSection.classList.add('hidden');
                 } else {
                     sharedSection.classList.remove('hidden');
                     sharedList.innerHTML = sharedEmails.map(shared => `
-                        <div class="shared-item" onclick="loadSharedMailbox('${shared.email}')">
-                            <div>
+                        <div class="shared-item ${selectedMailboxes.shared.has(shared.email) ? 'selected' : ''}" onclick="toggleMailboxSelection('shared', '${shared.email}')">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox" ${selectedMailboxes.shared.has(shared.email) ? 'checked' : ''} onchange="event.stopPropagation(); toggleMailboxSelection('shared', '${shared.email}')">
+                            </div>
+                            <div style="flex: 1; cursor: pointer;" onclick="event.stopPropagation(); loadSharedMailbox('${shared.email}')">
                                 <div class="shared-email">${shared.email}</div>
                                 <div class="shared-info">Shared ${new Date(shared.sharedAt).toLocaleDateString()}</div>
                             </div>
@@ -1350,16 +1506,22 @@
             updateImportedMailboxes() {
                 const importedSection = document.getElementById('importedMailboxes');
                 const importedList = document.getElementById('importedList');
+                const importedCount = document.getElementById('importedCount');
                 const importedEmails = Object.values(this.importedMailboxes)
                     .sort((a, b) => b.importedAt - a.importedAt);
+
+                importedCount.textContent = importedEmails.length;
 
                 if (importedEmails.length === 0) {
                     importedSection.classList.add('hidden');
                 } else {
                     importedSection.classList.remove('hidden');
                     importedList.innerHTML = importedEmails.map(imported => `
-                        <div class="shared-item" onclick="loadImportedMailbox('${imported.email}')">
-                            <div>
+                        <div class="shared-item ${selectedMailboxes.imported.has(imported.email) ? 'selected' : ''}" onclick="toggleMailboxSelection('imported', '${imported.email}')">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox" ${selectedMailboxes.imported.has(imported.email) ? 'checked' : ''} onchange="event.stopPropagation(); toggleMailboxSelection('imported', '${imported.email}')">
+                            </div>
+                            <div style="flex: 1; cursor: pointer;" onclick="event.stopPropagation(); loadImportedMailbox('${imported.email}')">
                                 <div class="shared-email">${imported.email}</div>
                                 <div class="shared-info">Imported ${new Date(imported.importedAt).toLocaleDateString()}</div>
                             </div>
@@ -1537,13 +1699,13 @@
             }
 
             toggleAbout() {
-                const aboutBanner = document.getElementById('aboutBanner');
+                const aboutModal = document.getElementById('aboutModal');
                 this.aboutVisible = !this.aboutVisible;
 
                 if (this.aboutVisible) {
-                    aboutBanner.classList.add('visible');
+                    aboutModal.classList.add('show');
                 } else {
-                    aboutBanner.classList.remove('visible');
+                    aboutModal.classList.remove('show');
                 }
             }
 
@@ -1756,6 +1918,100 @@
 
         function filterEmails() {
             tempMail.filterEmails();
+        }
+
+        // Collapsible section functionality
+        function toggleSection(header) {
+            const content = header.nextElementSibling;
+            const isExpanded = header.classList.contains('expanded');
+            
+            if (isExpanded) {
+                header.classList.remove('expanded');
+                content.classList.remove('expanded');
+            } else {
+                header.classList.add('expanded');
+                content.classList.add('expanded');
+            }
+        }
+
+        // Bulk selection variables
+        let selectedMailboxes = {
+            shared: new Set(),
+            imported: new Set()
+        };
+
+        // Toggle select all checkboxes
+        function toggleSelectAll(type) {
+            const selectAllCheckbox = document.getElementById(`selectAll${type.charAt(0).toUpperCase() + type.slice(1)}`);
+            const mailboxes = type === 'shared' ? tempMail.sharedMailboxes : tempMail.importedMailboxes;
+            
+            if (selectAllCheckbox.checked) {
+                Object.keys(mailboxes).forEach(email => selectedMailboxes[type].add(email));
+            } else {
+                selectedMailboxes[type].clear();
+            }
+            
+            updateBulkActionsVisibility(type);
+            updateMailboxList(type);
+        }
+
+        // Toggle individual mailbox selection
+        function toggleMailboxSelection(type, email) {
+            if (selectedMailboxes[type].has(email)) {
+                selectedMailboxes[type].delete(email);
+            } else {
+                selectedMailboxes[type].add(email);
+            }
+            
+            updateBulkActionsVisibility(type);
+            updateMailboxList(type);
+        }
+
+        // Update bulk actions visibility
+        function updateBulkActionsVisibility(type) {
+            const bulkActions = document.getElementById(`${type}BulkActions`);
+            const hasSelection = selectedMailboxes[type].size > 0;
+            
+            if (hasSelection) {
+                bulkActions.classList.remove('hidden');
+            } else {
+                bulkActions.classList.add('hidden');
+            }
+        }
+
+        // Update mailbox list with selection states
+        function updateMailboxList(type) {
+            if (type === 'shared') {
+                tempMail.updateSharedMailboxes();
+            } else {
+                tempMail.updateImportedMailboxes();
+            }
+        }
+
+        // Bulk delete mailboxes
+        function bulkDeleteMailboxes(type) {
+            const selectedEmails = Array.from(selectedMailboxes[type]);
+            if (selectedEmails.length === 0) return;
+            
+            if (confirm(`Delete ${selectedEmails.length} selected mailbox(es)? This action cannot be undone.`)) {
+                const mailboxes = type === 'shared' ? tempMail.sharedMailboxes : tempMail.importedMailboxes;
+                const storageKey = type === 'shared' ? 'tempmail_shared_mailboxes' : 'tempmail_imported_mailboxes';
+                
+                selectedEmails.forEach(email => {
+                    delete mailboxes[email];
+                });
+                
+                localStorage.setItem(storageKey, JSON.stringify(mailboxes));
+                selectedMailboxes[type].clear();
+                
+                if (type === 'shared') {
+                    tempMail.updateSharedMailboxes();
+                } else {
+                    tempMail.updateImportedMailboxes();
+                }
+                
+                tempMail.showTooltip(`Deleted ${selectedEmails.length} mailbox(es)`, 'success');
+            }
         }
 
         // Initialize the application
