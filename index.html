@@ -90,6 +90,9 @@
         <!-- Canonical URL -->
         <link rel="canonical" href="https://tempmail-pro.github.io" />
         
+        <!-- Sitemap -->
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+        
         <!-- Favicon -->
         <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📧</text></svg>" />
 
@@ -1872,18 +1875,26 @@
                 trackEvent('mailbox_share_modal_shown', 'sharing', 'modal_displayed');
             }
 
-            // Show inbox view
+            // Show inbox view - fixed error handling
             function showInbox(targetElement = null) {
-                document.getElementById('pageTitle').textContent = 'Inbox';
-                updateInboxView();
-                
-                // Update nav active state
-                document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-                if (targetElement) {
-                    targetElement.classList.add('active');
+                try {
+                    const pageTitle = document.getElementById('pageTitle');
+                    if (pageTitle) {
+                        pageTitle.textContent = 'Inbox';
+                    }
+                    updateInboxView();
+                    
+                    // Update nav active state
+                    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+                    if (targetElement && targetElement.classList) {
+                        targetElement.classList.add('active');
+                    }
+                    
+                    trackEvent('page_view', 'navigation', 'inbox');
+                } catch (error) {
+                    console.error('Error in showInbox:', error);
+                    showNotification('Error loading inbox', 'error');
                 }
-                
-                trackEvent('page_view', 'navigation', 'inbox');
             }
 
             // Update inbox view
@@ -2265,8 +2276,9 @@
                 trackEvent('auto_refresh_stopped', 'system', 'auto_refresh_disabled');
             }
 
-            // Show settings
+            // Show settings - fixed event handling
             function showSettings(targetElement = null) {
+                try {
                 document.getElementById('pageTitle').textContent = 'Settings';
                 
                 const contentArea = document.getElementById('contentArea');
@@ -2341,11 +2353,15 @@
                 
                 // Update nav active state
                 document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-                if (targetElement) {
+                if (targetElement && targetElement.classList) {
                     targetElement.classList.add('active');
                 }
                 
                 trackEvent('page_view', 'navigation', 'settings');
+                } catch (error) {
+                    console.error('Error in showSettings:', error);
+                    showNotification('Error loading settings', 'error');
+                }
             }
 
             // Export data
@@ -2584,19 +2600,27 @@
 
             // Fixed HTML escaping function
             function safeEscapeHtml(unsafe) {
-                if (unsafe === null || unsafe === undefined) {
+                try {
+                    if (unsafe === null || unsafe === undefined) {
+                        return '';
+                    }
+                    if (typeof unsafe !== 'string') {
+                        unsafe = String(unsafe);
+                    }
+                    return unsafe
+                        .replace(/&/g, "&amp;")
+                        .replace(/</g, "&lt;")
+                        .replace(/>/g, "&gt;")
+                        .replace(/"/g, "&quot;")
+                        .replace(/'/g, "&#039;");
+                } catch (error) {
+                    console.error('Error in safeEscapeHtml:', error);
                     return '';
                 }
-                if (typeof unsafe !== 'string') {
-                    unsafe = String(unsafe);
-                }
-                return unsafe
-                    .replace(/&/g, "&amp;")
-                    .replace(/</g, "&lt;")
-                    .replace(/>/g, "&gt;")
-                    .replace(/"/g, "&quot;")
-                    .replace(/'/g, "&#039;");
             }
+            
+            // Make function globally available for error debugging
+            window.escapeHtml = safeEscapeHtml;
 
             // Utility functions
             function getTimeAgo(date) {
