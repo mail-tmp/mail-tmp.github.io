@@ -2,7 +2,12 @@
 #!/usr/bin/env python3
 """
 TempMail Pro - Comprehensive UI Testing Suite
-Fast Python-based testing with Chromium
+Fast Python-based testin    def test_page_loads(self, page):
+        """Test page loads successfully"""
+        expect(page).to_have_title(r"TempMail Pro")
+        expect(page.locator('.logo-text')).to_contain_text('TempMail Pro')
+        expect(page.locator('.sidebar')).to_be_visible()
+        expect(page.locator('.main-content')).to_be_visible() Chromium
 """
 
 import os
