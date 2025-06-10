@@ -29,3 +29,4 @@ Thumbs.db
 _site/
 dist/
 build/
+venv/
