@@ -36,6 +36,7 @@ jobs:
         npm init -y
         npm install --save-dev playwright @playwright/test
         npx playwright install
+        npm install --package-lock-only
 
     - name: Create test directory
       run: mkdir -p tests
@@ -86,7 +87,7 @@ jobs:
         mkdir -p test-reports
 
         # Create detailed HTML report
-        cat > test-reports/index.html << EOF
+        cat > test-reports/index.html << 'EOF'
         <!DOCTYPE html>
         <html lang="en">
         <head>
